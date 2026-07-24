@@ -279,6 +279,16 @@
         }
       },
       "block_order": ["variant_1", "variant_2"]
+    },
+    "comparison": {
+      "type": "comparison",
+      "settings": {
+        "chip_text": "The SPLYN Advantage",
+        "heading": "Why",
+        "heading_italic": "SPLYN Beats",
+        "heading_end": "Standard Drinks",
+        "subtext": "See how SPLYN stacks up against sugary energy drinks and plain hydration."
+      }
     }
   },
   "order": [
@@ -286,6 +296,7 @@
     "marquee-banner",
     "ingredients",
     "flavors",
+    "comparison",
     "reviews",
     "community",
     "story",

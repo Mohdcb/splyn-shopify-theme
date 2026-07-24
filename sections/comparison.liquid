@@ -1,0 +1,133 @@
+<!-- COMPARISON SECTION -->
+<section id="comparison" class="comparison">
+  <div class="container">
+    <div class="section-head reveal text-center">
+      <span class="chip chip-yellow">{{ section.settings.chip_text | default: 'The SPLYN Advantage' }}</span>
+      <h2>{{ section.settings.heading | default: 'Why' }} <em>{{ section.settings.heading_italic | default: 'SPLYN Beats' }}</em> {{ section.settings.heading_end | default: 'Standard Drinks' }}</h2>
+      <p>{{ section.settings.subtext | default: 'See how SPLYN stack up against sugary energy drinks and plain hydration.' }}</p>
+    </div>
+
+    <div class="comparison-wrapper reveal">
+      <div class="comparison-table">
+        <!-- Header Row -->
+        <div class="comp-row comp-header">
+          <div class="comp-col col-category">CATEGORY</div>
+          <div class="comp-col col-other">SUGARY DRINKS</div>
+          <div class="comp-col col-other">PLAIN WATER</div>
+          <div class="comp-col col-splyn">
+            <img src="{{ 'transparent_logo.png' | asset_url }}" alt="SPLYN" class="comp-splyn-logo" />
+          </div>
+        </div>
+
+        <!-- Row 1: Clean Energy Lift -->
+        <div class="comp-row">
+          <div class="comp-col col-category">
+            <i data-lucide="zap"></i>
+            <span>Clean Energy Lift (200mg)</span>
+          </div>
+          <div class="comp-col col-other"><span class="badge-icon check-green">✓</span></div>
+          <div class="comp-col col-other"><span class="badge-icon cross-red">✕</span></div>
+          <div class="comp-col col-splyn"><span class="badge-icon check-green-bright">✓</span></div>
+        </div>
+
+        <!-- Row 2: L-Theanine Focus -->
+        <div class="comp-row">
+          <div class="comp-col col-category">
+            <i data-lucide="brain"></i>
+            <span>L-Theanine Mental Focus</span>
+          </div>
+          <div class="comp-col col-other"><span class="badge-icon cross-red">✕</span></div>
+          <div class="comp-col col-other"><span class="badge-icon cross-red">✕</span></div>
+          <div class="comp-col col-splyn"><span class="badge-icon check-green-bright">✓</span></div>
+        </div>
+
+        <!-- Row 3: Essential Electrolytes -->
+        <div class="comp-row">
+          <div class="comp-col col-category">
+            <i data-lucide="droplets"></i>
+            <span>Full Spectrum Electrolytes</span>
+          </div>
+          <div class="comp-col col-other"><span class="badge-icon cross-red">✕</span></div>
+          <div class="comp-col col-other"><span class="badge-icon cross-red">✕</span></div>
+          <div class="comp-col col-splyn"><span class="badge-icon check-green-bright">✓</span></div>
+        </div>
+
+        <!-- Row 4: Zero Sugar & Zero Calorie -->
+        <div class="comp-row">
+          <div class="comp-col col-category">
+            <i data-lucide="shield-check"></i>
+            <span>Zero Sugar & Zero Calories</span>
+          </div>
+          <div class="comp-col col-other"><span class="badge-icon cross-red">✕</span></div>
+          <div class="comp-col col-other"><span class="badge-icon check-green">✓</span></div>
+          <div class="comp-col col-splyn"><span class="badge-icon check-green-bright">✓</span></div>
+        </div>
+
+        <!-- Row 5: No Jitters or Post Crash -->
+        <div class="comp-row">
+          <div class="comp-col col-category">
+            <i data-lucide="sparkles"></i>
+            <span>No Jitters & Zero Crash</span>
+          </div>
+          <div class="comp-col col-other"><span class="badge-icon cross-red">✕</span></div>
+          <div class="comp-col col-other"><span class="badge-icon check-green">✓</span></div>
+          <div class="comp-col col-splyn"><span class="badge-icon check-green-bright">✓</span></div>
+        </div>
+
+        <!-- Row 6: Refreshing Taste -->
+        <div class="comp-row">
+          <div class="comp-col col-category">
+            <i data-lucide="heart"></i>
+            <span>Refreshing Crisp Flavors</span>
+          </div>
+          <div class="comp-col col-other"><span class="badge-icon check-green">✓</span></div>
+          <div class="comp-col col-other"><span class="badge-icon cross-red">✕</span></div>
+          <div class="comp-col col-splyn"><span class="badge-icon check-green-bright">✓</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparison Table",
+  "settings": [
+    {
+      "type": "text",
+      "id": "chip_text",
+      "label": "Chip Text",
+      "default": "The SPLYN Advantage"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading Prefix",
+      "default": "Why"
+    },
+    {
+      "type": "text",
+      "id": "heading_italic",
+      "label": "Heading Accent (Italic)",
+      "default": "SPLYN Beats"
+    },
+    {
+      "type": "text",
+      "id": "heading_end",
+      "label": "Heading End",
+      "default": "Standard Drinks"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "See how SPLYN stack up against sugary energy drinks and plain hydration."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Table"
+    }
+  ]
+}
+{% endschema %}
