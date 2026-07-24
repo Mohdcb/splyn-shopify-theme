@@ -1,0 +1,66 @@
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "settings": {
+        "show_reviews": true,
+        "review_text": "4.9 • 127 Reviews",
+        "show_dynamic_checkout": true
+      },
+      "blocks": {
+        "trust_1": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Shipping",
+            "subtitle": "On all orders over ₹499"
+          }
+        },
+        "trust_2": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "shield-check",
+            "title": "Secure Payment",
+            "subtitle": "100% encrypted checkout"
+          }
+        },
+        "trust_3": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "refresh-cw",
+            "title": "Easy Returns",
+            "subtitle": "7-day money-back guarantee"
+          }
+        },
+        "acc_1": {
+          "type": "accordion",
+          "settings": {
+            "icon": "list",
+            "title": "Ingredients",
+            "content": "<p>Premium caffeine (200mg), L-Theanine, Electrolytes (Sodium, Potassium, Magnesium). Zero sugar. Zero calories. No artificial colors.</p>"
+          }
+        },
+        "acc_2": {
+          "type": "accordion",
+          "settings": {
+            "icon": "droplets",
+            "title": "Nutrition Info",
+            "content": "<p>Serving Size: 337ml (11.4 fl oz). Calories: 0. Total Sugar: 0g. Caffeine: 200mg. Sodium: 150mg. Potassium: 100mg.</p>"
+          }
+        },
+        "acc_3": {
+          "type": "accordion",
+          "settings": {
+            "icon": "package",
+            "title": "Shipping & Returns",
+            "content": "<p>Ships within 24 hours. Free shipping on orders over ₹499. 7-day return policy — if you're not satisfied, we'll refund you.</p>"
+          }
+        }
+      },
+      "block_order": ["trust_1", "trust_2", "trust_3", "acc_1", "acc_2", "acc_3"]
+    }
+  },
+  "order": [
+    "main-product"
+  ]
+}

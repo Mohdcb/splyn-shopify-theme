@@ -1,0 +1,112 @@
+<!-- OUR STORY -->
+<section id="story" class="story">
+  <div class="container story-inner reveal">
+    <div class="story-visual">
+      <div class="story-card">
+        <div class="story-logo-circle">
+          {% if section.settings.logo != blank %}
+            <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" />
+          {% else %}
+            <img src="{{ 'transparent_logo.png' | asset_url }}" alt="{{ shop.name }}" />
+          {% endif %}
+          <span>{{ section.settings.logo_tagline }}</span>
+          <i data-lucide="zap"></i>
+        </div>
+        <blockquote>{{ section.settings.blockquote }}</blockquote>
+      </div>
+    </div>
+    <div class="story-content">
+      <span class="story-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.paragraph_1 }}</p>
+      <p>{{ section.settings.paragraph_2 }}</p>
+      <div class="story-stats">
+        {% for block in section.blocks %}
+          <div {{ block.shopify_attributes }}>
+            <b>{{ block.settings.value }}</b>
+            <span>{{ block.settings.label }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Our Story",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Story Logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_tagline",
+      "label": "Logo Circle Tagline",
+      "default": "BETTER WATER"
+    },
+    {
+      "type": "html",
+      "id": "blockquote",
+      "label": "Blockquote",
+      "default": "\"Three friends. One mission.<br>To make water<br>better.\""
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "OUR STORY"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Born in a<br>Coffee Shop"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "Splyn began not in a boardroom, but over coffee — three childhood friends noticing what was missing in the market. Most drinks were either overloaded with sugar or purely energy-driven with zero health."
+    },
+    {
+      "type": "html",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "We dug into the research, spotted the gap, and built <strong>Splyn</strong> — a next-generation sparkling sports drink that gives India's youth what they actually deserve."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "3"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Founders"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Story",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "3", "label": "Founders" } },
+        { "type": "stat", "settings": { "value": "2025", "label": "Founded" } },
+        { "type": "stat", "settings": { "value": "∞", "label": "Ambition" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

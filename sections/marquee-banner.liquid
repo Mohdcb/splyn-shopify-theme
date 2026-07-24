@@ -1,0 +1,78 @@
+<!-- MARQUEE BANNER -->
+<div class="marquee-banner">
+  <div class="marquee-track">
+    {% for block in section.blocks %}
+      <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | image_url: width: 64 }}" class="marquee-logo" alt="{{ shop.name }}" />
+      {% else %}
+        <img src="{{ 'transparent_logo.png' | asset_url }}" class="marquee-logo" alt="{{ shop.name }}" />
+      {% endif %}
+    {% endfor %}
+    {%- comment -%} Duplicate for seamless loop {%- endcomment -%}
+    {% for block in section.blocks %}
+      <span>{{ block.settings.text }}</span>
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | image_url: width: 64 }}" class="marquee-logo" alt="{{ shop.name }}" />
+      {% else %}
+        <img src="{{ 'transparent_logo.png' | asset_url }}" class="marquee-logo" alt="{{ shop.name }}" />
+      {% endif %}
+    {% endfor %}
+    {%- comment -%} Third duplicate for wider screens {%- endcomment -%}
+    {% for block in section.blocks %}
+      <span>{{ block.settings.text }}</span>
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | image_url: width: 64 }}" class="marquee-logo" alt="{{ shop.name }}" />
+      {% else %}
+        <img src="{{ 'transparent_logo.png' | asset_url }}" class="marquee-logo" alt="{{ shop.name }}" />
+      {% endif %}
+    {% endfor %}
+    {%- comment -%} Fourth duplicate to match original {%- endcomment -%}
+    {% for block in section.blocks %}
+      <span>{{ block.settings.text }}</span>
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | image_url: width: 64 }}" class="marquee-logo" alt="{{ shop.name }}" />
+      {% else %}
+        <img src="{{ 'transparent_logo.png' | asset_url }}" class="marquee-logo" alt="{{ shop.name }}" />
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Marquee Logo"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_item",
+      "name": "Marquee Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "BETTER WATER"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Banner",
+      "blocks": [
+        { "type": "text_item", "settings": { "text": "BETTER WATER" } },
+        { "type": "text_item", "settings": { "text": "ZERO SUGAR" } },
+        { "type": "text_item", "settings": { "text": "MAX VIBES" } },
+        { "type": "text_item", "settings": { "text": "PURE ENERGY" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

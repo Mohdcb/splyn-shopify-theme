@@ -1,0 +1,43 @@
+{%- comment -%}
+  Product Card Snippet
+  Usage: {% render 'product-card', product: product %}
+{%- endcomment -%}
+
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card-link">
+    <div class="product-card-image">
+      {% if product.featured_image %}
+        <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" loading="lazy" />
+      {% else %}
+        <img src="{{ 'can-lime.png' | asset_url }}" alt="{{ product.title }}" loading="lazy" />
+      {% endif %}
+      {% if product.compare_at_price > product.price %}
+        <span class="product-card-badge chip chip-yellow">Sale</span>
+      {% endif %}
+    </div>
+    <div class="product-card-info">
+      {% if product.vendor %}
+        <span class="product-card-vendor">{{ product.vendor }}</span>
+      {% endif %}
+      <h3 class="product-card-title">{{ product.title }}</h3>
+      <div class="product-card-price">
+        <span class="product-card-current">{{ product.price | money }}</span>
+        {% if product.compare_at_price > product.price %}
+          <span class="product-card-compare">{{ product.compare_at_price | money }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </a>
+  <form action="/cart/add" method="post" class="product-card-form">
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" />
+    <input type="hidden" name="quantity" value="1" />
+    <button type="submit" class="btn btn-primary product-card-btn"
+      {% unless product.available %}disabled{% endunless %}>
+      {% if product.available %}
+        Add to Cart
+      {% else %}
+        Sold Out
+      {% endif %}
+    </button>
+  </form>
+</div>

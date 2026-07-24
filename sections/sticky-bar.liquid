@@ -1,0 +1,115 @@
+<!-- STICKY ADD TO CART BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-bar-inner">
+    <div class="sticky-product">
+      {% if section.settings.product_image != blank %}
+        <img src="{{ section.settings.product_image | image_url: width: 100 }}" alt="{{ section.settings.product_name }}" class="sticky-can" />
+      {% else %}
+        <img src="{{ 'can-lime.png' | asset_url }}" alt="SPLYN" class="sticky-can" />
+      {% endif %}
+      <div class="sticky-info">
+        <span class="sticky-name">{{ section.settings.product_name }}</span>
+        <div class="sticky-price">
+          <span class="sticky-now">{{ section.settings.price_now }}</span>
+          {% if section.settings.price_old != blank %}
+            <span class="sticky-old">{{ section.settings.price_old }}</span>
+          {% endif %}
+          <span class="sticky-per">{{ section.settings.price_per }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="sticky-variants">
+      {% for block in section.blocks %}
+        <button class="sticky-variant{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label }}</button>
+      {% endfor %}
+    </div>
+    <div class="sticky-actions">
+      <a href="{{ section.settings.cart_link }}" class="sticky-btn sticky-btn-outline">{{ section.settings.cart_text }}</a>
+      <a href="{{ section.settings.buy_link }}" class="sticky-btn sticky-btn-primary">{{ section.settings.buy_text }}</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Sticky Cart Bar",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Thumbnail"
+    },
+    {
+      "type": "text",
+      "id": "product_name",
+      "label": "Product Name",
+      "default": "SPLYN Performance Drink"
+    },
+    {
+      "type": "text",
+      "id": "price_now",
+      "label": "Current Price",
+      "default": "₹199"
+    },
+    {
+      "type": "text",
+      "id": "price_old",
+      "label": "Compare-at Price",
+      "default": "₹249"
+    },
+    {
+      "type": "text",
+      "id": "price_per",
+      "label": "Price Unit",
+      "default": "/ can"
+    },
+    {
+      "type": "text",
+      "id": "cart_text",
+      "label": "Add to Cart Text",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "url",
+      "id": "cart_link",
+      "label": "Add to Cart Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "buy_text",
+      "label": "Buy Now Text",
+      "default": "Buy Now"
+    },
+    {
+      "type": "url",
+      "id": "buy_link",
+      "label": "Buy Now Link",
+      "default": "/collections/all"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "variant",
+      "name": "Variant Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Variant Label",
+          "default": "🟢 Lime Crush"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sticky Cart Bar",
+      "blocks": [
+        { "type": "variant", "settings": { "label": "🟢 Lime Crush" } },
+        { "type": "variant", "settings": { "label": "🔴 Raspberry Rush" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,870 @@
+<!-- MAIN PRODUCT PAGE — Premium Design -->
+<section class="pdp">
+  <div class="container">
+    <div class="pdp-layout">
+
+      <!-- LEFT: Product Gallery -->
+      <div class="pdp-gallery">
+        <div class="pdp-main-img">
+          {% if product.selected_or_first_available_variant.featured_image %}
+            <img id="ProductMainImage" src="{{ product.selected_or_first_available_variant.featured_image | image_url: width: 1000 }}" alt="{{ product.title }}" />
+          {% elsif product.featured_image %}
+            <img id="ProductMainImage" src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.title }}" />
+          {% else %}
+            <img id="ProductMainImage" src="{{ 'can-lime.png' | asset_url }}" alt="{{ product.title }}" />
+          {% endif %}
+          {% if product.compare_at_price > product.price %}
+            <span class="pdp-badge">SAVE {{ product.compare_at_price | minus: product.price | money }}</span>
+          {% endif %}
+        </div>
+        {% if product.images.size > 1 %}
+          <div class="pdp-thumbs">
+            {% for image in product.images %}
+              <button class="pdp-thumb{% if forloop.first %} active{% endif %}" data-image-url="{{ image | image_url: width: 1000 }}" data-image-url-small="{{ image | image_url: width: 150 }}">
+                <img src="{{ image | image_url: width: 150 }}" alt="{{ product.title }} - {{ forloop.index }}" loading="lazy" />
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- RIGHT: Product Info -->
+      <div class="pdp-info">
+
+        <!-- Breadcrumb -->
+        <nav class="pdp-breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span>/</span>
+          {% if collection %}
+            <a href="{{ collection.url }}">{{ collection.title }}</a>
+            <span>/</span>
+          {% endif %}
+          <span class="pdp-bc-current">{{ product.title }}</span>
+        </nav>
+
+        {% if product.vendor %}
+          <span class="pdp-vendor">{{ product.vendor }}</span>
+        {% endif %}
+
+        <h1 class="pdp-title">{{ product.title }}</h1>
+
+        <!-- Reviews Stars Placeholder -->
+        {% if section.settings.show_reviews %}
+          <div class="pdp-stars">
+            <div class="pdp-stars-icons">
+              {% for i in (1..5) %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#FFB800" stroke="#FFB800" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {% endfor %}
+            </div>
+            <span class="pdp-stars-text">{{ section.settings.review_text | default: '4.9 • 127 Reviews' }}</span>
+          </div>
+        {% endif %}
+
+        <!-- Price -->
+        <div class="pdp-price-wrap">
+          <span class="pdp-price" id="ProductPrice">{{ product.selected_or_first_available_variant.price | money }}</span>
+          {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
+            <span class="pdp-compare" id="ProductCompare">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+          {% endif %}
+          {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
+            {% assign discount = product.selected_or_first_available_variant.compare_at_price | minus: product.selected_or_first_available_variant.price | times: 100 | divided_by: product.selected_or_first_available_variant.compare_at_price %}
+            <span class="pdp-discount">-{{ discount }}%</span>
+          {% endif %}
+        </div>
+        <p class="pdp-tax-note">Tax included. <a href="/policies/shipping-policy">Shipping</a> calculated at checkout.</p>
+
+        <div class="pdp-divider"></div>
+
+        <!-- Description -->
+        <div class="pdp-desc">
+          {{ product.description }}
+        </div>
+
+        <div class="pdp-divider"></div>
+
+        <!-- Product Form -->
+        {% form 'product', product, class: 'pdp-form', id: 'ProductForm' %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="ProductVariantId" />
+
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+              <div class="pdp-option">
+                <label class="pdp-option-label">{{ option.name }}: <strong id="OptionSelected-{{ forloop.index0 }}">{{ option.selected_value }}</strong></label>
+                <div class="pdp-option-values">
+                  {% for value in option.values %}
+                    <button type="button"
+                      class="pdp-option-btn{% if option.selected_value == value %} is-active{% endif %}"
+                      data-option-index="{{ forloop.parentloop.index0 }}"
+                      data-value="{{ value }}"
+                      onclick="selectVariantOption(this)">
+                      {{ value }}
+                    </button>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          {% endunless %}
+
+          <!-- Quantity -->
+          <div class="pdp-option">
+            <label class="pdp-option-label">Quantity</label>
+            <div class="pdp-qty">
+              <button type="button" class="pdp-qty-btn" onclick="changeQty(-1)" aria-label="Decrease">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <input type="number" name="quantity" value="1" min="1" id="ProductQuantity" class="pdp-qty-input" readonly />
+              <button type="button" class="pdp-qty-btn" onclick="changeQty(1)" aria-label="Increase">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Add to Cart -->
+          <button type="submit" class="pdp-atc" id="ProductATC"
+            {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+            {% if product.selected_or_first_available_variant.available %}
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              Add to Cart — {{ product.selected_or_first_available_variant.price | money }}
+            {% else %}
+              Sold Out
+            {% endif %}
+          </button>
+
+          {% if section.settings.show_dynamic_checkout %}
+            {{ form | payment_button }}
+          {% endif %}
+        {% endform %}
+
+        <!-- Trust Blocks -->
+        <div class="pdp-trust-blocks">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'trust_badge' %}
+                <div class="pdp-trust-item" {{ block.shopify_attributes }}>
+                  <div class="pdp-trust-icon">
+                    <i data-lucide="{{ block.settings.icon }}"></i>
+                  </div>
+                  <div class="pdp-trust-text">
+                    <strong>{{ block.settings.title }}</strong>
+                    <span>{{ block.settings.subtitle }}</span>
+                  </div>
+                </div>
+              {% when 'accordion' %}
+                <details class="pdp-accordion" {{ block.shopify_attributes }}>
+                  <summary>
+                    <div class="pdp-accordion-title">
+                      <i data-lucide="{{ block.settings.icon | default: 'info' }}"></i>
+                      <span>{{ block.settings.title }}</span>
+                    </div>
+                    <svg class="pdp-accordion-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                  </summary>
+                  <div class="pdp-accordion-body">
+                    {{ block.settings.content }}
+                  </div>
+                </details>
+            {% endcase %}
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  /* Thumbnail gallery */
+  document.querySelectorAll('.pdp-thumb').forEach(function(thumb) {
+    thumb.addEventListener('click', function() {
+      document.querySelectorAll('.pdp-thumb').forEach(function(t) { t.classList.remove('active'); });
+      thumb.classList.add('active');
+      document.getElementById('ProductMainImage').src = thumb.dataset.imageUrl;
+    });
+  });
+
+  /* Quantity */
+  function changeQty(d) {
+    var i = document.getElementById('ProductQuantity');
+    var v = parseInt(i.value) + d;
+    if (v < 1) v = 1;
+    i.value = v;
+  }
+
+  /* Variant selection */
+  var productVariants = {{ product.variants | json }};
+  var selectedOptions = [];
+  {% for option in product.options_with_values %}
+    selectedOptions[{{ forloop.index0 }}] = {{ option.selected_value | json }};
+  {% endfor %}
+
+  function selectVariantOption(btn) {
+    var idx = parseInt(btn.dataset.optionIndex);
+    var val = btn.dataset.value;
+    selectedOptions[idx] = val;
+
+    btn.parentNode.querySelectorAll('.pdp-option-btn').forEach(function(b) { b.classList.remove('is-active'); });
+    btn.classList.add('is-active');
+
+    var label = document.getElementById('OptionSelected-' + idx);
+    if (label) label.textContent = val;
+
+    var matched = productVariants.find(function(v) {
+      return selectedOptions.every(function(opt, i) {
+        return v['option' + (i + 1)] === opt;
+      });
+    });
+
+    if (matched) {
+      document.getElementById('ProductVariantId').value = matched.id;
+      var priceEl = document.getElementById('ProductPrice');
+      var compareEl = document.getElementById('ProductCompare');
+      priceEl.textContent = Shopify.formatMoney ? Shopify.formatMoney(matched.price) : ('₹' + (matched.price / 100).toFixed(0));
+      if (compareEl) {
+        if (matched.compare_at_price && matched.compare_at_price > matched.price) {
+          compareEl.textContent = Shopify.formatMoney ? Shopify.formatMoney(matched.compare_at_price) : ('₹' + (matched.compare_at_price / 100).toFixed(0));
+          compareEl.style.display = '';
+        } else {
+          compareEl.style.display = 'none';
+        }
+      }
+      if (matched.featured_image) {
+        document.getElementById('ProductMainImage').src = matched.featured_image.src;
+      }
+      var atcBtn = document.getElementById('ProductATC');
+      if (matched.available) {
+        atcBtn.disabled = false;
+        atcBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Add to Cart — ' + (Shopify.formatMoney ? Shopify.formatMoney(matched.price) : ('₹' + (matched.price / 100).toFixed(0)));
+      } else {
+        atcBtn.disabled = true;
+        atcBtn.textContent = 'Sold Out';
+      }
+    }
+  }
+
+  /* AJAX Add to Cart → Open Cart Drawer */
+  var productForm = document.getElementById('ProductForm');
+  if (productForm) {
+    productForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var formData = new FormData(productForm);
+      var atcBtn = document.getElementById('ProductATC');
+      atcBtn.disabled = true;
+      atcBtn.innerHTML = '<span class="pdp-spinner"></span> Adding...';
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        body: formData
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        atcBtn.disabled = false;
+        atcBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Added!';
+        setTimeout(function() {
+          atcBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Add to Cart — ' + document.getElementById('ProductPrice').textContent;
+        }, 2000);
+        if (typeof openCartDrawer === 'function') openCartDrawer();
+      })
+      .catch(function() {
+        atcBtn.disabled = false;
+        atcBtn.textContent = 'Error — try again';
+      });
+    });
+  }
+</script>
+
+<style>
+  /* ── PRODUCT PAGE ── */
+  .pdp {
+    padding: 40px 0 120px;
+    background: #fff;
+  }
+
+  .pdp-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+
+  /* Gallery */
+  .pdp-gallery {
+    position: sticky;
+    top: 80px;
+  }
+
+  .pdp-main-img {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #f5f7fa;
+    aspect-ratio: 1;
+    border: 1px solid #e8ecf0;
+  }
+
+  .pdp-main-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 32px;
+    transition: transform 0.4s ease;
+  }
+
+  .pdp-main-img:hover img {
+    transform: scale(1.05);
+  }
+
+  .pdp-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: #FF3B30;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .pdp-thumbs {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .pdp-thumb {
+    width: 72px;
+    height: 72px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 2px solid #e8ecf0;
+    cursor: pointer;
+    background: #f5f7fa;
+    flex-shrink: 0;
+    padding: 4px;
+    transition: border-color 0.3s ease;
+  }
+
+  .pdp-thumb:hover { border-color: #9DBCEA; }
+  .pdp-thumb.active { border-color: #0F345E; }
+
+  .pdp-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Info */
+  .pdp-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pdp-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #8898aa;
+    margin-bottom: 20px;
+  }
+
+  .pdp-breadcrumb a {
+    color: #8898aa;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .pdp-breadcrumb a:hover { color: #0F345E; }
+  .pdp-bc-current { color: #0F345E; font-weight: 600; }
+
+  .pdp-vendor {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #0F345E;
+    margin-bottom: 8px;
+  }
+
+  .pdp-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: clamp(26px, 3.5vw, 38px);
+    line-height: 1.15;
+    color: #0F345E;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+
+  /* Stars */
+  .pdp-stars {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .pdp-stars-icons {
+    display: flex;
+    gap: 2px;
+  }
+
+  .pdp-stars-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0F345E;
+  }
+
+  /* Price */
+  .pdp-price-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+
+  .pdp-price {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: #0F345E;
+  }
+
+  .pdp-compare {
+    font-size: 18px;
+    color: #8898aa;
+    text-decoration: line-through;
+    font-weight: 500;
+  }
+
+  .pdp-discount {
+    font-size: 12px;
+    font-weight: 800;
+    color: #FF3B30;
+    background: #fff0f0;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .pdp-tax-note {
+    font-size: 12px;
+    color: #8898aa;
+    margin-bottom: 0;
+  }
+
+  .pdp-tax-note a {
+    color: #0F345E;
+    text-decoration: underline;
+  }
+
+  .pdp-divider {
+    height: 1px;
+    background: #e8ecf0;
+    margin: 20px 0;
+  }
+
+  /* Description */
+  .pdp-desc {
+    color: #3a4a5c;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .pdp-desc p { margin-bottom: 10px; }
+  .pdp-desc p:last-child { margin-bottom: 0; }
+  .pdp-desc strong { color: #0F345E; }
+  .pdp-desc ul, .pdp-desc ol { padding-left: 20px; margin: 8px 0; }
+  .pdp-desc li { margin-bottom: 4px; }
+
+  /* Options */
+  .pdp-option {
+    margin-top: 20px;
+  }
+
+  .pdp-option-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0F345E;
+    margin-bottom: 10px;
+  }
+
+  .pdp-option-label strong {
+    color: #0F345E;
+  }
+
+  .pdp-option-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pdp-option-btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 2px solid #e8ecf0;
+    background: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0F345E;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .pdp-option-btn:hover {
+    border-color: #9DBCEA;
+    background: #f0f6ff;
+  }
+
+  .pdp-option-btn.is-active {
+    border-color: #0F345E;
+    background: #0F345E;
+    color: #fff;
+  }
+
+  /* Quantity */
+  .pdp-qty {
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid #e8ecf0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .pdp-qty-btn {
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0F345E;
+    transition: background 0.2s;
+  }
+
+  .pdp-qty-btn:hover { background: #f5f7fa; }
+
+  .pdp-qty-input {
+    width: 56px;
+    height: 48px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #e8ecf0;
+    border-right: 1px solid #e8ecf0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0F345E;
+    outline: none;
+    background: transparent;
+    -moz-appearance: textfield;
+  }
+
+  .pdp-qty-input::-webkit-outer-spin-button,
+  .pdp-qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  /* Add to Cart */
+  .pdp-atc {
+    width: 100%;
+    padding: 18px 32px;
+    border: none;
+    border-radius: 14px;
+    background: #0F345E;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+    letter-spacing: 0.3px;
+  }
+
+  .pdp-atc:hover {
+    background: #071f3a;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(15, 52, 94, 0.3);
+  }
+
+  .pdp-atc:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .pdp-atc svg {
+    flex-shrink: 0;
+  }
+
+  .pdp-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: pdpSpin 0.6s linear infinite;
+  }
+
+  @keyframes pdpSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  .pdp-form .shopify-payment-button {
+    margin-top: 12px;
+  }
+
+  .pdp-form .shopify-payment-button__button {
+    border-radius: 14px !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 700 !important;
+    min-height: 56px;
+  }
+
+  /* Trust Blocks */
+  .pdp-trust-blocks {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid #e8ecf0;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .pdp-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e8ecf0;
+  }
+
+  .pdp-trust-item:last-child {
+    border-bottom: none;
+  }
+
+  .pdp-trust-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #f0f6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .pdp-trust-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: #0F345E;
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .pdp-trust-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .pdp-trust-text strong {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0F345E;
+  }
+
+  .pdp-trust-text span {
+    font-size: 12px;
+    color: #8898aa;
+  }
+
+  /* Accordion */
+  .pdp-accordion {
+    border-bottom: 1px solid #e8ecf0;
+  }
+
+  .pdp-accordion:last-child { border-bottom: none; }
+
+  .pdp-accordion summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .pdp-accordion summary::-webkit-details-marker { display: none; }
+
+  .pdp-accordion-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0F345E;
+  }
+
+  .pdp-accordion-title svg {
+    width: 18px;
+    height: 18px;
+    stroke: #0F345E;
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .pdp-accordion-arrow {
+    transition: transform 0.3s ease;
+    stroke: #8898aa;
+  }
+
+  .pdp-accordion[open] .pdp-accordion-arrow {
+    transform: rotate(180deg);
+  }
+
+  .pdp-accordion-body {
+    padding: 0 20px 18px 52px;
+    font-size: 14px;
+    color: #3a4a5c;
+    line-height: 1.7;
+  }
+
+  /* Responsive */
+  @media(max-width: 900px) {
+    .pdp-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .pdp-gallery {
+      position: relative;
+      top: 0;
+    }
+  }
+
+  @media(max-width: 480px) {
+    .pdp-main-img img {
+      padding: 20px;
+    }
+
+    .pdp-title {
+      font-size: 24px;
+    }
+
+    .pdp-price {
+      font-size: 26px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show Review Stars",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_text",
+      "label": "Review Text",
+      "default": "4.9 • 127 Reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dynamic_checkout",
+      "label": "Show Dynamic Checkout Button",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_badge",
+      "name": "Trust Badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Lucide Icon Name",
+          "default": "truck",
+          "info": "e.g. truck, shield-check, refresh-cw, leaf, award"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "On all orders over ₹499"
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Lucide Icon Name",
+          "default": "info"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Ingredients"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Premium caffeine, L-Theanine, electrolytes, zero sugar, zero calories.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Page",
+      "blocks": [
+        { "type": "trust_badge", "settings": { "icon": "truck", "title": "Free Shipping", "subtitle": "On all orders over ₹499" } },
+        { "type": "trust_badge", "settings": { "icon": "shield-check", "title": "Secure Payment", "subtitle": "100% encrypted checkout" } },
+        { "type": "trust_badge", "settings": { "icon": "refresh-cw", "title": "Easy Returns", "subtitle": "7-day money-back guarantee" } },
+        { "type": "accordion", "settings": { "icon": "list", "title": "Ingredients", "content": "<p>Premium caffeine (200mg), L-Theanine, Electrolytes (Sodium, Potassium, Magnesium). Zero sugar. Zero calories. No artificial colors.</p>" } },
+        { "type": "accordion", "settings": { "icon": "droplets", "title": "Nutrition Info", "content": "<p>Serving Size: 337ml (11.4 fl oz). Calories: 0. Total Sugar: 0g. Caffeine: 200mg. Sodium: 150mg. Potassium: 100mg.</p>" } },
+        { "type": "accordion", "settings": { "icon": "package", "title": "Shipping & Returns", "content": "<p>Ships within 24 hours. Free shipping on orders over ₹499. 7-day return policy — if you're not satisfied, we'll refund you.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main-collection": {
+      "type": "main-collection",
+      "settings": {
+        "chip_text": "Collection",
+        "products_per_page": 16
+      }
+    }
+  },
+  "order": [
+    "main-collection"
+  ]
+}

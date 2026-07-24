@@ -1,0 +1,275 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "New • Performance Hydration",
+        "heading": "Better Water",
+        "heading_italic": "For Better",
+        "subtext": "Zero sugar. Zero crash. Clean energy and deep hydration — in every can.",
+        "cta_primary_text": "Shop Now — ₹199",
+        "cta_secondary_text": "Explore →"
+      }
+    },
+    "marquee-banner": {
+      "type": "marquee-banner",
+      "settings": {},
+      "blocks": {
+        "text_1": {
+          "type": "text_item",
+          "settings": { "text": "BETTER WATER" }
+        },
+        "text_2": {
+          "type": "text_item",
+          "settings": { "text": "ZERO SUGAR" }
+        },
+        "text_3": {
+          "type": "text_item",
+          "settings": { "text": "MAX VIBES" }
+        },
+        "text_4": {
+          "type": "text_item",
+          "settings": { "text": "PURE ENERGY" }
+        }
+      },
+      "block_order": ["text_1", "text_2", "text_3", "text_4"]
+    },
+    "ingredients": {
+      "type": "ingredients",
+      "settings": {
+        "chip_text": "Inside Every Can",
+        "heading": "Designed for the",
+        "heading_italic": "Human Body."
+      },
+      "blocks": {
+        "ing_1": {
+          "type": "ingredient",
+          "settings": {
+            "title": "HYDRATE",
+            "tagline": "Electrolytes that restore",
+            "description": "Recharges vital minerals lost during intense workouts, keeping your muscles firing and hydration balanced all day long.",
+            "caption_title": "Electrolytes",
+            "caption_text": "Restore what sweat takes"
+          }
+        },
+        "ing_2": {
+          "type": "ingredient",
+          "settings": {
+            "title": "FOCUS",
+            "tagline": "L-theanine for calm, clean clarity",
+            "description": "Promotes sustained alpha brain waves to enhance mental clarity, flow state, and concentration without any nervous jitters.",
+            "caption_title": "L‑Theanine",
+            "caption_text": "Calm focus for the long game"
+          }
+        },
+        "ing_3": {
+          "type": "ingredient",
+          "settings": {
+            "title": "ENERGY",
+            "tagline": "Caffeine without the crash",
+            "description": "Delivers clean, balanced energy to power your day and elevate physical endurance with smooth, predictable momentum.",
+            "caption_title": "Caffeine",
+            "caption_text": "Pure performance, zero crash"
+          }
+        }
+      },
+      "block_order": ["ing_1", "ing_2", "ing_3"]
+    },
+    "flavors": {
+      "type": "flavors",
+      "settings": {
+        "chip_text": "Two Flavors. One Mission.",
+        "heading": "Pick your",
+        "heading_italic": "vibe.",
+        "subtext": "Tap a flavor to switch the world. The site shifts, the can rotates, the energy changes."
+      },
+      "blocks": {
+        "lime": {
+          "type": "flavor",
+          "settings": {
+            "flavor_id": "lime",
+            "flavor_label": "Lime",
+            "flavor_name": "Lime",
+            "flavor_name_italic": "Crush",
+            "description": "Zesty citrus. Cool finish. Built for sun‑soaked workouts and afternoon resets.",
+            "tags": "Citrus Hit, Mint Cool, Crisp Finish",
+            "caffeine": "200mg",
+            "sugar": "0g",
+            "size": "11.4 fl oz",
+            "cta_text": "Add Lime to Cart"
+          }
+        },
+        "berry": {
+          "type": "flavor",
+          "settings": {
+            "flavor_id": "berry",
+            "flavor_label": "Raspberry",
+            "flavor_name": "Raspberry",
+            "flavor_name_italic": "Rush",
+            "description": "Wild berries. Velvet finish. Designed for late nights, deep work, and golden hour.",
+            "tags": "Wild Berry, Soft Sweet, Smooth Lift",
+            "caffeine": "200mg",
+            "sugar": "0g",
+            "size": "11.4 fl oz",
+            "cta_text": "Add Raspberry to Cart"
+          }
+        }
+      },
+      "block_order": ["lime", "berry"]
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "chip_text": "Real Talk",
+        "heading": "The",
+        "heading_italic": "hype",
+        "subtext": "Watch creators, athletes, and everyday legends experience SPLYN for the first time."
+      },
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Alex Fitness",
+            "reviewer_title": "Pro Athlete • 2.4M followers",
+            "quote": "Finally a drink that keeps up with my training. Zero crash, all performance."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Sarah Runs",
+            "reviewer_title": "Marathon Runner • 890K followers",
+            "quote": "My long runs have never felt this smooth. The hydration is next level.",
+            "avatar_gradient": "linear-gradient(135deg, #ff6b9d, #c44569)"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Mike Lifts",
+            "reviewer_title": "CrossFit Coach • 1.2M followers",
+            "quote": "The clean energy hits different. No jitters, just pure focus for my lifts.",
+            "avatar_gradient": "linear-gradient(135deg, #a8edea, #fed6e3)"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Jenna Yoga",
+            "reviewer_title": "Yoga Instructor • 567K followers",
+            "quote": "I recommend SPLYN to all my students. Clean ingredients, amazing taste.",
+            "avatar_gradient": "linear-gradient(135deg, #9DBCEA, #EAF2FF)"
+          }
+        }
+      },
+      "block_order": ["review_1", "review_2", "review_3", "review_4"]
+    },
+    "community": {
+      "type": "community",
+      "settings": {
+        "chip_text": "Join the Movement",
+        "heading": "Be part of the",
+        "heading_italic": "SPLYN family.",
+        "description": "Thousands of athletes, creators, and everyday legends are already in the loop. Get early drops, exclusive recipes, community challenges, and direct access to the SPLYN team — all in one place.",
+        "cta_text": "Join Community"
+      },
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": { "alt_text": "SPLYN Community" }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": { "alt_text": "SPLYN Lifestyle" }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": { "alt_text": "SPLYN Energy" }
+        },
+        "slide_4": {
+          "type": "slide",
+          "settings": { "alt_text": "SPLYN Performance" }
+        },
+        "slide_5": {
+          "type": "slide",
+          "settings": { "alt_text": "SPLYN Community Vibes" }
+        },
+        "perk_1": {
+          "type": "perk",
+          "settings": { "icon": "zap", "text": "Early access to new flavors & drops" }
+        },
+        "perk_2": {
+          "type": "perk",
+          "settings": { "icon": "users", "text": "Connect with the community" }
+        },
+        "perk_3": {
+          "type": "perk",
+          "settings": { "icon": "gift", "text": "Exclusive member-only offers" }
+        },
+        "perk_4": {
+          "type": "perk",
+          "settings": { "icon": "message-circle", "text": "Direct line to the SPLYN team" }
+        }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3", "slide_4", "slide_5", "perk_1", "perk_2", "perk_3", "perk_4"]
+    },
+    "story": {
+      "type": "story",
+      "settings": {
+        "logo_tagline": "BETTER WATER",
+        "blockquote": "\"Three friends. One mission.<br>To make water<br>better.\"",
+        "eyebrow": "OUR STORY",
+        "heading": "Born in a<br>Coffee Shop",
+        "paragraph_1": "Splyn began not in a boardroom, but over coffee — three childhood friends noticing what was missing in the market. Most drinks were either overloaded with sugar or purely energy-driven with zero health.",
+        "paragraph_2": "We dug into the research, spotted the gap, and built <strong>Splyn</strong> — a next-generation sparkling sports drink that gives India's youth what they actually deserve."
+      },
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": { "value": "3", "label": "Founders" }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": { "value": "2025", "label": "Founded" }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": { "value": "∞", "label": "Ambition" }
+        }
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3"]
+    },
+    "sticky-bar": {
+      "type": "sticky-bar",
+      "settings": {
+        "product_name": "SPLYN Performance Drink",
+        "price_now": "₹199",
+        "price_old": "₹249",
+        "price_per": "/ can",
+        "cart_text": "Add to Cart",
+        "buy_text": "Buy Now"
+      },
+      "blocks": {
+        "variant_1": {
+          "type": "variant",
+          "settings": { "label": "🟢 Lime Crush" }
+        },
+        "variant_2": {
+          "type": "variant",
+          "settings": { "label": "🔴 Raspberry Rush" }
+        }
+      },
+      "block_order": ["variant_1", "variant_2"]
+    }
+  },
+  "order": [
+    "hero",
+    "marquee-banner",
+    "ingredients",
+    "flavors",
+    "reviews",
+    "community",
+    "story",
+    "sticky-bar"
+  ]
+}
