@@ -140,24 +140,125 @@ if (slides.length) {
   startSliderTimer();
 }
 
-// ── Ingredients hover interaction ──
+// ── Ingredients Auto-Slide & Hover Interaction ──
 const ingredientItems = document.querySelectorAll(".ingredient-item");
 const ingredientBgLayers = document.querySelectorAll(".ingredients-bg-layer, .ingredient-image");
+const ingredientsSection = document.getElementById("ingredients");
 
-function showIngredientImage(imageNum) {
+let currentIngredientIndex = 0;
+let ingredientAutoTimer = null;
+
+function activateIngredient(index) {
+  if (!ingredientItems.length) return;
+
+  currentIngredientIndex = (index + ingredientItems.length) % ingredientItems.length;
+
+  ingredientItems.forEach((item, i) => {
+    const isActive = i === currentIngredientIndex;
+    item.classList.toggle("active", isActive);
+  });
+
+  const activeImageNum = ingredientItems[currentIngredientIndex].dataset.image;
   ingredientBgLayers.forEach((img) => {
-    const isActive = img.dataset.image === imageNum;
+    const isActive = img.dataset.image === activeImageNum;
     img.classList.toggle("active", isActive);
   });
 }
 
-ingredientItems.forEach((item) => {
-  item.addEventListener("mouseenter", () => {
-    const imageNum = item.dataset.image;
-    showIngredientImage(imageNum);
+function startIngredientTimer() {
+  stopIngredientTimer();
+  ingredientAutoTimer = setInterval(() => {
+    activateIngredient(currentIngredientIndex + 1);
+  }, 3500);
+}
 
-    // Update active state on items
-    ingredientItems.forEach((i) => i.classList.remove("active"));
-    item.classList.add("active");
+function stopIngredientTimer() {
+  if (ingredientAutoTimer) {
+    clearInterval(ingredientAutoTimer);
+    ingredientAutoTimer = null;
+  }
+}
+
+if (ingredientItems.length) {
+  // Initialize first slide and start auto timer
+  activateIngredient(0);
+  startIngredientTimer();
+
+  ingredientItems.forEach((item, index) => {
+    item.addEventListener("mouseenter", () => {
+      stopIngredientTimer();
+      activateIngredient(index);
+    });
+  });
+
+  if (ingredientsSection) {
+    ingredientsSection.addEventListener("mouseleave", () => {
+      startIngredientTimer();
+    });
+  }
+}
+
+// ── Compulsory Pack Variant Selection Handler ──
+document.querySelectorAll(".variant-pill").forEach((pill) => {
+  pill.addEventListener("click", () => {
+    const card = pill.closest(".flavor-card-item");
+    if (!card) return;
+
+    // Toggle active pill inside this card
+    card.querySelectorAll(".variant-pill").forEach((p) => p.classList.remove("is-active"));
+    pill.classList.add("is-active");
+
+    // Update label text
+    const labelText = card.querySelector(".selected-pack-text");
+    if (labelText) {
+      labelText.textContent = `${pill.dataset.pack} (${pill.dataset.price})`;
+      labelText.classList.add("has-selection");
+    }
+
+    // Clear error state
+    const errorMsg = card.querySelector(".variant-error-msg");
+    const pillsContainer = card.querySelector(".variant-pills");
+    if (errorMsg) errorMsg.style.display = "none";
+    if (pillsContainer) pillsContainer.classList.remove("has-error");
+
+    // Update buy button text
+    const buyBtn = card.querySelector(".flavor-buy-btn");
+    if (buyBtn && buyBtn.dataset.flavor !== "mystery") {
+      buyBtn.textContent = `Buy Now — ${pill.dataset.pack} (${pill.dataset.price})`;
+    }
+  });
+});
+
+document.querySelectorAll(".flavor-buy-btn").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const flavor = btn.dataset.flavor;
+    if (flavor === "mystery") {
+      alert("Thanks for your interest! We'll notify you as soon as Drop 03 launches.");
+      return;
+    }
+
+    const card = btn.closest(".flavor-card-item");
+    if (!card) return;
+
+    const activePill = card.querySelector(".variant-pill.is-active");
+    if (!activePill) {
+      e.preventDefault();
+      const errorMsg = card.querySelector(".variant-error-msg");
+      const pillsContainer = card.querySelector(".variant-pills");
+      
+      if (errorMsg) errorMsg.style.display = "block";
+      if (pillsContainer) {
+        pillsContainer.classList.remove("has-error");
+        void pillsContainer.offsetWidth; // trigger reflow for animation
+        pillsContainer.classList.add("has-error");
+      }
+    } else {
+      const variantId = activePill.dataset.variantId;
+      if (variantId && !variantId.startsWith("default")) {
+        window.location.href = `/cart/${variantId}:1`;
+      } else {
+        window.location.href = "/checkout";
+      }
+    }
   });
 });

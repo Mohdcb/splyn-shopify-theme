@@ -3,10 +3,10 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "New • Performance Hydration",
-        "heading": "Better Water",
-        "heading_italic": "For Better",
-        "subtext": "Zero sugar. Zero crash. Clean energy and deep hydration — in every can.",
+        "eyebrow": "Better Water",
+        "heading": "The can that does",
+        "heading_italic": "3 things.",
+        "subtext": "Zero Sugar. Zero Calorie.",
         "cta_primary_text": "Shop Now — ₹199",
         "cta_secondary_text": "Explore →"
       }
@@ -17,19 +17,19 @@
       "blocks": {
         "text_1": {
           "type": "text_item",
-          "settings": { "text": "BETTER WATER" }
+          "settings": { "text": "BEYOND ENERGY. BEYOND HYDRATION." }
         },
         "text_2": {
           "type": "text_item",
-          "settings": { "text": "ZERO SUGAR" }
+          "settings": { "text": "ZERO SUGAR. ZERO CALORIE." }
         },
         "text_3": {
           "type": "text_item",
-          "settings": { "text": "MAX VIBES" }
+          "settings": { "text": "BEYOND ENERGY. BEYOND HYDRATION." }
         },
         "text_4": {
           "type": "text_item",
-          "settings": { "text": "PURE ENERGY" }
+          "settings": { "text": "ZERO SUGAR. ZERO CALORIE." }
         }
       },
       "block_order": ["text_1", "text_2", "text_3", "text_4"]
@@ -45,21 +45,21 @@
         "ing_1": {
           "type": "ingredient",
           "settings": {
-            "title": "HYDRATE",
-            "tagline": "Electrolytes that restore",
-            "description": "Recharges vital minerals lost during intense workouts, keeping your muscles firing and hydration balanced all day long.",
+            "title": "HYDRATION",
+            "tagline": "Not Water. Electrolytes.",
+            "description": "",
             "caption_title": "Electrolytes",
-            "caption_text": "Restore what sweat takes"
+            "caption_text": ""
           }
         },
         "ing_2": {
           "type": "ingredient",
           "settings": {
             "title": "FOCUS",
-            "tagline": "L-theanine for calm, clean clarity",
-            "description": "Promotes sustained alpha brain waves to enhance mental clarity, flow state, and concentration without any nervous jitters.",
+            "tagline": "Powered by L-Theanine",
+            "description": "",
             "caption_title": "L‑Theanine",
-            "caption_text": "Calm focus for the long game"
+            "caption_text": ""
           }
         },
         "ing_3": {
@@ -67,9 +67,9 @@
           "settings": {
             "title": "ENERGY",
             "tagline": "Caffeine without the crash",
-            "description": "Delivers clean, balanced energy to power your day and elevate physical endurance with smooth, predictable momentum.",
+            "description": "",
             "caption_title": "Caffeine",
-            "caption_text": "Pure performance, zero crash"
+            "caption_text": ""
           }
         }
       },
@@ -78,10 +78,10 @@
     "flavors": {
       "type": "flavors",
       "settings": {
-        "chip_text": "Two Flavors. One Mission.",
+        "chip_text": "Our Lineup",
         "heading": "Pick your",
-        "heading_italic": "vibe.",
-        "subtext": "Tap a flavor to switch the world. The site shifts, the can rotates, the energy changes."
+        "heading_italic": "taste.",
+        "subtext": "Explore our signature performance hydration lineup, built for peak energy and zero crash."
       },
       "blocks": {
         "lime": {
@@ -113,16 +113,31 @@
             "size": "11.4 fl oz",
             "cta_text": "Add Raspberry to Cart"
           }
+        },
+        "mystery": {
+          "type": "flavor",
+          "settings": {
+            "flavor_id": "mystery",
+            "flavor_label": "Mystery Drop",
+            "flavor_name": "Mystery",
+            "flavor_name_italic": "Vibe",
+            "description": "Something bold is brewing in our labs. Stay tuned for our next game-changing drop.",
+            "tags": "Next Drop, Secret Recipe, Coming Soon",
+            "caffeine": "???",
+            "sugar": "0g",
+            "size": "11.4 fl oz",
+            "cta_text": "Notify Me"
+          }
         }
       },
-      "block_order": ["lime", "berry"]
+      "block_order": ["lime", "berry", "mystery"]
     },
     "reviews": {
       "type": "reviews",
       "settings": {
         "chip_text": "Real Talk",
-        "heading": "The",
-        "heading_italic": "hype",
+        "heading": "The hype —",
+        "heading_italic": "listen to MYPs",
         "subtext": "Watch creators, athletes, and everyday legends experience SPLYN for the first time."
       },
       "blocks": {

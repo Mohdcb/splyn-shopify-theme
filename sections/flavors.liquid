@@ -1,48 +1,121 @@
-<!-- FLAVORS SWITCHING -->
+<!-- FLAVORS SECTION -->
 <section id="flavors" class="flavors">
   <div class="container">
-    <span class="chip chip-yellow reveal">{{ section.settings.chip_text }}</span>
-    <h2 class="reveal">{{ section.settings.heading }} <em>{{ section.settings.heading_italic }}</em></h2>
-    <p class="reveal">{{ section.settings.subtext }}</p>
-
-    <div class="flavor-switch reveal">
-      {% for block in section.blocks %}
-        <button class="flavor-btn{% if forloop.first %} is-active{% endif %}" data-flavor="{{ block.settings.flavor_id }}" {{ block.shopify_attributes }}>
-          <span class="swatch swatch-{{ block.settings.flavor_id }}"></span> {{ block.settings.flavor_label }}
-        </button>
-      {% endfor %}
+    <div class="flavors-head reveal">
+      <span class="chip chip-yellow">{{ section.settings.chip_text }}</span>
+      <h2>{{ section.settings.heading }} <em>{{ section.settings.heading_italic }}</em></h2>
+      <p>{{ section.settings.subtext }}</p>
     </div>
 
-    <div class="flavor-stage reveal" data-theme="{{ section.blocks[0].settings.flavor_id }}">
+    <div class="flavors-grid reveal">
       {% for block in section.blocks %}
-        <div class="flavor-card flavor-card-{{ block.settings.flavor_id }}{% if forloop.first %} is-active{% endif %}" data-bg="{{ block.settings.flavor_id }}">
-          <div class="flavor-copy">
-            <h3>{{ block.settings.flavor_name }} <em>{{ block.settings.flavor_name_italic }}</em></h3>
-            <p>{{ block.settings.description }}</p>
+        {% assign card_product = block.settings.product %}
+        {% if card_product == blank %}
+          {% assign f_id = block.settings.flavor_id | downcase %}
+          {% for p in collections.all.products %}
+            {% assign p_handle = p.handle | downcase %}
+            {% assign p_title = p.title | downcase %}
+            {% if p_handle contains f_id or f_id contains p_handle or p_title contains f_id or f_id contains p_title %}
+              {% assign card_product = p %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          {% if card_product == blank and block.settings.flavor_id != 'mystery' %}
+            {% assign prod_idx = forloop.index0 %}
+            {% if collections.all.products[prod_idx] != blank %}
+              {% assign card_product = collections.all.products[prod_idx] %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+
+        <div class="flavor-card-item flavor-card-{{ block.settings.flavor_id }}" {{ block.shopify_attributes }}>
+          <div class="flavor-card-badge">
+            {% if block.settings.flavor_id == 'mystery' %}
+              <span class="badge-mystery">NEXT DROP</span>
+            {% else %}
+              <span class="swatch swatch-{{ block.settings.flavor_id }}"></span>
+            {% endif %}
+          </div>
+          
+          <div class="flavor-card-media">
+            {% if block.settings.flavor_id == 'mystery' %}
+              <div class="empty-can-placeholder">
+                <div class="mystery-circle">?</div>
+                <p>NEW FLAVOR UNLOCKING SOON</p>
+              </div>
+            {% elsif card_product != blank and card_product.featured_image != blank %}
+              <img src="{{ card_product.featured_image | image_url: width: 600 }}" alt="{{ card_product.title | escape }}" />
+            {% elsif block.settings.can_image != blank %}
+              <img src="{{ block.settings.can_image | image_url: width: 600 }}" alt="{{ block.settings.flavor_name }}" />
+            {% else %}
+              {% if block.settings.flavor_id == 'lime' %}
+                <img src="{{ 'can-lime.png' | asset_url }}" alt="Lime Crush Can" />
+              {% elsif block.settings.flavor_id == 'berry' %}
+                <img src="{{ 'can-raspberry.png' | asset_url }}" alt="Raspberry Rush Can" />
+              {% else %}
+                <img src="{{ 'can-lime.png' | asset_url }}" alt="{{ block.settings.flavor_name }}" />
+              {% endif %}
+            {% endif %}
+          </div>
+
+          <div class="flavor-card-content">
+            {% if card_product != blank %}
+              <h3>{{ card_product.title }}</h3>
+            {% else %}
+              <h3>{{ block.settings.flavor_name }} <em>{{ block.settings.flavor_name_italic }}</em></h3>
+            {% endif %}
+
+            <p class="flavor-desc">
+              {% if card_product != blank and card_product.description != blank %}
+                {{ card_product.description | strip_html | truncatewords: 18 }}
+              {% else %}
+                {{ block.settings.description }}
+              {% endif %}
+            </p>
+            
             <ul class="flavor-tags">
               {% assign tags = block.settings.tags | split: ',' %}
               {% for tag in tags %}
                 <li>{{ tag | strip }}</li>
               {% endfor %}
             </ul>
+
             <div class="flavor-meta">
               <div><b>{{ block.settings.caffeine }}</b><span>Caffeine</span></div>
               <div><b>{{ block.settings.sugar }}</b><span>Sugar</span></div>
               <div><b>{{ block.settings.size }}</b><span>Per can</span></div>
             </div>
-            <a href="{{ block.settings.cta_link }}" class="btn btn-primary btn-large">{{ block.settings.cta_text }}</a>
-          </div>
-          <div class="flavor-media">
-            <div class="orb orb-{{ block.settings.flavor_id }}"></div>
-            {% if block.settings.can_image != blank %}
-              <img class="rotate-can" src="{{ block.settings.can_image | image_url: width: 800 }}" alt="{{ block.settings.flavor_name }} can" style="max-height: 580px;" />
-            {% else %}
-              {% if block.settings.flavor_id == 'lime' %}
-                <img class="rotate-can" src="{{ 'can-lime.png' | asset_url }}" alt="Lime can" style="max-height: 580px;" />
-              {% else %}
-                <img class="rotate-can" src="{{ 'can-raspberry.png' | asset_url }}" alt="Raspberry can" style="max-height: 580px;" />
-              {% endif %}
-            {% endif %}
+
+            {% unless block.settings.flavor_id == 'mystery' %}
+              <!-- Dynamic Shopify Variant Selector -->
+              <div class="flavor-variant-selector">
+                <label class="variant-label">Select Pack Variant: <span class="selected-pack-text">Select variant first *</span></label>
+                <div class="variant-pills">
+                  {% if card_product != blank and card_product.variants.size > 0 %}
+                    {% for variant in card_product.variants %}
+                      <button type="button" class="variant-pill"
+                        data-variant-id="{{ variant.id }}"
+                        data-pack="{{ variant.title }}"
+                        data-price="{{ variant.price | money }}"
+                        data-available="{{ variant.available }}">
+                        {{ variant.title }}
+                      </button>
+                    {% endfor %}
+                  {% else %}
+                    <!-- Dynamic Fallback Pack Variants -->
+                    <button type="button" class="variant-pill" data-variant-id="4001" data-pack="Pack of 4" data-price="₹599">Pack of 4</button>
+                    <button type="button" class="variant-pill" data-variant-id="4002" data-pack="Pack of 6" data-price="₹1,599">Pack of 6</button>
+                    <button type="button" class="variant-pill" data-variant-id="4003" data-pack="Pack of 12" data-price="₹2,999">Pack of 12</button>
+                    <button type="button" class="variant-pill" data-variant-id="4004" data-pack="Pack of 24" data-price="₹5,599">Pack of 24</button>
+                  {% endif %}
+                </div>
+                <div class="variant-error-msg" style="display: none;">⚠️ Please select a variant before buying</div>
+              </div>
+            {% endunless %}
+
+            <button type="button" class="btn {% if block.settings.flavor_id == 'mystery' %}btn-ghost{% else %}btn-primary{% endif %} btn-full flavor-buy-btn" data-flavor="{{ block.settings.flavor_id }}" {% if card_product != blank %}data-product-id="{{ card_product.id }}"{% endif %}>
+              {% if block.settings.flavor_id == 'mystery' %}Notify Me{% else %}Buy Now — {% if card_product != blank %}{{ card_product.title }}{% else %}{{ block.settings.flavor_name }}{% endif %}{% endif %}
+            </button>
           </div>
         </div>
       {% endfor %}
@@ -84,6 +157,11 @@
       "type": "flavor",
       "name": "Flavor Card",
       "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Shopify Product"
+        },
         {
           "type": "text",
           "id": "flavor_id",
