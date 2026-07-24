@@ -3,7 +3,7 @@
   <div class="container">
     <div class="section-head reveal text-center">
       <span class="chip chip-yellow">{{ section.settings.chip_text | default: 'The SPLYN Advantage' }}</span>
-      <h2>{{ section.settings.heading | default: 'Why' }} <em>{{ section.settings.heading_italic | default: 'SPLYN Beats' }}</em> {{ section.settings.heading_end | default: 'Standard Drinks' }}</h2>
+      <h2>{% if section.settings.heading != blank %}{{ section.settings.heading }}{% else %}Why{% endif %} <em>{% if section.settings.heading_italic != blank %}{{ section.settings.heading_italic }}{% else %}SPLYN{% endif %}</em><br>{% if section.settings.heading_end != blank %}{{ section.settings.heading_end }}{% else %}Beats Standard Drinks{% endif %}</h2>
       <p>{{ section.settings.subtext | default: 'See how SPLYN stack up against sugary energy drinks and plain hydration.' }}</p>
     </div>
 
