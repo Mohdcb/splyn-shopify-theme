@@ -186,7 +186,7 @@
         "heading": "Be part of the",
         "heading_italic": "SPLYN family.",
         "description": "Thousands of athletes, creators, and everyday legends are already in the loop. Get early drops, exclusive recipes, community challenges, and direct access to the SPLYN team — all in one place.",
-        "cta_text": "Join Community"
+        "cta_text": "Join WhatsApp Community"
       },
       "blocks": {
         "slide_1": {
@@ -224,9 +224,13 @@
         "perk_4": {
           "type": "perk",
           "settings": { "icon": "message-circle", "text": "Direct line to the SPLYN team" }
+        },
+        "perk_5": {
+          "type": "perk",
+          "settings": { "icon": "calendar", "text": "Access to exclusive community events" }
         }
       },
-      "block_order": ["slide_1", "slide_2", "slide_3", "slide_4", "slide_5", "perk_1", "perk_2", "perk_3", "perk_4"]
+      "block_order": ["slide_1", "slide_2", "slide_3", "slide_4", "slide_5", "perk_1", "perk_2", "perk_3", "perk_4", "perk_5"]
     },
     "story": {
       "type": "story",

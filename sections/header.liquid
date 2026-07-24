@@ -213,8 +213,32 @@
   }
 
   @media(max-width: 780px) {
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 16px;
+      position: relative;
+    }
+
     .mobile-menu-toggle {
       display: flex;
+      z-index: 2;
+    }
+
+    .brand {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-actions {
+      margin-left: auto;
+      z-index: 2;
     }
 
     .links {

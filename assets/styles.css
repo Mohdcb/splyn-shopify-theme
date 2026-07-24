@@ -171,7 +171,7 @@ a {
   position: absolute;
   bottom: 64px;
   right: 64px;
-  max-width: 520px;
+  max-width: 680px;
   text-align: right;
 }
 
@@ -193,19 +193,23 @@ a {
 .hero h1 {
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
-  font-size: clamp(44px, 6vw, 80px);
-  line-height: 1.02;
-  letter-spacing: -2px;
+  font-size: clamp(38px, 5.2vw, 70px);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
   color: #fff;
   margin-bottom: 16px;
-  text-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  text-shadow: 0 4px 24px rgba(0,0,0,0.4);
 }
 
 .hero h1 em {
   font-style: italic;
-  font-weight: 600;
-  color: #9DBCEA;
+  font-weight: 900;
+  font-size: 1.18em;
+  background: linear-gradient(135deg, #E8FF5A 0%, #a8edea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: block;
+  margin-top: 4px;
 }
 
 .hero p {
@@ -2487,10 +2491,11 @@ h2 {
 }
 
 .community-copy > p {
-  font-size: 17px;
-  line-height: 1.7;
-  color: var(--muted);
-  max-width: 480px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #0F345E;
+  font-weight: 500;
+  max-width: 520px;
 }
 
 .community-perks {
@@ -2508,20 +2513,51 @@ h2 {
   gap: 12px;
   font-size: 15px;
   font-weight: 600;
-  color: var(--purple-800);
+  color: #0F345E;
 }
 
 .community-perks li svg {
   width: 20px;
   height: 20px;
-  stroke: var(--purple-700);
+  stroke: #0F345E;
   fill: none;
   stroke-width: 2;
   flex-shrink: 0;
-  background: rgba(232, 255, 90, 0.15);
+  background: rgba(15, 52, 94, 0.08);
   border-radius: 8px;
   padding: 3px;
   box-sizing: content-box;
+}
+
+/* WhatsApp Community Button */
+.btn-whatsapp {
+  background: #25D366;
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+  width: fit-content;
+  text-decoration: none;
+}
+
+.btn-whatsapp:hover {
+  background: #20bd5a;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
+  color: #FFFFFF;
+}
+
+.whatsapp-icon {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+  flex-shrink: 0;
 }
 
 /* Community button uses standard .btn-primary */
@@ -2690,24 +2726,8 @@ h2 {
 }
 
 @media(max-width: 768px) {
-  .sticky-bar-inner {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .sticky-variants {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .sticky-actions {
-    flex: 1;
-    justify-content: flex-end;
-  }
-  
-  .sticky-name {
-    display: none;
+  .sticky-bar {
+    display: none !important;
   }
 }
 
