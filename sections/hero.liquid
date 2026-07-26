@@ -9,12 +9,14 @@
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-content">
-    <span class="hero-eyebrow">{{ section.settings.eyebrow }}</span>
+    {% if section.settings.eyebrow != blank %}
+      <span class="hero-eyebrow">{{ section.settings.eyebrow }}</span>
+    {% endif %}
     <h1>{{ section.settings.heading }}<br><em>{{ section.settings.heading_italic }}</em></h1>
     <p>{{ section.settings.subtext }}</p>
     <div class="hero-ctas">
-      <a href="{{ section.settings.cta_primary_link }}" class="btn btn-primary">{{ section.settings.cta_primary_text }}</a>
-      <a href="{{ section.settings.cta_secondary_link }}" class="btn btn-ghost">{{ section.settings.cta_secondary_text }}</a>
+      <a href="{{ section.settings.cta_primary_link }}" class="btn btn-primary"><i class="ph-duotone ph-shopping-bag-open"></i> {{ section.settings.cta_primary_text }}</a>
+      <a href="{{ section.settings.cta_secondary_link }}" class="btn btn-ghost"><i class="ph-duotone ph-compass"></i> {{ section.settings.cta_secondary_text }}</a>
     </div>
   </div>
 </section>

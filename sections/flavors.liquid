@@ -114,7 +114,11 @@
             {% endunless %}
 
             <button type="button" class="btn {% if block.settings.flavor_id == 'mystery' %}btn-ghost{% else %}btn-primary{% endif %} btn-full flavor-buy-btn" data-flavor="{{ block.settings.flavor_id }}" {% if card_product != blank %}data-product-id="{{ card_product.id }}"{% endif %}>
-              {% if block.settings.flavor_id == 'mystery' %}Notify Me{% else %}Buy Now — {% if card_product != blank %}{{ card_product.title }}{% else %}{{ block.settings.flavor_name }}{% endif %}{% endif %}
+              {% if block.settings.flavor_id == 'mystery' %}
+                <i class="ph-duotone ph-bell-simple-ringing"></i> Notify Me
+              {% else %}
+                <i class="ph-duotone ph-shopping-bag-open"></i> Buy Now — {% if card_product != blank %}{{ card_product.title }}{% else %}{{ block.settings.flavor_name }}{% endif %}
+              {% endif %}
             </button>
           </div>
         </div>

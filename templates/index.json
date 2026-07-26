@@ -3,7 +3,7 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "Better Water",
+        "eyebrow": "",
         "heading": "The can that does",
         "heading_italic": "3 things.",
         "subtext": "Zero Sugar. Zero Calorie.",
@@ -37,7 +37,7 @@
     "ingredients": {
       "type": "ingredients",
       "settings": {
-        "chip_text": "Inside Every Can",
+        "chip_text": "",
         "heading": "Designed for the",
         "heading_italic": "Human Body."
       },
@@ -173,7 +173,7 @@
             "reviewer_name": "Jenna Yoga",
             "reviewer_title": "Yoga Instructor • 567K followers",
             "quote": "I recommend SPLYN to all my students. Clean ingredients, amazing taste.",
-            "avatar_gradient": "linear-gradient(135deg, #9DBCEA, #EAF2FF)"
+            "avatar_gradient": "linear-gradient(135deg, #91B9EA, #EAF2FF)"
           }
         }
       },

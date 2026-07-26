@@ -32,11 +32,11 @@
 
     <!-- Right Actions -->
     <div class="nav-actions">
-      <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="cta-pill">{{ section.settings.cta_text | default: 'Shop now →' }}</a>
-      <button class="nav-cart-btn" onclick="openCartDrawer()" aria-label="Cart">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="cta-pill"><i class="ph-duotone ph-shopping-bag-open"></i> {{ section.settings.cta_text | default: 'Shop now' }}</a>
+      <a href="{{ routes.cart_url }}" class="nav-cart-btn" aria-label="Cart">
+        <i class="ph-duotone ph-shopping-cart-simple" style="font-size: 22px;"></i>
         <span class="nav-cart-count" id="cartCount">{{ cart.item_count }}</span>
-      </button>
+      </a>
     </div>
   </div>
 </header>

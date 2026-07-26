@@ -1,32 +1,105 @@
 <!-- STICKY ADD TO CART BAR -->
+{% assign st_product = section.settings.product %}
+{% if st_product == blank and product != blank %}
+  {% assign st_product = product %}
+{% endif %}
+{% if st_product == blank %}
+  {% assign st_product = collections['all'].products.first %}
+{% endif %}
+
+{% if st_product != blank %}
+  {% assign st_first_variant = st_product.selected_or_first_available_variant %}
+  {% assign st_title = st_product.title %}
+{% else %}
+  {% assign st_title = section.settings.product_name %}
+{% endif %}
+
 <div class="sticky-bar" id="stickyBar">
   <div class="sticky-bar-inner">
-    <div class="sticky-product">
-      {% if section.settings.product_image != blank %}
-        <img src="{{ section.settings.product_image | image_url: width: 100 }}" alt="{{ section.settings.product_name }}" class="sticky-can" />
-      {% else %}
-        <img src="{{ 'can-lime.png' | asset_url }}" alt="SPLYN" class="sticky-can" />
-      {% endif %}
-      <div class="sticky-info">
-        <span class="sticky-name">{{ section.settings.product_name }}</span>
-        <div class="sticky-price">
-          <span class="sticky-now">{{ section.settings.price_now }}</span>
-          {% if section.settings.price_old != blank %}
-            <span class="sticky-old">{{ section.settings.price_old }}</span>
+    {% if st_product != blank %}
+      {% form 'product', st_product, id: 'sticky-bar-form', class: 'sticky-bar-form-wrapper' %}
+        <input type="hidden" name="id" id="sticky-selected-variant-id" value="{{ st_first_variant.id }}">
+        <input type="hidden" name="return_to" value="/checkout">
+
+        <div class="sticky-product">
+          {% if st_product.featured_image != blank %}
+            <img id="sticky-can-img" src="{{ st_product.featured_image | image_url: width: 120 }}" alt="{{ st_title | escape }}" class="sticky-can" />
+          {% elsif section.settings.product_image != blank %}
+            <img id="sticky-can-img" src="{{ section.settings.product_image | image_url: width: 120 }}" alt="{{ st_title | escape }}" class="sticky-can" />
+          {% else %}
+            <img id="sticky-can-img" src="{{ 'can-lime.png' | asset_url }}" alt="SPLYN" class="sticky-can" />
           {% endif %}
-          <span class="sticky-per">{{ section.settings.price_per }}</span>
+          <div class="sticky-info">
+            <span class="sticky-name">{{ st_title }}</span>
+            <div class="sticky-price">
+              <span class="sticky-now" id="sticky-price-now">{{ st_first_variant.price | money }}</span>
+              <span class="sticky-old" id="sticky-price-old">
+                {% if st_first_variant.compare_at_price > st_first_variant.price %}
+                  {{ st_first_variant.compare_at_price | money }}
+                {% endif %}
+              </span>
+              {% if section.settings.price_per != blank %}
+                <span class="sticky-per">{{ section.settings.price_per }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="sticky-variants">
+          {% if st_product.variants.size > 1 %}
+            {% for variant in st_product.variants %}
+              <button type="button"
+                      class="sticky-variant{% if variant.id == st_first_variant.id %} active{% endif %}"
+                      data-variant-id="{{ variant.id }}"
+                      data-variant-price="{{ variant.price | money }}"
+                      data-variant-compare="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
+                      {% if variant.featured_image %}data-variant-image="{{ variant.featured_image | image_url: width: 120 }}"{% endif %}
+                      {% unless variant.available %}disabled{% endunless %}>
+                {{ variant.title }}
+                {% unless variant.available %} (Sold Out){% endunless %}
+              </button>
+            {% endfor %}
+          {% else %}
+            {% for block in section.blocks %}
+              <button type="button" class="sticky-variant{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label }}</button>
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        <div class="sticky-actions">
+          <button type="submit" name="checkout" class="sticky-btn sticky-btn-primary" {% if st_first_variant.available == false %}disabled{% endif %}>
+            <i class="ph-duotone ph-lightning"></i> {% if st_first_variant.available == false %}Sold Out{% else %}{{ section.settings.buy_text | default: 'Buy Now' }}{% endif %}
+          </button>
+        </div>
+      {% endform %}
+    {% else %}
+      <div class="sticky-product">
+        {% if section.settings.product_image != blank %}
+          <img src="{{ section.settings.product_image | image_url: width: 100 }}" alt="{{ section.settings.product_name }}" class="sticky-can" />
+        {% else %}
+          <img src="{{ 'can-lime.png' | asset_url }}" alt="SPLYN" class="sticky-can" />
+        {% endif %}
+        <div class="sticky-info">
+          <span class="sticky-name">{{ section.settings.product_name }}</span>
+          <div class="sticky-price">
+            <span class="sticky-now">{{ section.settings.price_now }}</span>
+            {% if section.settings.price_old != blank %}
+              <span class="sticky-old">{{ section.settings.price_old }}</span>
+            {% endif %}
+            <span class="sticky-per">{{ section.settings.price_per }}</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="sticky-variants">
-      {% for block in section.blocks %}
-        <button class="sticky-variant{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label }}</button>
-      {% endfor %}
-    </div>
-    <div class="sticky-actions">
-      <a href="{{ section.settings.cart_link }}" class="sticky-btn sticky-btn-outline">{{ section.settings.cart_text }}</a>
-      <a href="{{ section.settings.buy_link }}" class="sticky-btn sticky-btn-primary">{{ section.settings.buy_text }}</a>
-    </div>
+      <div class="sticky-variants">
+        {% for block in section.blocks %}
+          <button type="button" class="sticky-variant{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label }}</button>
+        {% endfor %}
+      </div>
+      <div class="sticky-actions">
+        <a href="{{ section.settings.cart_link }}" class="sticky-btn sticky-btn-outline">{{ section.settings.cart_text }}</a>
+        <a href="{{ section.settings.buy_link }}" class="sticky-btn sticky-btn-primary">{{ section.settings.buy_text }}</a>
+      </div>
+    {% endif %}
   </div>
 </div>
 
@@ -35,26 +108,31 @@
   "name": "Sticky Cart Bar",
   "settings": [
     {
+      "type": "product",
+      "id": "product",
+      "label": "Shopify Product (DB)"
+    },
+    {
       "type": "image_picker",
       "id": "product_image",
-      "label": "Product Thumbnail"
+      "label": "Fallback Product Thumbnail"
     },
     {
       "type": "text",
       "id": "product_name",
-      "label": "Product Name",
+      "label": "Fallback Product Name",
       "default": "SPLYN Performance Drink"
     },
     {
       "type": "text",
       "id": "price_now",
-      "label": "Current Price",
+      "label": "Fallback Price",
       "default": "₹199"
     },
     {
       "type": "text",
       "id": "price_old",
-      "label": "Compare-at Price",
+      "label": "Fallback Compare-at Price",
       "default": "₹249"
     },
     {
@@ -70,28 +148,16 @@
       "default": "Add to Cart"
     },
     {
-      "type": "url",
-      "id": "cart_link",
-      "label": "Add to Cart Link",
-      "default": "/collections/all"
-    },
-    {
       "type": "text",
       "id": "buy_text",
       "label": "Buy Now Text",
       "default": "Buy Now"
-    },
-    {
-      "type": "url",
-      "id": "buy_link",
-      "label": "Buy Now Link",
-      "default": "/collections/all"
     }
   ],
   "blocks": [
     {
       "type": "variant",
-      "name": "Variant Button",
+      "name": "Fallback Variant Button",
       "settings": [
         {
           "type": "text",

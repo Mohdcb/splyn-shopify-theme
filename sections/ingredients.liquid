@@ -17,8 +17,10 @@
 
   <div class="container ingredients-content-wrapper">
     <div class="section-head reveal">
-      <span class="chip chip-yellow">{{ section.settings.chip_text }}</span>
-      <h2>{{ section.settings.heading }} <em>{{ section.settings.heading_italic }}</em></h2>
+      {% if section.settings.chip_text != blank %}
+        <span class="chip chip-yellow">{{ section.settings.chip_text }}</span>
+      {% endif %}
+      <h2>{{ section.settings.heading }}<br><em>{{ section.settings.heading_italic }}</em></h2>
     </div>
 
     <div class="ingredients-showcase reveal">

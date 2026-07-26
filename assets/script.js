@@ -89,8 +89,8 @@ window.addEventListener("scroll", () => {
 // ── Nav background intensify on scroll ──
 const nav = document.querySelector(".nav");
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 30) nav.style.background = "#0F345E";
-  else nav.style.background = "#0F345E";
+  if (window.scrollY > 30) nav.style.background = "#003561";
+  else nav.style.background = "#003561";
 });
 
 // ── Sticky Bar ──
@@ -111,6 +111,28 @@ document.querySelectorAll(".sticky-variant").forEach((btn) => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".sticky-variant").forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
+
+    const variantId = btn.getAttribute("data-variant-id");
+    const variantPrice = btn.getAttribute("data-variant-price");
+    const variantCompare = btn.getAttribute("data-variant-compare");
+    const variantImage = btn.getAttribute("data-variant-image");
+
+    if (variantId) {
+      const hiddenInput = document.getElementById("sticky-selected-variant-id");
+      if (hiddenInput) hiddenInput.value = variantId;
+    }
+    if (variantPrice) {
+      const priceNow = document.getElementById("sticky-price-now");
+      if (priceNow) priceNow.textContent = variantPrice;
+    }
+    if (variantCompare !== null) {
+      const priceOld = document.getElementById("sticky-price-old");
+      if (priceOld) priceOld.textContent = variantCompare;
+    }
+    if (variantImage) {
+      const canImg = document.getElementById("sticky-can-img");
+      if (canImg) canImg.src = variantImage;
+    }
   });
 });
 

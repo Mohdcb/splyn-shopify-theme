@@ -2,7 +2,7 @@
 <div class="marquee-banner">
   <div class="marquee-track">
     {% for block in section.blocks %}
-      <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+      <span {{ block.shopify_attributes }}><i class="ph-duotone ph-sparkle" style="font-size: 16px; margin-right: 6px;"></i> {{ block.settings.text }}</span>
       {% if section.settings.logo != blank %}
         <img src="{{ section.settings.logo | image_url: width: 64 }}" class="marquee-logo" alt="{{ shop.name }}" />
       {% else %}
