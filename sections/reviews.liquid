@@ -1,23 +1,23 @@
 <!-- VIDEO REVIEWS -->
 <section id="reviews" class="reviews">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="chip chip-yellow">{{ section.settings.chip_text }}</span>
-      <h2>{{ section.settings.heading }} <em>{{ section.settings.heading_italic }}</em></h2>
-      <p>{{ section.settings.subtext }}</p>
+    <div class="section-head reveal text-center">
+      <span class="chip chip-yellow">{{ section.settings.chip_text | default: 'Real Talk' }}</span>
+      <h2>{{ section.settings.heading | default: 'The' }} <em>{{ section.settings.heading_italic | default: 'hype' }}</em></h2>
+      <p>{{ section.settings.subtext | default: 'Watch creators, athletes, and everyday legends experience SPLYN for the first time.' }}</p>
     </div>
 
     <div class="reviews-grid">
       {% for block in section.blocks %}
         <div class="review-card reveal" {% if forloop.index > 1 %}data-delay="{{ forloop.index0 | times: 100 }}"{% endif %} {{ block.shopify_attributes }}>
           <div class="review-video">
-            <video autoplay muted loop playsinline>
-              {% if block.settings.video_file != blank %}
-                <source src="{{ block.settings.video_file }}" type="video/mp4">
-              {% else %}
-                <source src="{{ 'review-video.mp4' | asset_url }}" type="video/mp4">
-              {% endif %}
-            </video>
+            <div class="review-video-placeholder">
+              <div class="video-play-pulse">
+                <i class="ph-duotone ph-video-camera"></i>
+              </div>
+              <span class="review-coming-soon-badge">✨ COMING SOON</span>
+              <p class="review-coming-soon-tag">Community Video Reviews Dropping Soon 🔥</p>
+            </div>
           </div>
           <div class="review-content">
             <div class="reviewer-info">
@@ -101,12 +101,6 @@
           "id": "avatar_gradient",
           "label": "Avatar Gradient CSS (optional)",
           "info": "e.g. linear-gradient(135deg, #ff6b9d, #c44569)"
-        },
-        {
-          "type": "text",
-          "id": "video_file",
-          "label": "Video File URL (optional)",
-          "info": "Leave blank to use default review video from assets"
         }
       ]
     }

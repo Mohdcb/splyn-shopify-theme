@@ -7,10 +7,10 @@
           {% if section.settings.logo != blank %}
             <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" />
           {% else %}
-            <img src="{{ 'transparent_logo.png' | asset_url }}" alt="{{ shop.name }}" />
+            <img src="{{ 'splyn-logo-white.svg' | asset_url }}" alt="{{ shop.name }}" />
           {% endif %}
           <span>{{ section.settings.logo_tagline }}</span>
-          <i class="ph-duotone ph-lightning" style="font-size: 24px; color: #91B9EA; margin-top: 8px;"></i>
+          <i class="ph-duotone ph-lightning" style="font-size: 20px; color: #ffffff; opacity: 0.9; margin-top: 4px;"></i>
         </div>
         <blockquote>{{ section.settings.blockquote }}</blockquote>
       </div>
@@ -23,7 +23,13 @@
       <div class="story-stats">
         {% for block in section.blocks %}
           <div {{ block.shopify_attributes }}>
-            {% if forloop.index == 1 %}<i class="ph-duotone ph-users-three" style="font-size: 22px; color: #91B9EA; margin-bottom: 4px;"></i>{% elsif forloop.index == 2 %}<i class="ph-duotone ph-calendar" style="font-size: 22px; color: #91B9EA; margin-bottom: 4px;"></i>{% else %}<i class="ph-duotone ph-infinity" style="font-size: 22px; color: #91B9EA; margin-bottom: 4px;"></i>{% endif %}
+            {% if forloop.index == 1 %}
+              <i class="ph-duotone ph-users-three" style="font-size: 22px; color: #003561; margin-bottom: 6px;"></i>
+            {% elsif forloop.index == 2 %}
+              <i class="ph-duotone ph-calendar" style="font-size: 22px; color: #003561; margin-bottom: 6px;"></i>
+            {% else %}
+              <i class="ph-duotone ph-infinity" style="font-size: 22px; color: #003561; margin-bottom: 6px;"></i>
+            {% endif %}
             <b>{{ block.settings.value }}</b>
             <span>{{ block.settings.label }}</span>
           </div>

@@ -189,26 +189,6 @@
         "cta_text": "Join WhatsApp Community"
       },
       "blocks": {
-        "slide_1": {
-          "type": "slide",
-          "settings": { "alt_text": "SPLYN Community" }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": { "alt_text": "SPLYN Lifestyle" }
-        },
-        "slide_3": {
-          "type": "slide",
-          "settings": { "alt_text": "SPLYN Energy" }
-        },
-        "slide_4": {
-          "type": "slide",
-          "settings": { "alt_text": "SPLYN Performance" }
-        },
-        "slide_5": {
-          "type": "slide",
-          "settings": { "alt_text": "SPLYN Community Vibes" }
-        },
         "perk_1": {
           "type": "perk",
           "settings": { "icon": "zap", "text": "Early access to new flavors & drops" }
@@ -230,7 +210,7 @@
           "settings": { "icon": "calendar", "text": "Access to exclusive community events" }
         }
       },
-      "block_order": ["slide_1", "slide_2", "slide_3", "slide_4", "slide_5", "perk_1", "perk_2", "perk_3", "perk_4", "perk_5"]
+      "block_order": ["perk_1", "perk_2", "perk_3", "perk_4", "perk_5"]
     },
     "story": {
       "type": "story",

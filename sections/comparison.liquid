@@ -4,7 +4,7 @@
     <div class="section-head reveal text-center">
       <span class="chip chip-yellow">{{ section.settings.chip_text | default: 'The SPLYN Advantage' }}</span>
       <h2>{% if section.settings.heading != blank %}{{ section.settings.heading }}{% else %}Why{% endif %} <em>{% if section.settings.heading_italic != blank %}{{ section.settings.heading_italic }}{% else %}SPLYN{% endif %}</em><br>{% if section.settings.heading_end != blank %}{{ section.settings.heading_end }}{% else %}Beats Standard Drinks{% endif %}</h2>
-      <p>{{ section.settings.subtext | default: 'See how SPLYN stack up against sugary energy drinks and plain hydration.' }}</p>
+      <p>{{ section.settings.subtext | default: 'See how SPLYN stacks up against energy drinks and electrolyte drinks.' }}</p>
     </div>
 
     <div class="comparison-wrapper reveal">
@@ -12,77 +12,66 @@
         <!-- Header Row -->
         <div class="comp-row comp-header">
           <div class="comp-col col-category">CATEGORY</div>
-          <div class="comp-col col-other">SUGARY DRINKS</div>
-          <div class="comp-col col-other">PLAIN WATER</div>
+          <div class="comp-col col-other">ENERGY DRINKS</div>
+          <div class="comp-col col-other">ELECTROLYTE DRINKS</div>
           <div class="comp-col col-splyn">
-            <img src="{{ 'transparent_logo.png' | asset_url }}" alt="SPLYN" class="comp-splyn-logo" />
+            <img src="{{ 'splyn-logo-white.svg' | asset_url }}" alt="SPLYN" class="comp-splyn-logo" />
           </div>
         </div>
 
-        <!-- Row 1: Clean Energy Lift -->
-        <div class="comp-row">
-          <div class="comp-col col-category">
-            <i class="ph-duotone ph-lightning"></i>
-            <span>Clean Energy Lift (200mg)</span>
-          </div>
-          <div class="comp-col col-other"><i class="ph-duotone ph-check-circle badge-icon check-green"></i></div>
-          <div class="comp-col col-other"><i class="ph-duotone ph-x-circle badge-icon cross-red"></i></div>
-          <div class="comp-col col-splyn"><i class="ph-duotone ph-check-circle badge-icon check-green-bright"></i></div>
-        </div>
-
-        <!-- Row 2: L-Theanine Focus -->
-        <div class="comp-row">
-          <div class="comp-col col-category">
-            <i class="ph-duotone ph-brain"></i>
-            <span>L-Theanine Mental Focus</span>
-          </div>
-          <div class="comp-col col-other"><i class="ph-duotone ph-x-circle badge-icon cross-red"></i></div>
-          <div class="comp-col col-other"><i class="ph-duotone ph-x-circle badge-icon cross-red"></i></div>
-          <div class="comp-col col-splyn"><i class="ph-duotone ph-check-circle badge-icon check-green-bright"></i></div>
-        </div>
-
-        <!-- Row 3: Essential Electrolytes -->
+        <!-- Row 1: Hydration -->
         <div class="comp-row">
           <div class="comp-col col-category">
             <i class="ph-duotone ph-drop"></i>
-            <span>Full Spectrum Electrolytes</span>
+            <span>Hydration</span>
           </div>
-          <div class="comp-col col-other"><i class="ph-duotone ph-x-circle badge-icon cross-red"></i></div>
-          <div class="comp-col col-other"><i class="ph-duotone ph-x-circle badge-icon cross-red"></i></div>
-          <div class="comp-col col-splyn"><i class="ph-duotone ph-check-circle badge-icon check-green-bright"></i></div>
+          <div class="comp-col col-other"><span class="comp-val comp-no">No</span></div>
+          <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
+          <div class="comp-col col-splyn"><span class="comp-val comp-splyn-yes"><i class="ph-duotone ph-check-circle"></i> Yes</span></div>
         </div>
 
-        <!-- Row 4: Zero Sugar & Zero Calorie -->
+        <!-- Row 2: Focus -->
         <div class="comp-row">
           <div class="comp-col col-category">
-            <i class="ph-duotone ph-shield-check"></i>
-            <span>Zero Sugar & Zero Calories</span>
+            <i class="ph-duotone ph-target"></i>
+            <span>Focus</span>
           </div>
-          <div class="comp-col col-other"><i class="ph-duotone ph-x-circle badge-icon cross-red"></i></div>
-          <div class="comp-col col-other"><i class="ph-duotone ph-check-circle badge-icon check-green"></i></div>
-          <div class="comp-col col-splyn"><i class="ph-duotone ph-check-circle badge-icon check-green-bright"></i></div>
+          <div class="comp-col col-other"><span class="comp-val comp-no">No</span></div>
+          <div class="comp-col col-other"><span class="comp-val comp-no">No</span></div>
+          <div class="comp-col col-splyn"><span class="comp-val comp-splyn-yes"><i class="ph-duotone ph-check-circle"></i> Yes</span></div>
         </div>
 
-        <!-- Row 5: No Jitters or Post Crash -->
+        <!-- Row 3: Energy -->
         <div class="comp-row">
           <div class="comp-col col-category">
-            <i class="ph-duotone ph-sparkle"></i>
-            <span>No Jitters & Zero Crash</span>
+            <i class="ph-duotone ph-lightning"></i>
+            <span>Energy</span>
           </div>
-          <div class="comp-col col-other"><i class="ph-duotone ph-x-circle badge-icon cross-red"></i></div>
-          <div class="comp-col col-other"><i class="ph-duotone ph-check-circle badge-icon check-green"></i></div>
-          <div class="comp-col col-splyn"><i class="ph-duotone ph-check-circle badge-icon check-green-bright"></i></div>
+          <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
+          <div class="comp-col col-other"><span class="comp-val comp-no">No</span></div>
+          <div class="comp-col col-splyn"><span class="comp-val comp-splyn-yes"><i class="ph-duotone ph-check-circle"></i> Yes</span></div>
         </div>
 
-        <!-- Row 6: Refreshing Taste -->
+        <!-- Row 4: Refined Sugar -->
         <div class="comp-row">
           <div class="comp-col col-category">
-            <i class="ph-duotone ph-smiley"></i>
-            <span>Refreshing Crisp Flavors</span>
+            <i class="ph-duotone ph-cube"></i>
+            <span>Refined Sugar</span>
           </div>
-          <div class="comp-col col-other"><i class="ph-duotone ph-check-circle badge-icon check-green"></i></div>
-          <div class="comp-col col-other"><i class="ph-duotone ph-x-circle badge-icon cross-red"></i></div>
-          <div class="comp-col col-splyn"><i class="ph-duotone ph-check-circle badge-icon check-green-bright"></i></div>
+          <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
+          <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
+          <div class="comp-col col-splyn"><span class="comp-val comp-splyn-no"><i class="ph-duotone ph-x-circle"></i> No</span></div>
+        </div>
+
+        <!-- Row 5: Calories -->
+        <div class="comp-row">
+          <div class="comp-col col-category">
+            <i class="ph-duotone ph-flame"></i>
+            <span>Calories</span>
+          </div>
+          <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
+          <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
+          <div class="comp-col col-splyn"><span class="comp-val comp-splyn-no"><i class="ph-duotone ph-x-circle"></i> No</span></div>
         </div>
       </div>
     </div>
@@ -121,7 +110,7 @@
       "type": "textarea",
       "id": "subtext",
       "label": "Subtext",
-      "default": "See how SPLYN stack up against sugary energy drinks and plain hydration."
+      "default": "See how SPLYN stacks up against energy drinks and electrolyte drinks."
     }
   ],
   "presets": [

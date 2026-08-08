@@ -3,43 +3,16 @@
   <div class="container">
     <div class="community-inner">
 
-      <!-- Left: Image Slider -->
-      <div class="community-slider">
-        <div class="slider-track">
-          {% for block in section.blocks %}
-            {% if block.type == 'slide' %}
-              <div class="slide{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>
-                {% if block.settings.image != blank %}
-                  <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.alt_text | default: 'SPLYN Community' }}" />
-                {% else %}
-                  <img src="{{ 'hero-bg.png' | asset_url }}" alt="SPLYN Community" />
-                {% endif %}
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-
-        <!-- Navigation dots -->
-        <div class="slider-dots">
-          {% assign slide_index = 0 %}
-          {% for block in section.blocks %}
-            {% if block.type == 'slide' %}
-              <button class="slider-dot{% if slide_index == 0 %} active{% endif %}" data-index="{{ slide_index }}"></button>
-              {% assign slide_index = slide_index | plus: 1 %}
-            {% endif %}
-          {% endfor %}
-        </div>
-
-        <!-- Arrows -->
-        <button class="slider-arrow prev" aria-label="Previous"><i class="ph-duotone ph-caret-left" style="font-size: 20px;"></i></button>
-        <button class="slider-arrow next" aria-label="Next"><i class="ph-duotone ph-caret-right" style="font-size: 20px;"></i></button>
+      <!-- Left: Single Factory Image (No Slider) -->
+      <div class="community-media reveal">
+        <img src="{{ 'factory.jpeg' | asset_url }}" alt="SPLYN Factory & Community" class="community-image" />
       </div>
 
       <!-- Right: Community CTA -->
       <div class="community-copy reveal">
-        <span class="chip chip-yellow">{{ section.settings.chip_text }}</span>
-        <h2>{{ section.settings.heading }} <em>{{ section.settings.heading_italic }}</em></h2>
-        <p>{{ section.settings.description }}</p>
+        <span class="chip chip-yellow">{{ section.settings.chip_text | default: 'Join the Movement' }}</span>
+        <h2>{{ section.settings.heading | default: 'Be part of the' }} <em>{{ section.settings.heading_italic | default: 'SPLYN family.' }}</em></h2>
+        <p>{{ section.settings.description | default: 'Thousands of athletes, creators, and everyday legends are already in the loop. Get early drops, exclusive recipes, community challenges, and direct access to the SPLYN team — all in one place.' }}</p>
         <ul class="community-perks">
           {% for block in section.blocks %}
             {% if block.type == 'perk' %}
@@ -91,7 +64,7 @@
       "type": "text",
       "id": "cta_text",
       "label": "CTA Button Text",
-      "default": "Join Community"
+      "default": "Join WhatsApp Community"
     },
     {
       "type": "url",
@@ -101,23 +74,6 @@
   ],
   "blocks": [
     {
-      "type": "slide",
-      "name": "Slider Image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Slide Image"
-        },
-        {
-          "type": "text",
-          "id": "alt_text",
-          "label": "Alt Text",
-          "default": "SPLYN Community"
-        }
-      ]
-    },
-    {
       "type": "perk",
       "name": "Community Perk",
       "settings": [
@@ -125,8 +81,7 @@
           "type": "text",
           "id": "icon",
           "label": "Lucide Icon Name",
-          "default": "zap",
-          "info": "Use Lucide icon names: zap, users, gift, message-circle, etc."
+          "default": "zap"
         },
         {
           "type": "text",
@@ -141,11 +96,6 @@
     {
       "name": "Community",
       "blocks": [
-        { "type": "slide", "settings": { "alt_text": "SPLYN Community" } },
-        { "type": "slide", "settings": { "alt_text": "SPLYN Lifestyle" } },
-        { "type": "slide", "settings": { "alt_text": "SPLYN Energy" } },
-        { "type": "slide", "settings": { "alt_text": "SPLYN Performance" } },
-        { "type": "slide", "settings": { "alt_text": "SPLYN Community Vibes" } },
         { "type": "perk", "settings": { "icon": "zap", "text": "Early access to new flavors & drops" } },
         { "type": "perk", "settings": { "icon": "users", "text": "Connect with the community" } },
         { "type": "perk", "settings": { "icon": "gift", "text": "Exclusive member-only offers" } },

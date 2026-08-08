@@ -1,22 +1,86 @@
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg-img">
-    {% if section.settings.background_image != blank %}
-      <img src="{{ section.settings.background_image | image_url: width: 2000 }}" alt="{{ section.settings.heading | escape }}" />
-    {% else %}
-      <img src="{{ 'hero-bg.png' | asset_url }}" alt="SPLYN — Performance Hydration" />
-    {% endif %}
-    <div class="hero-overlay"></div>
-  </div>
-  <div class="hero-content">
-    {% if section.settings.eyebrow != blank %}
-      <span class="hero-eyebrow">{{ section.settings.eyebrow }}</span>
-    {% endif %}
-    <h1>{{ section.settings.heading }}<br><em>{{ section.settings.heading_italic }}</em></h1>
-    <p>{{ section.settings.subtext }}</p>
-    <div class="hero-ctas">
-      <a href="{{ section.settings.cta_primary_link }}" class="btn btn-primary"><i class="ph-duotone ph-shopping-bag-open"></i> {{ section.settings.cta_primary_text }}</a>
-      <a href="{{ section.settings.cta_secondary_link }}" class="btn btn-ghost"><i class="ph-duotone ph-compass"></i> {{ section.settings.cta_secondary_text }}</a>
+  <div class="hero-container">
+    <!-- Left Column: Visual & Floating Feature Badges -->
+    <div class="hero-visual">
+      <div class="hero-img-wrapper">
+        {% if section.settings.hero_image != blank %}
+          <img src="{{ section.settings.hero_image | image_url: width: 2000 }}" alt="{{ section.settings.heading | escape }}" class="hero-can-img" />
+        {% elsif section.settings.background_image != blank %}
+          <img src="{{ section.settings.background_image | image_url: width: 2000 }}" alt="{{ section.settings.heading | escape }}" class="hero-can-img" />
+        {% else %}
+          <img src="{{ 'hero-splyn.png' | asset_url }}" alt="SPLYN — Performance Hydration" class="hero-can-img" />
+        {% endif %}
+        
+        <!-- Floating Feature Badges -->
+        {% if section.settings.show_badge1 != false %}
+          <div class="hero-badge badge-1">
+            <i class="ph-duotone {{ section.settings.badge1_icon | default: 'ph-drop' }}"></i>
+            <div>
+              <strong>{{ section.settings.badge1_title | default: '100%' }}</strong>
+              <span>{{ section.settings.badge1_sub | default: 'Electrolytes' }}</span>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if section.settings.show_badge2 != false %}
+          <div class="hero-badge badge-2">
+            <i class="ph-duotone {{ section.settings.badge2_icon | default: 'ph-lightning' }}"></i>
+            <div>
+              <strong>{{ section.settings.badge2_title | default: 'Zero' }}</strong>
+              <span>{{ section.settings.badge2_sub | default: 'Sugar & Calories' }}</span>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if section.settings.show_badge3 != false %}
+          <div class="hero-badge badge-3">
+            <i class="ph-duotone {{ section.settings.badge3_icon | default: 'ph-target' }}"></i>
+            <div>
+              <strong>{{ section.settings.badge3_title | default: 'Focus' }}</strong>
+              <span>{{ section.settings.badge3_sub | default: 'L-Theanine Lift' }}</span>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Right Column: Text & CTAs -->
+    <div class="hero-content">
+      {% if section.settings.eyebrow != blank %}
+        <div class="hero-eyebrow-wrapper">
+          <span class="hero-eyebrow">
+            <i class="ph-duotone ph-sparkle"></i> {{ section.settings.eyebrow }}
+          </span>
+        </div>
+      {% endif %}
+
+      <h1 class="hero-heading">
+        {{ section.settings.heading | default: 'The can that does' }}
+        {% if section.settings.heading_italic != blank %}
+          <span class="hero-heading-highlight">{{ section.settings.heading_italic }}</span>
+        {% endif %}
+      </h1>
+
+      <!-- Benefit Tags -->
+      <div class="hero-feature-tags">
+        <span class="tag"><i class="ph-duotone ph-drop"></i> {{ section.settings.tag1_text | default: 'Hydration' }}</span>
+        <span class="tag-divider">•</span>
+        <span class="tag"><i class="ph-duotone ph-target"></i> {{ section.settings.tag2_text | default: 'Focus' }}</span>
+        <span class="tag-divider">•</span>
+        <span class="tag"><i class="ph-duotone ph-lightning"></i> {{ section.settings.tag3_text | default: 'Energy' }}</span>
+      </div>
+
+      <p class="hero-subtext">{{ section.settings.subtext | default: 'Zero Sugar. Zero Calorie. Clean energy and deep hydration — in every can.' }}</p>
+
+      <div class="hero-ctas">
+        <a href="{{ section.settings.cta_primary_link | default: '/collections/all' }}" class="btn btn-hero-primary">
+          <i class="ph-duotone ph-shopping-bag-open"></i> {{ section.settings.cta_primary_text | default: 'Shop Now — ₹199' }}
+        </a>
+        <a href="{{ section.settings.cta_secondary_link | default: '/#story' }}" class="btn btn-hero-secondary">
+          <i class="ph-duotone ph-compass"></i> {{ section.settings.cta_secondary_text | default: 'Explore →' }}
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -26,56 +90,178 @@
   "name": "Hero Banner",
   "settings": [
     {
+      "type": "header",
+      "content": "Hero Visual & Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image (Hand & Can Visual)"
+    },
+    {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Background Image"
+      "label": "Alternative Image Picker"
+    },
+    {
+      "type": "header",
+      "content": "Hero Content & Copy"
     },
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow Text",
-      "default": "New • Performance Hydration"
+      "label": "Eyebrow Badge Text",
+      "default": "Performance Hydration"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
-      "default": "Better Water"
+      "label": "Heading Main",
+      "default": "The can that does"
     },
     {
       "type": "text",
       "id": "heading_italic",
-      "label": "Heading (Italic Line)",
-      "default": "For Better"
+      "label": "Heading Accent (Italic)",
+      "default": "3 things."
     },
     {
       "type": "textarea",
       "id": "subtext",
-      "label": "Subtext",
-      "default": "Zero sugar. Zero crash. Clean energy and deep hydration — in every can."
+      "label": "Subtext Paragraph",
+      "default": "Zero Sugar. Zero Calorie. Clean energy and deep hydration — in every can."
+    },
+    {
+      "type": "header",
+      "content": "Feature Tags Row"
+    },
+    {
+      "type": "text",
+      "id": "tag1_text",
+      "label": "Tag 1 Text",
+      "default": "Hydration"
+    },
+    {
+      "type": "text",
+      "id": "tag2_text",
+      "label": "Tag 2 Text",
+      "default": "Focus"
+    },
+    {
+      "type": "text",
+      "id": "tag3_text",
+      "label": "Tag 3 Text",
+      "default": "Energy"
+    },
+    {
+      "type": "header",
+      "content": "Call-To-Action Buttons"
     },
     {
       "type": "text",
       "id": "cta_primary_text",
-      "label": "Primary CTA Text",
+      "label": "Primary CTA Button Text",
       "default": "Shop Now — ₹199"
     },
     {
       "type": "url",
       "id": "cta_primary_link",
-      "label": "Primary CTA Link",
-      "default": "/collections/all"
+      "label": "Primary CTA Button Link"
     },
     {
       "type": "text",
       "id": "cta_secondary_text",
-      "label": "Secondary CTA Text",
+      "label": "Secondary CTA Button Text",
       "default": "Explore →"
     },
     {
       "type": "url",
       "id": "cta_secondary_link",
-      "label": "Secondary CTA Link"
+      "label": "Secondary CTA Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Floating Feature Badge 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge1",
+      "label": "Show Badge 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge1_icon",
+      "label": "Badge 1 Icon (Phosphor)",
+      "default": "ph-drop"
+    },
+    {
+      "type": "text",
+      "id": "badge1_title",
+      "label": "Badge 1 Title",
+      "default": "100%"
+    },
+    {
+      "type": "text",
+      "id": "badge1_sub",
+      "label": "Badge 1 Subtitle",
+      "default": "Electrolytes"
+    },
+    {
+      "type": "header",
+      "content": "Floating Feature Badge 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge2",
+      "label": "Show Badge 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge2_icon",
+      "label": "Badge 2 Icon (Phosphor)",
+      "default": "ph-lightning"
+    },
+    {
+      "type": "text",
+      "id": "badge2_title",
+      "label": "Badge 2 Title",
+      "default": "Zero"
+    },
+    {
+      "type": "text",
+      "id": "badge2_sub",
+      "label": "Badge 2 Subtitle",
+      "default": "Sugar & Calories"
+    },
+    {
+      "type": "header",
+      "content": "Floating Feature Badge 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge3",
+      "label": "Show Badge 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge3_icon",
+      "label": "Badge 3 Icon (Phosphor)",
+      "default": "ph-target"
+    },
+    {
+      "type": "text",
+      "id": "badge3_title",
+      "label": "Badge 3 Title",
+      "default": "Focus"
+    },
+    {
+      "type": "text",
+      "id": "badge3_sub",
+      "label": "Badge 3 Subtitle",
+      "default": "L-Theanine Lift"
     }
   ],
   "presets": [

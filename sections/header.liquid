@@ -1,4 +1,3 @@
-
 <!-- NAV -->
 <header class="nav">
   <div class="nav-inner">
@@ -9,9 +8,9 @@
 
     <a class="brand" href="{{ routes.root_url }}">
       {% if section.settings.logo != blank %}
-        <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" style="height: 56px;" />
+        <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" style="height: {{ section.settings.logo_height | default: 36 }}px;" />
       {% else %}
-        <img src="{{ 'transparent_logo.png' | asset_url }}" alt="{{ shop.name }}" style="height: 56px;" />
+        <img src="{{ 'splyn-logo-white.svg' | asset_url }}" alt="{{ shop.name }}" style="height: {{ section.settings.logo_height | default: 36 }}px;" />
       {% endif %}
     </a>
 
@@ -47,9 +46,9 @@
     <div class="mobile-menu-header">
       <a class="brand" href="{{ routes.root_url }}">
         {% if section.settings.logo != blank %}
-          <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" style="height: 40px;" />
+          <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" style="height: 34px;" />
         {% else %}
-          <img src="{{ 'transparent_logo.png' | asset_url }}" alt="{{ shop.name }}" style="height: 40px;" />
+          <img src="{{ 'splyn-logo-white.svg' | asset_url }}" alt="{{ shop.name }}" style="height: 34px;" />
         {% endif %}
       </a>
       <button class="mobile-menu-close" onclick="document.querySelector('.mobile-menu-overlay').classList.remove('is-open'); document.body.style.overflow='';" aria-label="Close">
@@ -59,202 +58,25 @@
     <nav class="mobile-menu-links">
       {% if section.settings.menu != blank %}
         {% for link in linklists[section.settings.menu].links %}
-          <a href="{{ link.url }}">{{ link.title }}</a>
+          <a href="{{ link.url }}" onclick="document.querySelector('.mobile-menu-overlay').classList.remove('is-open'); document.body.style.overflow='';">{{ link.title }}</a>
         {% endfor %}
       {% else %}
-        <a href="/">Home</a>
-        <a href="/collections/all">Shop</a>
-        <a href="/#story">About</a>
-        <a href="/#community">Community</a>
-        <a href="/#foot-newsletter">Contact</a>
+        <a href="/" onclick="document.querySelector('.mobile-menu-overlay').classList.remove('is-open'); document.body.style.overflow='';">Home</a>
+        <a href="/collections/all" onclick="document.querySelector('.mobile-menu-overlay').classList.remove('is-open'); document.body.style.overflow='';">Shop</a>
+        <a href="/#story" onclick="document.querySelector('.mobile-menu-overlay').classList.remove('is-open'); document.body.style.overflow='';">About</a>
+        <a href="/#community" onclick="document.querySelector('.mobile-menu-overlay').classList.remove('is-open'); document.body.style.overflow='';">Community</a>
+        <a href="/#foot-newsletter" onclick="document.querySelector('.mobile-menu-overlay').classList.remove('is-open'); document.body.style.overflow='';">Contact</a>
       {% endif %}
     </nav>
     <div class="mobile-menu-footer">
-      <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="btn btn-primary btn-large" style="width:100%; text-align:center;">{{ section.settings.cta_text | default: 'Shop now →' }}</a>
+      <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="btn btn-primary btn-full"><i class="ph-duotone ph-shopping-bag-open"></i> {{ section.settings.cta_text | default: 'Shop now' }}</a>
     </div>
   </div>
 </div>
 
-<style>
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .nav-cart-btn {
-    position: relative;
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    padding: 6px;
-    display: flex;
-    align-items: center;
-    transition: opacity 0.2s;
-  }
-
-  .nav-cart-btn:hover { opacity: 0.8; }
-
-  .nav-cart-count {
-    position: absolute;
-    top: -4px;
-    right: -6px;
-    background: var(--yellow);
-    color: var(--purple-900);
-    font-size: 10px;
-    font-weight: 800;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  .mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    padding: 4px;
-  }
-
-  .mobile-menu-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0.3s, opacity 0.3s;
-  }
-
-  .mobile-menu-overlay.is-open {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  .mobile-menu-overlay::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(4px);
-  }
-
-  .mobile-menu-panel {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 320px;
-    max-width: 85vw;
-    background: var(--purple-900);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    transform: translateX(-100%);
-    transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
-    z-index: 1;
-  }
-
-  .mobile-menu-overlay.is-open .mobile-menu-panel {
-    transform: translateX(0);
-  }
-
-  .mobile-menu-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .mobile-menu-header .brand img {
-    filter: brightness(0) invert(1);
-  }
-
-  .mobile-menu-close {
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    padding: 4px;
-  }
-
-  .mobile-menu-links {
-    flex: 1;
-    overflow-y: auto;
-    padding: 24px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .mobile-menu-links a {
-    display: block;
-    padding: 14px 16px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    border-radius: 12px;
-    transition: background 0.2s;
-  }
-
-  .mobile-menu-links a:hover {
-    background: rgba(255,255,255,0.08);
-  }
-
-  .mobile-menu-footer {
-    padding: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-
-  @media(max-width: 780px) {
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding: 10px 16px;
-      position: relative;
-    }
-
-    .mobile-menu-toggle {
-      display: flex;
-      z-index: 2;
-    }
-
-    .brand {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .nav-actions {
-      margin-left: auto;
-      z-index: 2;
-    }
-
-    .links {
-      display: none;
-    }
-
-    .cta-pill {
-      display: none;
-    }
-  }
-</style>
-
 {% schema %}
 {
   "name": "Header",
-  "class": "section-header",
   "settings": [
     {
       "type": "image_picker",
@@ -262,15 +84,25 @@
       "label": "Logo Image"
     },
     {
+      "type": "range",
+      "id": "logo_height",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop Logo Height",
+      "default": 36
+    },
+    {
       "type": "link_list",
       "id": "menu",
-      "label": "Navigation Menu"
+      "label": "Main Navigation Menu"
     },
     {
       "type": "text",
       "id": "cta_text",
       "label": "CTA Button Text",
-      "default": "Shop now →"
+      "default": "Shop now"
     },
     {
       "type": "url",
