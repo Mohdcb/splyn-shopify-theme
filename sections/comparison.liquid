@@ -11,68 +11,100 @@
       <div class="comparison-table">
         <!-- Header Row -->
         <div class="comp-row comp-header">
-          <div class="comp-col col-category">CATEGORY</div>
-          <div class="comp-col col-other">ENERGY DRINKS</div>
-          <div class="comp-col col-other">ELECTROLYTE DRINKS</div>
+          <div class="comp-col col-category">{{ section.settings.col_header_category | default: 'CATEGORY' }}</div>
+          <div class="comp-col col-other">{{ section.settings.col_header_energy | default: 'ENERGY DRINKS' }}</div>
+          <div class="comp-col col-other">{{ section.settings.col_header_electro | default: 'ELECTROLYTE DRINKS' }}</div>
           <div class="comp-col col-splyn">
-            <img src="{{ 'splyn-logo-white.svg' | asset_url }}" alt="SPLYN" class="comp-splyn-logo" />
+            {% if section.settings.splyn_logo != blank %}
+              <img src="{{ section.settings.splyn_logo | image_url: width: 200 }}" alt="SPLYN" class="comp-splyn-logo" />
+            {% else %}
+              <img src="{{ 'splyn-logo-white.svg' | asset_url }}" alt="SPLYN" class="comp-splyn-logo" />
+            {% endif %}
           </div>
         </div>
 
-        <!-- Row 1: Hydration -->
-        <div class="comp-row">
-          <div class="comp-col col-category">
-            <i class="ph-duotone ph-drop"></i>
-            <span>Hydration</span>
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            <div class="comp-row" {{ block.shopify_attributes }}>
+              <div class="comp-col col-category">
+                {% if block.settings.icon != blank %}
+                  <i class="ph-duotone {{ block.settings.icon }}"></i>
+                {% endif %}
+                <span>{{ block.settings.title }}</span>
+              </div>
+              <div class="comp-col col-other">
+                <span class="comp-val {% if block.settings.col1_val == 'Yes' %}comp-yes{% else %}comp-no{% endif %}">{{ block.settings.col1_val }}</span>
+              </div>
+              <div class="comp-col col-other">
+                <span class="comp-val {% if block.settings.col2_val == 'Yes' %}comp-yes{% else %}comp-no{% endif %}">{{ block.settings.col2_val }}</span>
+              </div>
+              <div class="comp-col col-splyn">
+                <span class="comp-val {% if block.settings.splyn_val == 'Yes' %}comp-splyn-yes{% else %}comp-splyn-no{% endif %}">
+                  {% if block.settings.splyn_val == 'Yes' %}
+                    <i class="ph-duotone ph-check-circle"></i> Yes
+                  {% else %}
+                    <i class="ph-duotone ph-x-circle"></i> No
+                  {% endif %}
+                </span>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <!-- Default Row 1: Hydration -->
+          <div class="comp-row">
+            <div class="comp-col col-category">
+              <i class="ph-duotone ph-drop"></i>
+              <span>Hydration</span>
+            </div>
+            <div class="comp-col col-other"><span class="comp-val comp-no">No</span></div>
+            <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
+            <div class="comp-col col-splyn"><span class="comp-val comp-splyn-yes"><i class="ph-duotone ph-check-circle"></i> Yes</span></div>
           </div>
-          <div class="comp-col col-other"><span class="comp-val comp-no">No</span></div>
-          <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
-          <div class="comp-col col-splyn"><span class="comp-val comp-splyn-yes"><i class="ph-duotone ph-check-circle"></i> Yes</span></div>
-        </div>
 
-        <!-- Row 2: Focus -->
-        <div class="comp-row">
-          <div class="comp-col col-category">
-            <i class="ph-duotone ph-target"></i>
-            <span>Focus</span>
+          <!-- Default Row 2: Focus -->
+          <div class="comp-row">
+            <div class="comp-col col-category">
+              <i class="ph-duotone ph-target"></i>
+              <span>Focus</span>
+            </div>
+            <div class="comp-col col-other"><span class="comp-val comp-no">No</span></div>
+            <div class="comp-col col-other"><span class="comp-val comp-no">No</span></div>
+            <div class="comp-col col-splyn"><span class="comp-val comp-splyn-yes"><i class="ph-duotone ph-check-circle"></i> Yes</span></div>
           </div>
-          <div class="comp-col col-other"><span class="comp-val comp-no">No</span></div>
-          <div class="comp-col col-other"><span class="comp-val comp-no">No</span></div>
-          <div class="comp-col col-splyn"><span class="comp-val comp-splyn-yes"><i class="ph-duotone ph-check-circle"></i> Yes</span></div>
-        </div>
 
-        <!-- Row 3: Energy -->
-        <div class="comp-row">
-          <div class="comp-col col-category">
-            <i class="ph-duotone ph-lightning"></i>
-            <span>Energy</span>
+          <!-- Default Row 3: Energy -->
+          <div class="comp-row">
+            <div class="comp-col col-category">
+              <i class="ph-duotone ph-lightning"></i>
+              <span>Energy</span>
+            </div>
+            <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
+            <div class="comp-col col-other"><span class="comp-val comp-no">No</span></div>
+            <div class="comp-col col-splyn"><span class="comp-val comp-splyn-yes"><i class="ph-duotone ph-check-circle"></i> Yes</span></div>
           </div>
-          <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
-          <div class="comp-col col-other"><span class="comp-val comp-no">No</span></div>
-          <div class="comp-col col-splyn"><span class="comp-val comp-splyn-yes"><i class="ph-duotone ph-check-circle"></i> Yes</span></div>
-        </div>
 
-        <!-- Row 4: Refined Sugar -->
-        <div class="comp-row">
-          <div class="comp-col col-category">
-            <i class="ph-duotone ph-cube"></i>
-            <span>Refined Sugar</span>
+          <!-- Default Row 4: Refined Sugar -->
+          <div class="comp-row">
+            <div class="comp-col col-category">
+              <i class="ph-duotone ph-cube"></i>
+              <span>Refined Sugar</span>
+            </div>
+            <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
+            <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
+            <div class="comp-col col-splyn"><span class="comp-val comp-splyn-no"><i class="ph-duotone ph-x-circle"></i> No</span></div>
           </div>
-          <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
-          <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
-          <div class="comp-col col-splyn"><span class="comp-val comp-splyn-no"><i class="ph-duotone ph-x-circle"></i> No</span></div>
-        </div>
 
-        <!-- Row 5: Calories -->
-        <div class="comp-row">
-          <div class="comp-col col-category">
-            <i class="ph-duotone ph-flame"></i>
-            <span>Calories</span>
+          <!-- Default Row 5: Calories -->
+          <div class="comp-row">
+            <div class="comp-col col-category">
+              <i class="ph-duotone ph-flame"></i>
+              <span>Calories</span>
+            </div>
+            <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
+            <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
+            <div class="comp-col col-splyn"><span class="comp-val comp-splyn-no"><i class="ph-duotone ph-x-circle"></i> No</span></div>
           </div>
-          <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
-          <div class="comp-col col-other"><span class="comp-val comp-yes">Yes</span></div>
-          <div class="comp-col col-splyn"><span class="comp-val comp-splyn-no"><i class="ph-duotone ph-x-circle"></i> No</span></div>
-        </div>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -82,6 +114,11 @@
 {
   "name": "Comparison Table",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "splyn_logo",
+      "label": "SPLYN Column Header Logo"
+    },
     {
       "type": "text",
       "id": "chip_text",
@@ -98,19 +135,87 @@
       "type": "text",
       "id": "heading_italic",
       "label": "Heading Accent (Italic)",
-      "default": "SPLYN Beats"
+      "default": "SPLYN"
     },
     {
       "type": "text",
       "id": "heading_end",
       "label": "Heading End",
-      "default": "Standard Drinks"
+      "default": "Beats Standard Drinks"
     },
     {
       "type": "textarea",
       "id": "subtext",
       "label": "Subtext",
       "default": "See how SPLYN stacks up against energy drinks and electrolyte drinks."
+    },
+    {
+      "type": "text",
+      "id": "col_header_category",
+      "label": "Column 1 Header Text",
+      "default": "CATEGORY"
+    },
+    {
+      "type": "text",
+      "id": "col_header_energy",
+      "label": "Column 2 Header Text",
+      "default": "ENERGY DRINKS"
+    },
+    {
+      "type": "text",
+      "id": "col_header_electro",
+      "label": "Column 3 Header Text",
+      "default": "ELECTROLYTE DRINKS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature Title",
+          "default": "Hydration"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Class (Phosphor)",
+          "default": "ph-drop"
+        },
+        {
+          "type": "select",
+          "id": "col1_val",
+          "label": "Energy Drinks Value",
+          "options": [
+            { "value": "Yes", "label": "Yes" },
+            { "value": "No", "label": "No" }
+          ],
+          "default": "No"
+        },
+        {
+          "type": "select",
+          "id": "col2_val",
+          "label": "Electrolyte Drinks Value",
+          "options": [
+            { "value": "Yes", "label": "Yes" },
+            { "value": "No", "label": "No" }
+          ],
+          "default": "Yes"
+        },
+        {
+          "type": "select",
+          "id": "splyn_val",
+          "label": "SPLYN Value",
+          "options": [
+            { "value": "Yes", "label": "Yes" },
+            { "value": "No", "label": "No" }
+          ],
+          "default": "Yes"
+        }
+      ]
     }
   ],
   "presets": [

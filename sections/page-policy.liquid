@@ -1,0 +1,155 @@
+<!-- POLICY & LEGAL PAGE CONTAINER -->
+<section class="policy-page">
+  <div class="container policy-container">
+    
+    <!-- Policy Header -->
+    <div class="policy-header reveal text-center">
+      <span class="chip chip-yellow">Legal & Trust</span>
+      <h1>
+        {% if page.title != blank %}
+          {{ page.title }}
+        {% elsif section.settings.policy_title != blank %}
+          {{ section.settings.policy_title }}
+        {% else %}
+          Policy & Terms
+        {% endif %}
+      </h1>
+      <p class="policy-last-updated">Last Updated: February 2026 • SPLYN Beverages Pvt. Ltd.</p>
+    </div>
+
+    <div class="policy-grid">
+      
+      <!-- Policy Sidebar Nav -->
+      <aside class="policy-sidebar">
+        <h4>Legal Documents</h4>
+        <nav class="policy-nav-list">
+          <a href="/pages/privacy-policy" class="{% if request.path contains 'privacy' %}active{% endif %}">
+            <i class="ph-duotone ph-shield-check"></i> Privacy Policy
+          </a>
+          <a href="/pages/terms-and-conditions" class="{% if request.path contains 'terms' %}active{% endif %}">
+            <i class="ph-duotone ph-file-text"></i> Terms & Conditions
+          </a>
+          <a href="/pages/shipping-policy" class="{% if request.path contains 'shipping' %}active{% endif %}">
+            <i class="ph-duotone ph-truck"></i> Shipping Policy
+          </a>
+          <a href="/pages/refund-policy" class="{% if request.path contains 'refund' %}active{% endif %}">
+            <i class="ph-duotone ph-arrow-counter-clockwise"></i> Refund & Cancellation
+          </a>
+          <a href="/pages/razorpay-policy" class="{% if request.path contains 'razorpay' %}active{% endif %}">
+            <i class="ph-duotone ph-credit-card"></i> Razorpay Payment Policy
+          </a>
+        </nav>
+
+        <div class="policy-support-card">
+          <i class="ph-duotone ph-headset"></i>
+          <h5>Need Assistance?</h5>
+          <p>Our support team is here to help with any questions regarding orders or policies.</p>
+          <a href="mailto:hello@splyn.in" class="btn btn-primary btn-full">Contact Support</a>
+        </div>
+      </aside>
+
+      <!-- Main Policy Body Content -->
+      <main class="policy-content-body">
+        {% if page.content != blank %}
+          {{ page.content }}
+        {% else %}
+          {% case section.settings.policy_type %}
+            {% when 'privacy' %}
+              <h2>1. Information We Collect</h2>
+              <p>When you visit SPLYN (splyn.in), purchase our products, or interact with our community, we collect personal information such as your name, billing address, shipping address, email address, phone number, and payment information processed securely via Razorpay.</p>
+              
+              <h2>2. How We Use Your Information</h2>
+              <p>We use the collected information to fulfill orders, process payments, provide customer support, send order status notifications, and communicate promotional offers if opted in.</p>
+              
+              <h2>3. Data Protection & Security</h2>
+              <p>SPLYN adheres to industry-standard encryption protocols (SSL/TLS) to safeguard your data. Payment transactions are handled with PCI-DSS compliant payment gateway partners like Razorpay. We never store raw credit card numbers or sensitive banking credentials on our servers.</p>
+              
+              <h2>4. Third-Party Sharing</h2>
+              <p>We do not sell or rent your personal data to third parties. Data is shared strictly with trusted logistics partners (e.g. BlueDart, Delhivery) and payment processing gateways for order fulfillment.</p>
+
+            {% when 'terms' %}
+              <h2>1. Acceptance of Terms</h2>
+              <p>By accessing or purchasing from SPLYN (splyn.in), operated by SPLYN Beverages Pvt. Ltd., you agree to comply with and be bound by these Terms and Conditions.</p>
+
+              <h2>2. Product Availability & Pricing</h2>
+              <p>All prices listed on splyn.in are in Indian Rupees (INR) and inclusive of applicable GST unless stated otherwise. We reserve the right to modify prices or discontinue products at any time without prior notice.</p>
+
+              <h2>3. Account Responsibility</h2>
+              <p>You are responsible for maintaining the confidentiality of your account credentials and restricting access to your devices. Orders placed through your account are deemed authorized by you.</p>
+
+              <h2>4. Intellectual Property</h2>
+              <p>All trademarks, logos, content, design elements, and product packaging associated with SPLYN are exclusive property of SPLYN Beverages Pvt. Ltd.</p>
+
+            {% when 'shipping' %}
+              <h2>1. Order Processing Time</h2>
+              <p>All orders placed on splyn.in are processed within 1 to 2 business days (excluding Sundays and national holidays). Orders placed after 4 PM IST are processed the next business day.</p>
+
+              <h2>2. Delivery Timelines</h2>
+              <p>Standard delivery timelines across metro cities in India range from 2 to 4 business days. Regional and tier-2/tier-3 cities receive delivery within 4 to 7 business days.</p>
+
+              <h2>3. Shipping Charges</h2>
+              <p>We offer Free Standard Shipping across India on all orders exceeding ₹499. For orders below ₹499, a flat shipping fee of ₹49 applies.</p>
+
+              <h2>4. Order Tracking</h2>
+              <p>Once your order is dispatched, you will receive an SMS and email containing your tracking URL and AWB number to monitor live shipment status.</p>
+
+            {% when 'refund' %}
+              <h2>1. 10-Day Return & Replacement Policy</h2>
+              <p>Due to the consumable nature of performance beverages, returns are accepted for damaged, defective, or incorrect items reported within 10 days of delivery.</p>
+
+              <h2>2. Eligibility Criteria</h2>
+              <p>To be eligible for a replacement or refund, items must be unopened in original packaging. Please provide clear unboxing photos/videos to <strong>hello@splyn.in</strong> or WhatsApp customer care.</p>
+
+              <h2>3. Refund Processing Time</h2>
+              <p>Approved refunds are processed back to your original payment method (UPI, Debit/Credit Card, Net Banking) via Razorpay within 5 to 7 business days.</p>
+
+            {% when 'razorpay' %}
+              <h2>1. Razorpay Payment Gateway Integration</h2>
+              <p>All online payments on splyn.in are processed via Razorpay Software Private Limited. Razorpay provides end-to-end PCI-DSS Level 1 compliant encryption for seamless transactions.</p>
+
+              <h2>2. Supported Payment Methods</h2>
+              <p>We accept all major payment modes including UPI (Google Pay, PhonePe, Paytm, BHIM), Credit/Debit Cards (Visa, Mastercard, RuPay), Net Banking across 50+ Indian banks, and Wallet payments.</p>
+
+              <h2>3. Transaction Security & Disclaimer</h2>
+              <p>SPLYN does not store any credit/debit card numbers or UPI PINs. If your payment is debited but the order shows failed, Razorpay automatically refunds the debited amount to your source bank account within 3-5 business days.</p>
+
+              <h2>4. Merchant Chargeback & Disputes</h2>
+              <p>For any transaction failures, chargeback queries, or payment disputes, contact our billing desk at <strong>hello@splyn.in</strong> with your Razorpay payment reference ID.</p>
+
+            {% else %}
+              <h2>Policy Information</h2>
+              <p>Please review our official company policies for purchasing performance beverages on splyn.in.</p>
+          {% endcase %}
+        {% endif %}
+      </main>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Policy Page Renderer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "policy_title",
+      "label": "Policy Page Title",
+      "default": "Legal Policy"
+    },
+    {
+      "type": "select",
+      "id": "policy_type",
+      "label": "Policy Content Preset",
+      "options": [
+        { "value": "privacy", "label": "Privacy Policy" },
+        { "value": "terms", "label": "Terms & Conditions" },
+        { "value": "shipping", "label": "Shipping Policy" },
+        { "value": "refund", "label": "Refund & Return Policy" },
+        { "value": "razorpay", "label": "Razorpay Payment Disclaimer" }
+      ],
+      "default": "privacy"
+    }
+  ]
+}
+{% endschema %}

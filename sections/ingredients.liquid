@@ -1,42 +1,39 @@
 <!-- INGREDIENTS — Designed for the Human Body -->
 <section id="ingredients" class="ingredients">
-  <!-- Background image layers for section hover transition -->
-  <div class="ingredients-bg-container">
-    {% for block in section.blocks %}
-      <div class="ingredients-bg-layer{% if forloop.first %} active{% endif %}" data-image="{{ forloop.index }}">
-        {% if block.settings.image != blank %}
-          <img src="{{ block.settings.image | image_url: width: 1600 }}" alt="{{ block.settings.title }}" />
-        {% else %}
-          <img src="{{ 'ing' | append: forloop.index | append: '.png' | asset_url }}" alt="{{ block.settings.title }}" />
-        {% endif %}
-      </div>
-    {% endfor %}
-    <!-- Opacity dark overlay layer for visibility & text contrast -->
-    <div class="ingredients-overlay"></div>
-  </div>
-
-  <div class="container ingredients-content-wrapper">
-    <div class="section-head reveal">
-      {% if section.settings.chip_text != blank %}
-        <span class="chip chip-yellow">{{ section.settings.chip_text }}</span>
-      {% endif %}
-      <h2>{{ section.settings.heading }}<br><em>{{ section.settings.heading_italic }}</em></h2>
+  <div class="container">
+    <div class="ingredients-head reveal text-center">
+      <span class="chip chip-yellow">{{ section.settings.chip_text | default: 'Inside Every Can' }}</span>
+      <h2>{{ section.settings.heading | default: 'Designed for the' }} <em>{{ section.settings.heading_italic | default: 'Human Body.' }}</em></h2>
+      <p class="ingredients-subtext">{{ section.settings.subtext | default: 'Three core pillars formulated for peak physical recovery, mental flow state, and clean energy.' }}</p>
     </div>
 
-    <div class="ingredients-showcase reveal">
-      <div class="ingredients-list">
-        {% for block in section.blocks %}
-          <div class="ingredient-item{% if forloop.first %} active{% endif %}" data-image="{{ forloop.index }}" {{ block.shopify_attributes }}>
-            <div class="ingredient-content">
-              <h3 class="ingredient-title"><span>{{ block.settings.title }}</span></h3>
-              <p class="ingredient-tagline">{{ block.settings.tagline }}</p>
-              {% if block.settings.description != blank %}
-                <p class="ingredient-description">{{ block.settings.description }}</p>
+    <div class="ingredients-grid reveal">
+      {% for block in section.blocks %}
+        <div class="ing-card ing-card-{{ forloop.index }}" {{ block.shopify_attributes }}>
+          <div class="ing-card-media">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.title }}" />
+            {% else %}
+              <img src="{{ 'ing' | append: forloop.index | append: '.png' | asset_url }}" alt="{{ block.settings.title }}" />
+            {% endif %}
+            <div class="ing-card-badge">
+              {% if forloop.index == 1 %}
+                <i class="ph-duotone ph-drop"></i> <span>100% Electrolytes</span>
+              {% elsif forloop.index == 2 %}
+                <i class="ph-duotone ph-brain"></i> <span>L-Theanine Lift</span>
+              {% else %}
+                <i class="ph-duotone ph-lightning"></i> <span>Clean 200mg Energy</span>
               {% endif %}
             </div>
           </div>
-        {% endfor %}
-      </div>
+
+          <div class="ing-card-content">
+            <h3>{{ block.settings.title }}</h3>
+            <span class="ing-tagline">{{ block.settings.tagline }}</span>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -54,32 +51,38 @@
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
+      "label": "Heading Main",
       "default": "Designed for the"
     },
     {
       "type": "text",
       "id": "heading_italic",
-      "label": "Heading (Italic)",
+      "label": "Heading Accent (Italic)",
       "default": "Human Body."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext Paragraph",
+      "default": "Three core pillars formulated for peak physical recovery, mental flow state, and clean energy."
     }
   ],
   "blocks": [
     {
       "type": "ingredient",
-      "name": "Ingredient",
+      "name": "Ingredient Card",
       "settings": [
         {
           "type": "text",
           "id": "title",
-          "label": "Title",
-          "default": "HYDRATE"
+          "label": "Card Title",
+          "default": "HYDRATION"
         },
         {
           "type": "text",
           "id": "tagline",
           "label": "Tagline",
-          "default": "Electrolytes that restore"
+          "default": "Not Water. Electrolytes."
         },
         {
           "type": "textarea",
@@ -90,19 +93,7 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Ingredient Background Image"
-        },
-        {
-          "type": "text",
-          "id": "caption_title",
-          "label": "Image Caption Title",
-          "default": "Electrolytes"
-        },
-        {
-          "type": "text",
-          "id": "caption_text",
-          "label": "Image Caption Text",
-          "default": "Restore what sweat takes"
+          "label": "Card Image Visual"
         }
       ]
     }
@@ -116,9 +107,7 @@
           "settings": {
             "title": "HYDRATION",
             "tagline": "Not Water. Electrolytes.",
-            "description": "Recharges vital minerals lost during intense workouts, keeping your muscles firing and hydration balanced all day long.",
-            "caption_title": "Electrolytes",
-            "caption_text": "Restore what sweat takes"
+            "description": "Recharges vital minerals lost during intense workouts, keeping your muscles firing and hydration balanced all day long."
           }
         },
         {
@@ -126,9 +115,7 @@
           "settings": {
             "title": "FOCUS",
             "tagline": "Powered by L-Theanine",
-            "description": "Promotes sustained alpha brain waves to enhance mental clarity, flow state, and concentration without any nervous jitters.",
-            "caption_title": "L‑Theanine",
-            "caption_text": "Calm focus for the long game"
+            "description": "Promotes sustained alpha brain waves to enhance mental clarity, flow state, and concentration without any nervous jitters."
           }
         },
         {
@@ -136,9 +123,7 @@
           "settings": {
             "title": "ENERGY",
             "tagline": "Caffeine without the crash",
-            "description": "Delivers clean, balanced energy to power your day and elevate physical endurance with smooth, predictable momentum.",
-            "caption_title": "Caffeine",
-            "caption_text": "Pure performance, zero crash"
+            "description": "Delivers clean, balanced energy to power your day and elevate physical endurance with smooth, predictable momentum."
           }
         }
       ]

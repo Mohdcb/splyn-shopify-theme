@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-policy",
+      "settings": {
+        "policy_title": "Refund & Return Policy",
+        "policy_type": "refund"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,83 @@
+<!-- SHOPIFY STANDARD POLICY TEMPLATE -->
+<section class="policy-page">
+  <div class="container policy-container">
+    
+    <div class="policy-header reveal text-center">
+      <span class="chip chip-yellow">Legal & Trust</span>
+      <h1>{{ policy.title }}</h1>
+      <p class="policy-last-updated">Last Updated: {{ policy.updated_at | date: "%B %d, %Y" }} • SPLYN Beverages Pvt. Ltd.</p>
+    </div>
+
+    <div class="policy-grid">
+      
+      <!-- Policy Sidebar Nav -->
+      <aside class="policy-sidebar">
+        <h4>Legal Documents</h4>
+        <nav class="policy-nav-list">
+          <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}" class="{% if request.path contains 'privacy' %}active{% endif %}">
+            <i class="ph-duotone ph-shield-check"></i> Privacy Policy
+          </a>
+          <a href="{{ shop.terms_of_service.url | default: '/policies/terms-of-service' }}" class="{% if request.path contains 'terms' %}active{% endif %}">
+            <i class="ph-duotone ph-file-text"></i> Terms & Conditions
+          </a>
+          <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}" class="{% if request.path contains 'shipping' %}active{% endif %}">
+            <i class="ph-duotone ph-truck"></i> Shipping Policy
+          </a>
+          <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}" class="{% if request.path contains 'refund' %}active{% endif %}">
+            <i class="ph-duotone ph-arrow-counter-clockwise"></i> Refund Policy
+          </a>
+          <a href="/pages/razorpay-policy" class="{% if request.path contains 'razorpay' %}active{% endif %}">
+            <i class="ph-duotone ph-credit-card"></i> Razorpay Policy
+          </a>
+        </nav>
+
+        <div class="policy-support-card">
+          <i class="ph-duotone ph-headset"></i>
+          <h5>Need Assistance?</h5>
+          <p>Our support team is here to help with any questions regarding orders or policies.</p>
+          <a href="mailto:hello@splyn.in" class="btn btn-primary btn-full">Contact Support</a>
+        </div>
+      </aside>
+
+      <!-- Main Policy Body Content -->
+      <main class="policy-content-body">
+        {% if policy.body != blank %}
+          {{ policy.body }}
+        {% else %}
+          {% if request.path contains 'refund' %}
+            <h2>1. 10-Day Return & Replacement Policy</h2>
+            <p>Due to the consumable nature of performance beverages, returns are accepted for damaged, defective, or incorrect items reported within 10 days of delivery.</p>
+
+            <h2>2. Eligibility Criteria</h2>
+            <p>To be eligible for a replacement or refund, items must be unopened in original packaging. Please provide clear unboxing photos/videos to <strong>hello@splyn.in</strong> or WhatsApp customer care.</p>
+
+            <h2>3. Refund Processing Time</h2>
+            <p>Approved refunds are processed back to your original payment method (UPI, Debit/Credit Card, Net Banking) via Razorpay within 5 to 7 business days.</p>
+          {% elsif request.path contains 'privacy' %}
+            <h2>1. Information We Collect</h2>
+            <p>When you visit SPLYN (splyn.in), purchase our products, or interact with our community, we collect personal information such as your name, billing address, shipping address, email address, phone number, and payment information processed securely via Razorpay.</p>
+
+            <h2>2. Data Protection & Security</h2>
+            <p>SPLYN adheres to industry-standard encryption protocols (SSL/TLS) to safeguard your data. Payment transactions are handled with PCI-DSS compliant payment gateway partners like Razorpay.</p>
+          {% elsif request.path contains 'shipping' %}
+            <h2>1. Order Processing Time</h2>
+            <p>All orders placed on splyn.in are processed within 1 to 2 business days (excluding Sundays and national holidays).</p>
+
+            <h2>2. Delivery Timelines</h2>
+            <p>Standard delivery timelines across metro cities in India range from 2 to 4 business days. Regional and tier-2/tier-3 cities receive delivery within 4 to 7 business days.</p>
+          {% elsif request.path contains 'terms' %}
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing or purchasing from SPLYN (splyn.in), operated by SPLYN Beverages Pvt. Ltd., you agree to comply with and be bound by these Terms and Conditions.</p>
+
+            <h2>2. Product Availability & Pricing</h2>
+            <p>All prices listed on splyn.in are in Indian Rupees (INR) and inclusive of applicable GST unless stated otherwise.</p>
+          {% else %}
+            <h2>Policy Information</h2>
+            <p>Please review our official company policies for purchasing performance beverages on splyn.in.</p>
+          {% endif %}
+        {% endif %}
+      </main>
+
+    </div>
+  </div>
+</section>

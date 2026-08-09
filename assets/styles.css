@@ -502,22 +502,25 @@ a {
 
 .btn-hero-secondary {
   background: #ffffff;
-  color: #003561;
-  border: 2px solid #003561;
-  padding: 12px 26px;
+  color: #003561 !important;
+  border: 2px solid #003561 !important;
+  padding: 13px 26px;
   border-radius: 50px;
   font-weight: 700;
   font-size: 15px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  box-shadow: 0 4px 14px rgba(0, 53, 97, 0.12);
   transition: all 0.3s ease;
 }
 
 .btn-hero-secondary:hover {
   background: #003561;
-  color: #ffffff;
+  color: #ffffff !important;
+  border-color: #003561 !important;
   transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 53, 97, 0.25);
 }
 
 /* Mobile Responsive */
@@ -555,6 +558,10 @@ a {
   .hero-img-wrapper {
     max-width: 360px;
     margin: 0 auto;
+  }
+
+  .hero-img-wrapper:hover .hero-can-img {
+    transform: scale(1.2) translateY(18px) !important;
   }
 
   .hero-feature-tags {
@@ -1512,12 +1519,19 @@ h2 {
 .reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .2, 1)
+  transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .2, 1);
 }
 
-.reveal.in {
-  opacity: 1;
-  transform: none
+.reveal.in,
+.reveal.active,
+.shopify-design-mode .reveal,
+body.design-mode .reveal,
+html.design-mode .reveal,
+body[class*="shopify"] .reveal,
+body:has(#shopify-section-iframe) .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
 }
 
 /* FLAVORS SECTION - 3 COLUMNS IN A ROW */
@@ -2369,186 +2383,147 @@ h2 {
   }
 }
 
-/* INGREDIENTS SECTION */
-/* INGREDIENTS SECTION */
+/* REDESIGNED INGREDIENTS SECTION (SECTION 3) */
 .ingredients {
   position: relative;
-  padding: 120px 0;
-  min-height: 650px;
-  background: #0A0F1D;
+  padding: 60px 0 70px 0;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  color: #003561;
+}
+
+.ingredients-head {
+  margin-bottom: 36px;
+}
+
+.ingredients-head h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  color: #00274d;
+  margin: 10px 0 6px 0;
+  line-height: 1.15;
+}
+
+.ingredients-head h2 em {
+  font-style: italic;
+  background: linear-gradient(135deg, #003561 0%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ingredients-subtext {
+  font-size: 15px;
+  color: #475569;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.ingredients-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.ing-card {
+  background: #ffffff;
+  border-radius: 22px;
+  border: 1px solid rgba(0, 53, 97, 0.1);
+  box-shadow: 0 12px 32px rgba(0, 37, 77, 0.06);
   overflow: hidden;
-  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
 }
 
-/* Background image layers container */
-.ingredients-bg-container {
-  position: absolute;
-  inset: 0;
+.ing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 37, 77, 0.12);
+  border-color: rgba(0, 53, 97, 0.22);
+}
+
+.ing-card-media {
+  position: relative;
   width: 100%;
-  height: 100%;
-  z-index: 1;
+  height: 200px;
+  background: #001a33;
+  overflow: hidden;
 }
 
-.ingredients-bg-layer {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
-  transform: scale(1.03);
-}
-
-.ingredients-bg-layer.active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.ingredients-bg-layer img {
+.ing-card-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Opacity dark overlay layer in between background image & text */
-.ingredients-overlay {
+.ing-card:hover .ing-card-media img {
+  transform: scale(1.05);
+}
+
+.ing-card-badge {
   position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: linear-gradient(135deg, rgba(7, 15, 30, 0.82) 0%, rgba(10, 20, 40, 0.75) 50%, rgba(5, 10, 25, 0.85) 100%);
-  backdrop-filter: blur(2px);
-}
-
-.ingredients-content-wrapper {
-  position: relative;
-  z-index: 3;
-}
-
-.ingredients .section-head {
-  text-align: center;
-  margin: 0 auto 60px;
-  max-width: 900px;
-  display: flex;
-  flex-direction: column;
+  top: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 6px 12px;
+  border-radius: 16px;
+  display: inline-flex;
   align-items: center;
-}
-
-.ingredients .section-head h2 {
-  font-size: clamp(38px, 5.5vw, 60px);
-  color: #FFFFFF;
+  gap: 6px;
+  font-size: 11px;
   font-weight: 800;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  text-align: center;
+  color: #003561;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 53, 97, 0.1);
 }
 
-.ingredients .section-head h2 em {
-  color: #91B9EA;
-  font-style: italic;
+.ing-card-badge i {
+  font-size: 14px;
+  color: #003561;
 }
 
-.ingredients-showcase {
-  display: block;
-  width: 100%;
-}
-
-/* Ingredients List - 3 Columns in a Row */
-.ingredients-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  align-items: start;
-}
-
-.ingredient-item {
+.ing-card-content {
+  padding: 18px 20px 22px 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 20px 16px;
-  border: none;
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  cursor: pointer;
-  transition: transform 0.35s ease, opacity 0.35s ease;
-  position: relative;
-}
-
-.ingredient-item::before {
-  display: none;
-}
-
-.ingredient-item:hover,
-.ingredient-item.active {
-  border: none;
-  box-shadow: none;
-  transform: translateY(-6px);
-}
-
-.ingredient-content {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
 }
 
-.ingredient-title {
+.ing-card-content h3 {
   font-family: 'Poppins', sans-serif;
-  font-size: clamp(24px, 2.5vw, 34px);
-  font-weight: 800;
-  color: #FFFFFF;
-  margin-bottom: 10px;
-  display: inline-block;
-  position: relative;
-  letter-spacing: 0.5px;
-  text-align: center;
+  font-size: 22px;
+  font-weight: 900;
+  color: #00274d;
+  margin-bottom: 2px;
+  letter-spacing: -0.3px;
 }
 
-.ingredient-title span {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 6px;
-}
-
-/* Animated Underline centered on hover / active */
-.ingredient-title span::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 100%;
-  height: 3px;
-  background: #91B9EA;
-  border-radius: 2px;
-  transform: translateX(-50%) scaleX(0);
-  transform-origin: center;
-  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.ingredient-item:hover .ingredient-title span::after,
-.ingredient-item.active .ingredient-title span::after {
-  transform: translateX(-50%) scaleX(1);
-}
-
-.ingredient-tagline {
-  font-size: 13px;
+.ing-tagline {
+  font-size: 12px;
   font-weight: 700;
-  color: #91B9EA;
+  color: #0284c7;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
-  margin-bottom: 12px;
-  text-align: center;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  display: block;
 }
 
-.ingredient-description {
-  font-size: 15px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.88);
-  margin: 0;
-  font-weight: 400;
-  text-align: center;
+.ing-card-content p {
+  font-size: 13.5px;
+  color: #475569;
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+@media (max-width: 992px) {
+  .ingredients-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 /* Responsive */
@@ -3719,6 +3694,163 @@ h2 {
   }
   .cart-item-unit-price {
     display: none;
+  }
+}
+
+/* POLICY & LEGAL PAGES */
+.policy-page {
+  padding: 80px 0 120px 0;
+  background: #f8fafc;
+  min-height: 80vh;
+}
+
+.policy-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.policy-header {
+  margin-bottom: 48px;
+}
+
+.policy-header h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  color: #003561;
+  margin: 12px 0 8px 0;
+}
+
+.policy-last-updated {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.policy-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.policy-sidebar {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px;
+  border: 1px solid rgba(0, 53, 97, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 100px;
+}
+
+.policy-sidebar h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: #003561;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.policy-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.policy-nav-list a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.policy-nav-list a:hover {
+  background: rgba(0, 53, 97, 0.05);
+  color: #003561;
+}
+
+.policy-nav-list a.active {
+  background: #003561;
+  color: #ffffff;
+}
+
+.policy-support-card {
+  background: #f1f5f9;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.policy-support-card i {
+  font-size: 32px;
+  color: #003561;
+  margin-bottom: 8px;
+}
+
+.policy-support-card h5 {
+  font-size: 15px;
+  font-weight: 800;
+  color: #003561;
+  margin-bottom: 4px;
+}
+
+.policy-support-card p {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.policy-content-body {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 48px;
+  border: 1px solid rgba(0, 53, 97, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  line-height: 1.8;
+  color: #334155;
+  font-size: 15px;
+}
+
+.policy-content-body h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #003561;
+  margin: 32px 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 53, 97, 0.08);
+}
+
+.policy-content-body h2:first-child {
+  margin-top: 0;
+}
+
+.policy-content-body p {
+  margin-bottom: 16px;
+}
+
+@media (max-width: 900px) {
+  .policy-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .policy-sidebar {
+    position: static;
+  }
+  .policy-content-body {
+    padding: 24px;
   }
 }
 

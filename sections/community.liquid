@@ -3,9 +3,13 @@
   <div class="container">
     <div class="community-inner">
 
-      <!-- Left: Single Factory Image (No Slider) -->
+      <!-- Left: Single Factory Image -->
       <div class="community-media reveal">
-        <img src="{{ 'factory.jpeg' | asset_url }}" alt="SPLYN Factory & Community" class="community-image" />
+        {% if section.settings.community_image != blank %}
+          <img src="{{ section.settings.community_image | image_url: width: 1200 }}" alt="{{ section.settings.heading | escape }}" class="community-image" />
+        {% else %}
+          <img src="{{ 'factory.jpeg' | asset_url }}" alt="SPLYN Factory & Community" class="community-image" />
+        {% endif %}
       </div>
 
       <!-- Right: Community CTA -->
@@ -36,6 +40,11 @@
 {
   "name": "Community",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "community_image",
+      "label": "Community / Factory Image"
+    },
     {
       "type": "text",
       "id": "chip_text",
@@ -99,7 +108,8 @@
         { "type": "perk", "settings": { "icon": "zap", "text": "Early access to new flavors & drops" } },
         { "type": "perk", "settings": { "icon": "users", "text": "Connect with the community" } },
         { "type": "perk", "settings": { "icon": "gift", "text": "Exclusive member-only offers" } },
-        { "type": "perk", "settings": { "icon": "message-circle", "text": "Direct line to the SPLYN team" } }
+        { "type": "perk", "settings": { "icon": "message-circle", "text": "Direct line to the SPLYN team" } },
+        { "type": "perk", "settings": { "icon": "calendar", "text": "Access to exclusive community events" } }
       ]
     }
   ]

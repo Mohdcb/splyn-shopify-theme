@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-policy",
+      "settings": {
+        "policy_title": "Razorpay Payment Disclaimer & Policy",
+        "policy_type": "razorpay"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

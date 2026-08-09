@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-policy",
+      "settings": {
+        "policy_title": "Legal Policy",
+        "policy_type": "privacy"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

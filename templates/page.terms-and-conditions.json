@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-policy",
+      "settings": {
+        "policy_title": "Terms & Conditions",
+        "policy_type": "terms"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

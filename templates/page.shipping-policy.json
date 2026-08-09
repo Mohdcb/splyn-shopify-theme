@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-policy",
+      "settings": {
+        "policy_title": "Shipping Policy",
+        "policy_type": "shipping"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

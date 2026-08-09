@@ -8,6 +8,7 @@ const io = new IntersectionObserver(
     entries.forEach((e) => {
       if (e.isIntersecting) {
         e.target.classList.add("in");
+        e.target.classList.add("active");
         io.unobserve(e.target);
       }
     });
@@ -15,6 +16,42 @@ const io = new IntersectionObserver(
   { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
 );
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+// ── Shopify Design Mode Customizer Fix ──
+function revealAllForEditor() {
+  document.querySelectorAll(".reveal").forEach((el) => {
+    el.classList.add("in");
+    el.classList.add("active");
+    el.style.opacity = "1";
+    el.style.transform = "none";
+  });
+}
+
+if (window.Shopify && window.Shopify.designMode) {
+  revealAllForEditor();
+}
+
+document.addEventListener("shopify:section:select", (e) => {
+  if (e.target) {
+    e.target.querySelectorAll(".reveal").forEach((el) => {
+      el.classList.add("in");
+      el.classList.add("active");
+      el.style.opacity = "1";
+      el.style.transform = "none";
+    });
+  }
+});
+
+document.addEventListener("shopify:section:load", (e) => {
+  if (e.target) {
+    e.target.querySelectorAll(".reveal").forEach((el) => {
+      el.classList.add("in");
+      el.classList.add("active");
+      el.style.opacity = "1";
+      el.style.transform = "none";
+    });
+  }
+});
 
 // ── Stagger children of a reveal ──
 document.querySelectorAll(".reveal").forEach((el, i) => {
