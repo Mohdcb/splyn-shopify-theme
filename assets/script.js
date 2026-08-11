@@ -295,7 +295,11 @@ document.querySelectorAll(".variant-pill").forEach((pill) => {
     // Update buy button text
     const buyBtn = card.querySelector(".flavor-buy-btn, .product-card-btn");
     if (buyBtn && buyBtn.dataset.flavor !== "mystery") {
-      buyBtn.textContent = `Buy Now — ${pill.dataset.pack} (${pill.dataset.price})`;
+      if (card.classList.contains("product-card")) {
+        buyBtn.textContent = "Add to Cart";
+      } else {
+        buyBtn.textContent = `Buy Now — ${pill.dataset.pack} (${pill.dataset.price})`;
+      }
     }
   });
 });
