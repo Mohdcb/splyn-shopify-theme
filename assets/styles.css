@@ -2486,6 +2486,7 @@ body:has(#shopify-section-iframe) .reveal {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
+  line-height: 1.35;
 }
 
 @media(max-width:880px) {
