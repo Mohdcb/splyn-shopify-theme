@@ -128,7 +128,7 @@
             "flavor_name": "Lemon",
             "flavor_name_italic": "Lemon",
             "description": "Zesty citrus. Cool finish. Built for sun‑soaked workouts and afternoon resets.",
-            "tags": "Citrus Hit, Mint Cool, Crisp Finish",
+            "tags": "Hydration, Focus, Energy",
             "caffeine": "75mg",
             "sugar": "0g",
             "size": "250ml",
@@ -145,7 +145,7 @@
             "flavor_name": "Raspberry",
             "flavor_name_italic": "Rush",
             "description": "Wild berries. Velvet finish. Designed for late nights, deep work, and golden hour.",
-            "tags": "Wild Berry, Soft Sweet, Smooth Lift",
+            "tags": "Hydration, Focus, Energy",
             "caffeine": "75mg",
             "sugar": "0g",
             "size": "250ml",
@@ -318,7 +318,7 @@
           "type": "stat",
           "settings": {
             "value": "75mg",
-            "label": "Caffeine + L-Theanine<br/>& Electrolytes"
+            "label": "Caffeine, zero crash"
           }
         },
         "stat_3": {
