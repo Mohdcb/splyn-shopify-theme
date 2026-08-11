@@ -321,3 +321,74 @@ document.querySelectorAll(".flavor-buy-btn").forEach((btn) => {
     }
   });
 });
+
+// ── Interactive Flavor Poll Widget ──
+document.querySelectorAll(".flavor-poll-widget").forEach((widget) => {
+  const options = widget.querySelectorAll(".poll-option-btn");
+  const statusMsg = widget.querySelector(".poll-status-msg");
+  const changeBtn = widget.querySelector(".poll-change-btn");
+
+  let votedFlavor = null;
+
+  function updatePoll() {
+    let totalVotes = 0;
+    options.forEach((opt) => {
+      let baseVotes = parseInt(opt.dataset.votes, 10) || 0;
+      if (opt.dataset.flavor === votedFlavor) {
+        baseVotes += 1;
+      }
+      totalVotes += baseVotes;
+    });
+
+    options.forEach((opt) => {
+      let baseVotes = parseInt(opt.dataset.votes, 10) || 0;
+      if (opt.dataset.flavor === votedFlavor) {
+        baseVotes += 1;
+      }
+      const pct = Math.round((baseVotes / totalVotes) * 100);
+      const fillBar = opt.querySelector(".poll-fill-bar");
+      const pctText = opt.querySelector(".poll-percentage");
+
+      if (fillBar) fillBar.style.width = votedFlavor ? `${pct}%` : "0%";
+      if (pctText) pctText.textContent = votedFlavor ? `${pct}%` : "";
+
+      if (opt.dataset.flavor === votedFlavor) {
+        opt.classList.add("is-voted");
+      } else {
+        opt.classList.remove("is-voted");
+      }
+      if (votedFlavor) {
+        opt.classList.add("has-voted");
+      } else {
+        opt.classList.remove("has-voted");
+      }
+    });
+
+    if (votedFlavor) {
+      if (statusMsg) {
+        statusMsg.innerHTML = `🎉 <strong>Voted!</strong> ${totalVotes.toLocaleString()} votes cast`;
+      }
+      if (changeBtn) changeBtn.style.display = "inline-block";
+    } else {
+      if (statusMsg) {
+        statusMsg.innerHTML = `<i class="ph-bold ph-hand-pointing"></i> Tap a flavor to vote!`;
+      }
+      if (changeBtn) changeBtn.style.display = "none";
+    }
+  }
+
+  options.forEach((opt) => {
+    opt.addEventListener("click", () => {
+      votedFlavor = opt.dataset.flavor;
+      updatePoll();
+    });
+  });
+
+  if (changeBtn) {
+    changeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      votedFlavor = null;
+      updatePoll();
+    });
+  }
+});

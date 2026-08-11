@@ -1607,12 +1607,16 @@ body:has(#shopify-section-iframe) .reveal {
   display: block;
 }
 
-.swatch-lime {
+.swatch-lime,
+.swatch-lemon,
+.swatch-lemon-lime {
   background: linear-gradient(135deg, #b8ff4a, #6cd86a);
   box-shadow: 0 0 12px rgba(184, 255, 74, 0.6);
 }
 
-.swatch-berry {
+.swatch-berry,
+.swatch-raspberry,
+.swatch-raspberry-peach {
   background: linear-gradient(135deg, #ff8fbf, #d96aa9);
   box-shadow: 0 0 12px rgba(255, 143, 191, 0.6);
 }
@@ -1628,19 +1632,27 @@ body:has(#shopify-section-iframe) .reveal {
 }
 
 /* Card background accents */
-.flavor-card-lime {
+.flavor-card-lime,
+.flavor-card-lemon,
+.flavor-card-lemon-lime {
   background: linear-gradient(180deg, #f4ffe8 0%, #FFFFFF 35%);
   border-color: rgba(184, 255, 74, 0.4);
 }
 
-.flavor-card-berry {
+.flavor-card-berry,
+.flavor-card-raspberry,
+.flavor-card-raspberry-peach {
   background: linear-gradient(180deg, #fff0f5 0%, #FFFFFF 35%);
   border-color: rgba(255, 143, 191, 0.4);
 }
 
 .flavor-card-mystery {
-  background: linear-gradient(180deg, #f1f5f9 0%, #FFFFFF 35%);
+  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
   border: 2px dashed rgba(0, 53, 97, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .flavor-card-media {
@@ -1851,6 +1863,206 @@ body:has(#shopify-section-iframe) .reveal {
   letter-spacing: 0.2px;
 }
 
+/* Community Flavor Poll Card Styling */
+.badge-poll {
+  background: #E8FF5A;
+  color: #003561;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 8px rgba(0, 53, 97, 0.12);
+}
+
+.flavor-poll-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  padding: 20px 10px 10px 10px;
+}
+
+.poll-header {
+  margin-bottom: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.poll-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #10B981;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 6px;
+}
+
+.poll-header h3 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #003561;
+  margin: 0 0 6px 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.poll-header h3 em {
+  font-style: italic;
+  color: #10B981;
+}
+
+.poll-header .flavor-desc {
+  font-size: 13px;
+  color: #4A5568;
+  margin-bottom: 0;
+  min-height: auto;
+  text-align: center;
+  max-width: 240px;
+}
+
+.flavor-poll-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 270px;
+  gap: 14px;
+  margin: 0 auto;
+}
+
+.poll-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.poll-option-btn {
+  position: relative;
+  width: 100%;
+  padding: 14px 18px;
+  min-height: 50px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(0, 53, 97, 0.15);
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.poll-option-btn:hover {
+  border-color: #003561;
+  background: rgba(0, 53, 97, 0.02);
+}
+
+.poll-fill-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(232, 255, 90, 0.4) 0%, rgba(16, 185, 129, 0.4) 100%);
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.poll-option-btn.is-voted {
+  border-color: #10B981;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.poll-option-btn.is-voted .poll-fill-bar {
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.35) 0%, rgba(16, 185, 129, 0.55) 100%);
+}
+
+.poll-option-left,
+.poll-option-right {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.poll-emoji {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.poll-flavor-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #003561;
+}
+
+.poll-percentage {
+  font-size: 12px;
+  font-weight: 800;
+  color: #003561;
+}
+
+.poll-check-icon {
+  display: none;
+  color: #10B981;
+  font-size: 16px;
+}
+
+.poll-option-btn.is-voted .poll-check-icon {
+  display: inline-flex;
+}
+
+.poll-footer-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #003561;
+  text-align: center;
+  width: 100%;
+}
+
+.poll-status-msg {
+  font-weight: 600;
+  text-align: center;
+}
+
+.poll-change-btn {
+  background: none;
+  border: none;
+  color: #003561;
+  text-decoration: underline;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.poll-change-btn:hover {
+  color: #10B981;
+}
+
 /* Pack Variant Selector Styling */
 .flavor-variant-selector {
   width: 100%;
@@ -1884,10 +2096,41 @@ body:has(#shopify-section-iframe) .reveal {
 .variant-pills {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 12px 8px;
+  margin-top: 8px;
+}
+
+.variant-pill-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 12px;
+  width: 100%;
+}
+
+.free-shipping-badge {
+  position: absolute;
+  top: 0px;
+  right: 4px;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: #FFFFFF;
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35);
+  display: inline-block;
+  text-align: center;
+  z-index: 2;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 .variant-pill {
+  width: 100%;
   padding: 8px 6px;
   border-radius: 12px;
   border: 1.5px solid rgba(0, 53, 97, 0.15);

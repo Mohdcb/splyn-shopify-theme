@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -7,40 +16,65 @@
         "heading": "The can that does",
         "heading_italic": "3 things.",
         "subtext": "Zero Sugar. Zero Calorie.",
-        "cta_primary_text": "Shop Now — ₹199",
-        "cta_secondary_text": "Explore →"
+        "tag1_text": "Hydration",
+        "tag2_text": "Focus",
+        "tag3_text": "Energy",
+        "cta_primary_text": "Pre-Order Now",
+        "cta_primary_link": "",
+        "cta_secondary_text": "Explore →",
+        "cta_secondary_link": "",
+        "show_badge1": true,
+        "badge1_icon": "ph-drop",
+        "badge1_title": "Hydration",
+        "badge1_sub": "Electrolytes",
+        "show_badge2": true,
+        "badge2_icon": "ph-lightning",
+        "badge2_title": "Energy",
+        "badge2_sub": "Caffiene",
+        "show_badge3": true,
+        "badge3_icon": "ph-target",
+        "badge3_title": "Focus",
+        "badge3_sub": "L-Theanine"
       }
     },
     "marquee-banner": {
       "type": "marquee-banner",
-      "settings": {},
       "blocks": {
         "text_1": {
           "type": "text_item",
-          "settings": { "text": "BEYOND ENERGY. BEYOND HYDRATION." }
+          "settings": {
+            "text": "BEYOND ENERGY. BEYOND HYDRATION."
+          }
         },
         "text_2": {
           "type": "text_item",
-          "settings": { "text": "ZERO SUGAR. ZERO CALORIE." }
+          "settings": {
+            "text": "ZERO SUGAR. ZERO CALORIE."
+          }
         },
         "text_3": {
           "type": "text_item",
-          "settings": { "text": "BEYOND ENERGY. BEYOND HYDRATION." }
+          "settings": {
+            "text": "BEYOND ENERGY. BEYOND HYDRATION."
+          }
         },
         "text_4": {
           "type": "text_item",
-          "settings": { "text": "ZERO SUGAR. ZERO CALORIE." }
+          "settings": {
+            "text": "ZERO SUGAR. ZERO CALORIE."
+          }
         }
       },
-      "block_order": ["text_1", "text_2", "text_3", "text_4"]
+      "block_order": [
+        "text_1",
+        "text_2",
+        "text_3",
+        "text_4"
+      ],
+      "settings": {}
     },
     "ingredients": {
       "type": "ingredients",
-      "settings": {
-        "chip_text": "",
-        "heading": "Designed for the",
-        "heading_italic": "Human Body."
-      },
       "blocks": {
         "ing_1": {
           "type": "ingredient",
@@ -48,8 +82,7 @@
             "title": "HYDRATION",
             "tagline": "Not Water. Electrolytes.",
             "description": "",
-            "caption_title": "Electrolytes",
-            "caption_text": ""
+            "image": "shopify://shop_images/hf_20260808_101219_40ca90c2-d74b-4e5a-9d4b-224f946e6b22.png"
           }
         },
         "ing_2": {
@@ -58,8 +91,7 @@
             "title": "FOCUS",
             "tagline": "Powered by L-Theanine",
             "description": "",
-            "caption_title": "L‑Theanine",
-            "caption_text": ""
+            "image": "shopify://shop_images/hf_20260808_091452_02e3e9bc-1606-4409-ae35-716655c72d39_1.png"
           }
         },
         "ing_3": {
@@ -68,55 +100,63 @@
             "title": "ENERGY",
             "tagline": "Caffeine without the crash",
             "description": "",
-            "caption_title": "Caffeine",
-            "caption_text": ""
+            "image": "shopify://shop_images/popo.png"
           }
         }
       },
-      "block_order": ["ing_1", "ing_2", "ing_3"]
+      "block_order": [
+        "ing_1",
+        "ing_2",
+        "ing_3"
+      ],
+      "settings": {
+        "chip_text": "",
+        "heading": "Designed for the",
+        "heading_italic": "Human Body.",
+        "subtext": "Three core pillars formulated for peak physical recovery, mental flow state, and clean energy."
+      }
     },
     "flavors": {
       "type": "flavors",
-      "settings": {
-        "chip_text": "Our Lineup",
-        "heading": "Pick your",
-        "heading_italic": "taste.",
-        "subtext": "Explore our signature performance hydration lineup, built for peak energy and zero crash."
-      },
       "blocks": {
         "lime": {
           "type": "flavor",
           "settings": {
-            "flavor_id": "lime",
-            "flavor_label": "Lime",
-            "flavor_name": "Lime",
-            "flavor_name_italic": "Crush",
+            "product": "splyn-energy-drink-lime",
+            "flavor_id": "Lemon Lime",
+            "flavor_label": "Lemon Lime",
+            "flavor_name": "Lemon",
+            "flavor_name_italic": "Lemon",
             "description": "Zesty citrus. Cool finish. Built for sun‑soaked workouts and afternoon resets.",
             "tags": "Citrus Hit, Mint Cool, Crisp Finish",
-            "caffeine": "200mg",
+            "caffeine": "75mg",
             "sugar": "0g",
-            "size": "11.4 fl oz",
-            "cta_text": "Add Lime to Cart"
+            "size": "250ml",
+            "cta_text": "Add Lime to Cart",
+            "cta_link": "shopify://collections/all"
           }
         },
         "berry": {
           "type": "flavor",
           "settings": {
+            "product": "",
             "flavor_id": "berry",
             "flavor_label": "Raspberry",
             "flavor_name": "Raspberry",
             "flavor_name_italic": "Rush",
             "description": "Wild berries. Velvet finish. Designed for late nights, deep work, and golden hour.",
             "tags": "Wild Berry, Soft Sweet, Smooth Lift",
-            "caffeine": "200mg",
+            "caffeine": "75mg",
             "sugar": "0g",
-            "size": "11.4 fl oz",
-            "cta_text": "Add Raspberry to Cart"
+            "size": "250ml",
+            "cta_text": "Add Raspberry to Cart",
+            "cta_link": "shopify://collections/all"
           }
         },
         "mystery": {
           "type": "flavor",
           "settings": {
+            "product": "",
             "flavor_id": "mystery",
             "flavor_label": "Mystery Drop",
             "flavor_name": "Mystery",
@@ -126,27 +166,46 @@
             "caffeine": "???",
             "sugar": "0g",
             "size": "11.4 fl oz",
-            "cta_text": "Notify Me"
+            "cta_text": "Notify Me",
+            "cta_link": "shopify://collections/all"
           }
         }
       },
-      "block_order": ["lime", "berry", "mystery"]
+      "block_order": [
+        "lime",
+        "berry",
+        "mystery"
+      ],
+      "settings": {
+        "chip_text": "Our Lineup",
+        "heading": "Pick your",
+        "heading_italic": "taste",
+        "subtext": "Explore our signature performance hydration lineup, built for peak energy and zero crash."
+      }
+    },
+    "comparison": {
+      "type": "comparison",
+      "settings": {
+        "chip_text": "The SPLYN Advantage",
+        "heading": "Why",
+        "heading_italic": "SPLYN",
+        "heading_end": "Beats Standard Drinks",
+        "subtext": "See how SPLYN stacks up against sugary energy drinks and plain hydration.",
+        "col_header_category": "CATEGORY",
+        "col_header_energy": "ENERGY DRINKS",
+        "col_header_electro": "ELECTROLYTE DRINKS"
+      }
     },
     "reviews": {
       "type": "reviews",
-      "settings": {
-        "chip_text": "Real Talk",
-        "heading": "The hype —",
-        "heading_italic": "listen to MVPs",
-        "subtext": "Watch creators, athletes, and everyday legends experience SPLYN for the first time."
-      },
       "blocks": {
         "review_1": {
           "type": "review",
           "settings": {
             "reviewer_name": "Alex Fitness",
             "reviewer_title": "Pro Athlete • 2.4M followers",
-            "quote": "Finally a drink that keeps up with my training. Zero crash, all performance."
+            "quote": "Finally a drink that keeps up with my training. Zero crash, all performance.",
+            "avatar_gradient": ""
           }
         },
         "review_2": {
@@ -177,97 +236,141 @@
           }
         }
       },
-      "block_order": ["review_1", "review_2", "review_3", "review_4"]
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ],
+      "settings": {
+        "chip_text": "Real Talk",
+        "heading": "The hype —",
+        "heading_italic": "listen to MVPs",
+        "subtext": "Watch creators, athletes, and everyday legends experience SPLYN for the first time."
+      }
     },
     "community": {
       "type": "community",
+      "blocks": {
+        "perk_1": {
+          "type": "perk",
+          "settings": {
+            "icon": "zap",
+            "text": "Early access to new flavors & drops"
+          }
+        },
+        "perk_2": {
+          "type": "perk",
+          "settings": {
+            "icon": "users",
+            "text": "Connect with the community"
+          }
+        },
+        "perk_3": {
+          "type": "perk",
+          "settings": {
+            "icon": "gift",
+            "text": "Exclusive member-only offers"
+          }
+        },
+        "perk_4": {
+          "type": "perk",
+          "settings": {
+            "icon": "message-circle",
+            "text": "Direct line to the SPLYN team"
+          }
+        },
+        "perk_5": {
+          "type": "perk",
+          "settings": {
+            "icon": "calendar",
+            "text": "Access to exclusive community events"
+          }
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "perk_3",
+        "perk_4",
+        "perk_5"
+      ],
       "settings": {
         "chip_text": "Join the Movement",
         "heading": "Be part of the",
         "heading_italic": "SPLYN family.",
         "description": "Thousands of athletes, creators, and everyday legends are already in the loop. Get early drops, exclusive recipes, community challenges, and direct access to the SPLYN team — all in one place.",
-        "cta_text": "Join WhatsApp Community"
-      },
-      "blocks": {
-        "perk_1": {
-          "type": "perk",
-          "settings": { "icon": "zap", "text": "Early access to new flavors & drops" }
-        },
-        "perk_2": {
-          "type": "perk",
-          "settings": { "icon": "users", "text": "Connect with the community" }
-        },
-        "perk_3": {
-          "type": "perk",
-          "settings": { "icon": "gift", "text": "Exclusive member-only offers" }
-        },
-        "perk_4": {
-          "type": "perk",
-          "settings": { "icon": "message-circle", "text": "Direct line to the SPLYN team" }
-        },
-        "perk_5": {
-          "type": "perk",
-          "settings": { "icon": "calendar", "text": "Access to exclusive community events" }
-        }
-      },
-      "block_order": ["perk_1", "perk_2", "perk_3", "perk_4", "perk_5"]
+        "cta_text": "Join WhatsApp Community",
+        "cta_link": ""
+      }
     },
     "story": {
       "type": "story",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "value": "3",
+            "label": "Founders"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "value": "2025",
+            "label": "Founded"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "value": "∞",
+            "label": "Ambition"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3"
+      ],
       "settings": {
-        "logo_tagline": "BETTER WATER",
+        "logo_tagline": "",
         "blockquote": "\"Three friends. One mission.<br>To make water<br>better.\"",
         "eyebrow": "OUR STORY",
         "heading": "Born in a<br>Coffee Shop",
         "paragraph_1": "Splyn began not in a boardroom, but over coffee — three childhood friends noticing what was missing in the market. Most drinks were either overloaded with sugar or purely energy-driven with zero health.",
         "paragraph_2": "We dug into the research, spotted the gap, and built <strong>Splyn</strong> — a next-generation sparkling sports drink that gives India's youth what they actually deserve."
-      },
-      "blocks": {
-        "stat_1": {
-          "type": "stat",
-          "settings": { "value": "3", "label": "Founders" }
-        },
-        "stat_2": {
-          "type": "stat",
-          "settings": { "value": "2025", "label": "Founded" }
-        },
-        "stat_3": {
-          "type": "stat",
-          "settings": { "value": "∞", "label": "Ambition" }
-        }
-      },
-      "block_order": ["stat_1", "stat_2", "stat_3"]
+      }
     },
     "sticky-bar": {
       "type": "sticky-bar",
+      "blocks": {
+        "variant_1": {
+          "type": "variant",
+          "settings": {
+            "label": "🟢 Lime Crush"
+          }
+        },
+        "variant_2": {
+          "type": "variant",
+          "settings": {
+            "label": "🔴 Raspberry Rush"
+          }
+        }
+      },
+      "block_order": [
+        "variant_1",
+        "variant_2"
+      ],
       "settings": {
+        "product": "",
         "product_name": "SPLYN Performance Drink",
         "price_now": "₹199",
         "price_old": "₹249",
         "price_per": "/ can",
         "cart_text": "Add to Cart",
         "buy_text": "Buy Now"
-      },
-      "blocks": {
-        "variant_1": {
-          "type": "variant",
-          "settings": { "label": "🟢 Lime Crush" }
-        },
-        "variant_2": {
-          "type": "variant",
-          "settings": { "label": "🔴 Raspberry Rush" }
-        }
-      },
-      "block_order": ["variant_1", "variant_2"]
-    },
-    "comparison": {
-      "type": "comparison",
-      "settings": {
-        "chip_text": "The SPLYN Advantage",
-        "heading": "Why",
-        "heading_italic": "SPLYN",
-        "heading_end": "Beats Standard Drinks",
-        "subtext": "See how SPLYN stacks up against sugary energy drinks and plain hydration."
       }
     }
   },
