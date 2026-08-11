@@ -20,15 +20,21 @@
       <h2>{{ section.settings.heading }}</h2>
       <p>{{ section.settings.paragraph_1 }}</p>
       <p>{{ section.settings.paragraph_2 }}</p>
+      {% if section.settings.paragraph_3 != blank %}
+        <p>{{ section.settings.paragraph_3 }}</p>
+      {% endif %}
       <div class="story-stats">
         {% for block in section.blocks %}
           <div {{ block.shopify_attributes }}>
-            {% if forloop.index == 1 %}
+            {% assign l_lower = block.settings.label | downcase %}
+            {% if l_lower contains 'founder' %}
               <i class="ph-duotone ph-users-three" style="font-size: 22px; color: #003561; margin-bottom: 6px;"></i>
-            {% elsif forloop.index == 2 %}
-              <i class="ph-duotone ph-calendar" style="font-size: 22px; color: #003561; margin-bottom: 6px;"></i>
+            {% elsif l_lower contains 'caffeine' or l_lower contains 'crash' %}
+              <i class="ph-duotone ph-lightning" style="font-size: 22px; color: #003561; margin-bottom: 6px;"></i>
+            {% elsif l_lower contains 'sugar' %}
+              <i class="ph-duotone ph-drop" style="font-size: 22px; color: #003561; margin-bottom: 6px;"></i>
             {% else %}
-              <i class="ph-duotone ph-infinity" style="font-size: 22px; color: #003561; margin-bottom: 6px;"></i>
+              <i class="ph-duotone ph-sparkle" style="font-size: 22px; color: #003561; margin-bottom: 6px;"></i>
             {% endif %}
             <b>{{ block.settings.value }}</b>
             <span>{{ block.settings.label }}</span>

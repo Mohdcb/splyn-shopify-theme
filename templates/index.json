@@ -317,15 +317,15 @@
         "stat_2": {
           "type": "stat",
           "settings": {
-            "value": "2025",
-            "label": "Founded"
+            "value": "75mg",
+            "label": "Caffeine, zero crash"
           }
         },
         "stat_3": {
           "type": "stat",
           "settings": {
-            "value": "∞",
-            "label": "Ambition"
+            "value": "0g",
+            "label": "Sugar"
           }
         }
       },
@@ -336,11 +336,12 @@
       ],
       "settings": {
         "logo_tagline": "",
-        "blockquote": "\"Three friends. One mission.<br>To make water<br>better.\"",
+        "blockquote": "\"Three friends training in the same gym. One mission. Clean energy.\"",
         "eyebrow": "OUR STORY",
-        "heading": "Born in a<br>Coffee Shop",
-        "paragraph_1": "Splyn began not in a boardroom, but over coffee — three childhood friends noticing what was missing in the market. Most drinks were either overloaded with sugar or purely energy-driven with zero health.",
-        "paragraph_2": "We dug into the research, spotted the gap, and built <strong>Splyn</strong> — a next-generation sparkling sports drink that gives India's youth what they actually deserve."
+        "heading": "BUILT FOR THE GRIND",
+        "paragraph_1": "Three friends training in the same gym, drinking the same energy drinks — and hating what came with them. Sugar crashes mid-session. Jitters that killed focus instead of sharpening it.",
+        "paragraph_2": "So we built Splyn. Zero sugar. Real electrolytes for what you actually sweat out. 75mg caffeine, balanced with L-Theanine, so you get clean energy — not a spike and a crash.",
+        "paragraph_3": "No shortcuts. No empty calories. Just what your body needs to show up and put in the work."
       }
     },
     "sticky-bar": {
