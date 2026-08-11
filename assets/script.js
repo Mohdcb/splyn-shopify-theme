@@ -260,7 +260,7 @@ if (ingredientItems.length) {
 // ── Compulsory Pack Variant Selection Handler ──
 document.querySelectorAll(".variant-pill").forEach((pill) => {
   pill.addEventListener("click", () => {
-    const card = pill.closest(".flavor-card-item");
+    const card = pill.closest(".flavor-card-item, .product-card");
     if (!card) return;
 
     // Toggle active pill inside this card
@@ -274,6 +274,18 @@ document.querySelectorAll(".variant-pill").forEach((pill) => {
       labelText.classList.add("has-selection");
     }
 
+    // Update form hidden variant input if present
+    const variantInput = card.querySelector(".card-variant-id-input, input[name='id']");
+    if (variantInput && pill.dataset.variantId) {
+      variantInput.value = pill.dataset.variantId;
+    }
+
+    // Update displayed price if present
+    const priceDisplay = card.querySelector(".product-card-current");
+    if (priceDisplay && pill.dataset.price) {
+      priceDisplay.textContent = pill.dataset.price;
+    }
+
     // Clear error state
     const errorMsg = card.querySelector(".variant-error-msg");
     const pillsContainer = card.querySelector(".variant-pills");
@@ -281,14 +293,14 @@ document.querySelectorAll(".variant-pill").forEach((pill) => {
     if (pillsContainer) pillsContainer.classList.remove("has-error");
 
     // Update buy button text
-    const buyBtn = card.querySelector(".flavor-buy-btn");
+    const buyBtn = card.querySelector(".flavor-buy-btn, .product-card-btn");
     if (buyBtn && buyBtn.dataset.flavor !== "mystery") {
       buyBtn.textContent = `Buy Now — ${pill.dataset.pack} (${pill.dataset.price})`;
     }
   });
 });
 
-document.querySelectorAll(".flavor-buy-btn").forEach((btn) => {
+document.querySelectorAll(".flavor-buy-btn, .product-card-btn").forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const flavor = btn.dataset.flavor;
     if (flavor === "mystery") {
@@ -296,7 +308,7 @@ document.querySelectorAll(".flavor-buy-btn").forEach((btn) => {
       return;
     }
 
-    const card = btn.closest(".flavor-card-item");
+    const card = btn.closest(".flavor-card-item, .product-card");
     if (!card) return;
 
     const activePill = card.querySelector(".variant-pill.is-active");
@@ -313,10 +325,14 @@ document.querySelectorAll(".flavor-buy-btn").forEach((btn) => {
       }
     } else {
       const variantId = activePill.dataset.variantId;
-      if (variantId && !variantId.startsWith("default")) {
+      const form = btn.closest("form");
+      if (form) {
+        const variantInput = form.querySelector("input[name='id']");
+        if (variantInput && variantId && !variantId.startsWith("default")) {
+          variantInput.value = variantId;
+        }
+      } else if (variantId && !variantId.startsWith("default")) {
         window.location.href = `/cart/${variantId}:1`;
-      } else {
-        window.location.href = "/checkout";
       }
     }
   });

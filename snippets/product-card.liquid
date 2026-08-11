@@ -28,13 +28,52 @@
       </div>
     </div>
   </a>
-  <form action="/cart/add" method="post" class="product-card-form">
-    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" />
+
+  <!-- Dynamic Shopify Variant Selector for Collection Cards -->
+  <div class="flavor-variant-selector" style="padding: 0 16px 12px 16px;">
+    <label class="variant-label">Select Pack Variant: <span class="selected-pack-text">Select variant first *</span></label>
+    <div class="variant-pills">
+      {% if product != blank and product.variants.size > 0 %}
+        {% for variant in product.variants %}
+          {% assign v_title_lower = variant.title | downcase | strip %}
+          <div class="variant-pill-wrapper">
+            {% unless v_title_lower == 'pack of 4' or v_title_lower == '4 pack' or v_title_lower == '4' %}
+              <span class="free-shipping-badge">Free Shipping</span>
+            {% endunless %}
+            <button type="button" class="variant-pill"
+              data-variant-id="{{ variant.id }}"
+              data-pack="{{ variant.title }}"
+              data-price="{{ variant.price | money }}"
+              data-available="{{ variant.available }}">
+              {{ variant.title }}
+            </button>
+          </div>
+        {% endfor %}
+      {% else %}
+        <!-- Fallback Pack Variants -->
+        <div class="variant-pill-wrapper">
+          <button type="button" class="variant-pill" data-variant-id="4001" data-pack="Pack of 4" data-price="₹599">Pack of 4</button>
+        </div>
+        <div class="variant-pill-wrapper">
+          <span class="free-shipping-badge">Free Shipping</span>
+          <button type="button" class="variant-pill" data-variant-id="4002" data-pack="Pack of 6" data-price="₹1,599">Pack of 6</button>
+        </div>
+        <div class="variant-pill-wrapper">
+          <span class="free-shipping-badge">Free Shipping</span>
+          <button type="button" class="variant-pill" data-variant-id="4004" data-pack="Pack of 24" data-price="₹5,599">Pack of 24</button>
+        </div>
+      {% endif %}
+    </div>
+    <div class="variant-error-msg" style="display: none;">⚠️ Please select a variant before buying</div>
+  </div>
+
+  <form action="/cart/add" method="post" class="product-card-form" style="padding: 0 16px 16px 16px;">
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" class="card-variant-id-input" />
     <input type="hidden" name="quantity" value="1" />
-    <button type="submit" class="btn btn-primary product-card-btn"
+    <button type="submit" class="btn btn-primary product-card-btn flavor-buy-btn"
       {% unless product.available %}disabled{% endunless %}>
       {% if product.available %}
-        Add to Cart
+        Add to Cart — {{ product.title }}
       {% else %}
         Sold Out
       {% endif %}
