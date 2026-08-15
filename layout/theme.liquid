@@ -8,11 +8,11 @@
   
   <!-- Site Favicon & Touch Icons -->
   {% if settings.favicon != blank %}
-    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" />
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}" />
   {% else %}
-    <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}" />
-    <link rel="shortcut icon" href="{{ 'favicon.svg' | asset_url }}" />
-    <link rel="apple-touch-icon" href="{{ 'favicon.svg' | asset_url }}" />
+    <link rel="icon" type="image/png" href="{{ 'transparent_logo.png' | asset_url }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ 'transparent_logo.png' | asset_url }}" />
+    <link rel="apple-touch-icon" href="{{ 'transparent_logo.png' | asset_url }}" />
   {% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
