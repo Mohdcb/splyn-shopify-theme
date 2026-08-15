@@ -286,6 +286,18 @@ document.querySelectorAll(".variant-pill").forEach((pill) => {
       priceDisplay.textContent = pill.dataset.price;
     }
 
+    // Update compare_at_price display if present
+    const compareDisplay = card.querySelector(".product-card-compare");
+    if (compareDisplay) {
+      if (pill.dataset.comparePrice && pill.dataset.comparePrice !== "") {
+        compareDisplay.textContent = pill.dataset.comparePrice;
+        compareDisplay.style.display = "inline-block";
+      } else {
+        compareDisplay.style.display = "none";
+        compareDisplay.textContent = "";
+      }
+    }
+
     // Clear error state
     const errorMsg = card.querySelector(".variant-error-msg");
     const pillsContainer = card.querySelector(".variant-pills");

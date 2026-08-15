@@ -62,14 +62,17 @@
 
         <!-- Price -->
         <div class="pdp-price-wrap">
-          <span class="pdp-price" id="ProductPrice">{{ product.selected_or_first_available_variant.price | money }}</span>
-          {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
-            <span class="pdp-compare" id="ProductCompare">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+          {% assign initial_variant = product.selected_or_first_available_variant %}
+          <span class="pdp-price" id="ProductPrice">{{ initial_variant.price | money }}</span>
+          <span class="pdp-compare" id="ProductCompare"{% unless initial_variant.compare_at_price > initial_variant.price %} style="display: none;"{% endunless %}>
+            {{ initial_variant.compare_at_price | money }}
+          </span>
+          {% assign discount = 0 %}
+          {% if initial_variant.compare_at_price > initial_variant.price %}
+            {% assign save_amount = initial_variant.compare_at_price | minus: initial_variant.price %}
+            {% assign discount = save_amount | times: 100.0 | divided_by: initial_variant.compare_at_price | round %}
           {% endif %}
-          {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
-            {% assign discount = product.selected_or_first_available_variant.compare_at_price | minus: product.selected_or_first_available_variant.price | times: 100 | divided_by: product.selected_or_first_available_variant.compare_at_price %}
-            <span class="pdp-discount">-{{ discount }}%</span>
-          {% endif %}
+          <span class="pdp-discount" id="ProductDiscount"{% unless discount > 0 %} style="display: none;"{% endunless %}>-{{ discount }}%</span>
         </div>
         <p class="pdp-tax-note">Tax included. <a href="/policies/shipping-policy">Shipping</a> calculated at checkout.</p>
 
@@ -190,7 +193,23 @@
   }
 
   /* Variant selection */
-  var productVariants = {{ product.variants | json }};
+  var productVariants = [
+    {% for variant in product.variants %}
+      {
+        id: {{ variant.id | json }},
+        title: {{ variant.title | json }},
+        option1: {{ variant.option1 | json }},
+        option2: {{ variant.option2 | json }},
+        option3: {{ variant.option3 | json }},
+        price: {{ variant.price | json }},
+        compare_at_price: {{ variant.compare_at_price | json }},
+        price_formatted: {{ variant.price | money | json }},
+        compare_at_price_formatted: {% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money | json }}{% else %}""{% endif %},
+        available: {{ variant.available | json }},
+        featured_image: {% if variant.featured_image %}{ src: {{ variant.featured_image | image_url: width: 1000 | json }} }{% else %}null{% endif %}
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
   var selectedOptions = [];
   {% for option in product.options_with_values %}
     selectedOptions[{{ forloop.index0 }}] = {{ option.selected_value | json }};
@@ -217,25 +236,40 @@
       document.getElementById('ProductVariantId').value = matched.id;
       var priceEl = document.getElementById('ProductPrice');
       var compareEl = document.getElementById('ProductCompare');
-      priceEl.textContent = Shopify.formatMoney ? Shopify.formatMoney(matched.price) : ('₹' + (matched.price / 100).toFixed(0));
+      var discountEl = document.getElementById('ProductDiscount');
+
+      if (priceEl) {
+        priceEl.textContent = matched.price_formatted;
+      }
       if (compareEl) {
         if (matched.compare_at_price && matched.compare_at_price > matched.price) {
-          compareEl.textContent = Shopify.formatMoney ? Shopify.formatMoney(matched.compare_at_price) : ('₹' + (matched.compare_at_price / 100).toFixed(0));
-          compareEl.style.display = '';
+          compareEl.textContent = matched.compare_at_price_formatted;
+          compareEl.style.display = 'inline-block';
         } else {
           compareEl.style.display = 'none';
         }
       }
-      if (matched.featured_image) {
+      if (discountEl) {
+        if (matched.compare_at_price && matched.compare_at_price > matched.price) {
+          var disc = Math.round(((matched.compare_at_price - matched.price) * 100) / matched.compare_at_price);
+          discountEl.textContent = '-' + disc + '%';
+          discountEl.style.display = 'inline-block';
+        } else {
+          discountEl.style.display = 'none';
+        }
+      }
+      if (matched.featured_image && matched.featured_image.src) {
         document.getElementById('ProductMainImage').src = matched.featured_image.src;
       }
       var atcBtn = document.getElementById('ProductATC');
-      if (matched.available) {
-        atcBtn.disabled = false;
-        atcBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Add to Cart — ' + (Shopify.formatMoney ? Shopify.formatMoney(matched.price) : ('₹' + (matched.price / 100).toFixed(0)));
-      } else {
-        atcBtn.disabled = true;
-        atcBtn.textContent = 'Sold Out';
+      if (atcBtn) {
+        if (matched.available) {
+          atcBtn.disabled = false;
+          atcBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Add to Cart — ' + matched.price_formatted;
+        } else {
+          atcBtn.disabled = true;
+          atcBtn.textContent = 'Sold Out';
+        }
       }
     }
   }

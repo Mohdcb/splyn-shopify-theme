@@ -20,11 +20,12 @@
         <span class="product-card-vendor">{{ product.vendor }}</span>
       {% endif %}
       <h3 class="product-card-title">{{ product.title }}</h3>
+      {% assign card_variant = product.selected_or_first_available_variant %}
       <div class="product-card-price">
-        <span class="product-card-current">{{ product.price | money }}</span>
-        {% if product.compare_at_price > product.price %}
-          <span class="product-card-compare">{{ product.compare_at_price | money }}</span>
-        {% endif %}
+        <span class="product-card-current">{% if card_variant %}{{ card_variant.price | money }}{% else %}{{ product.price | money }}{% endif %}</span>
+        <span class="product-card-compare"{% unless card_variant.compare_at_price > card_variant.price or product.compare_at_price > product.price %} style="display: none;"{% endunless %}>
+          {% if card_variant.compare_at_price > card_variant.price %}{{ card_variant.compare_at_price | money }}{% elsif product.compare_at_price > product.price %}{{ product.compare_at_price | money }}{% endif %}
+        </span>
       </div>
     </div>
   </a>
@@ -44,6 +45,7 @@
               data-variant-id="{{ variant.id }}"
               data-pack="{{ variant.title }}"
               data-price="{{ variant.price | money }}"
+              data-compare-price="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
               data-available="{{ variant.available }}">
               {{ variant.title }}
             </button>
