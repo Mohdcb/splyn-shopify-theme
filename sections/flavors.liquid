@@ -29,9 +29,107 @@
         {% endif %}
 
         {% assign flavor_handle = block.settings.flavor_id | handleize %}
-        <div class="flavor-card-item flavor-card-{{ flavor_handle }}" {{ block.shopify_attributes }}>
-          {% if block.settings.flavor_id == 'mystery' %}
-            <!-- FLAVOR POLL CARD (3rd Column) -->
+        {% if block.settings.flavor_id == 'mystery' %}
+          <!-- CARD 3: FLAVOUR MIX PRODUCT CARD (Desktop & Mobile) -->
+          {% assign mix_product = all_products['flavour-mix'] %}
+          {% if mix_product == blank %}
+            {% for p in collections.all.products %}
+              {% assign p_h = p.handle | downcase %}
+              {% assign p_t = p.title | downcase %}
+              {% if p_h contains 'mix' or p_t contains 'mix' or p_h contains 'variety' or p_t contains 'variety' %}
+                {% assign mix_product = p %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+
+          <div class="flavor-card-item flavor-card-mix" {{ block.shopify_attributes }}>
+            <div class="flavor-card-badge">
+              <span class="swatch swatch-mix"></span>
+            </div>
+
+            <div class="flavor-card-media">
+              {% if mix_product != blank and mix_product.featured_image != blank %}
+                <img src="{{ mix_product.featured_image | image_url: width: 600 }}" alt="{{ mix_product.title | escape }}" />
+              {% else %}
+                <img src="{{ 'can-raspberry.png' | asset_url }}" alt="Flavour Mix" />
+              {% endif %}
+            </div>
+
+            <div class="flavor-card-content">
+              {% if mix_product != blank %}
+                <h3>{{ mix_product.title }}</h3>
+              {% else %}
+                <h3>Flavour Mix</h3>
+              {% endif %}
+
+              <p class="flavor-desc">
+                {% if mix_product != blank and mix_product.description != blank %}
+                  {{ mix_product.description | strip_html | truncatewords: 18 }}
+                {% else %}
+                  A pack of six: three of one flavor and three of another flavor.
+                {% endif %}
+              </p>
+
+              <ul class="flavor-tags">
+                <li>Hydration</li>
+                <li>Focus</li>
+                <li>Energy</li>
+              </ul>
+
+              <div class="flavor-meta">
+                <div><b>75mg</b><span>Caffeine</span></div>
+                <div><b>75mg</b><span>L-Theanine</span></div>
+                <div><b>3 Key</b><span>Electrolytes</span></div>
+              </div>
+
+              <!-- Dynamic Shopify Variant Selector -->
+              <div class="flavor-variant-selector">
+                <label class="variant-label">Select Pack Variant: <span class="selected-pack-text">Select variant first *</span></label>
+                <div class="variant-pills">
+                  {% if mix_product != blank and mix_product.variants.size > 0 %}
+                    {% for variant in mix_product.variants %}
+                      {% assign v_title_lower = variant.title | downcase | strip %}
+                      <div class="variant-pill-wrapper">
+                        {% unless v_title_lower == 'pack of 4' or v_title_lower == '4 pack' or v_title_lower == '4' %}
+                          <span class="free-shipping-badge">Free Shipping</span>
+                        {% endunless %}
+                        <button type="button" class="variant-pill"
+                          data-variant-id="{{ variant.id }}"
+                          data-pack="{{ variant.title }}"
+                          data-price="{{ variant.price | money }}"
+                          data-compare-price="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
+                          data-available="{{ variant.available }}">
+                          {{ variant.title }}
+                        </button>
+                      </div>
+                    {% endfor %}
+                  {% else %}
+                    <!-- Dynamic Fallback Pack Variants -->
+                    <div class="variant-pill-wrapper">
+                      <button type="button" class="variant-pill" data-variant-id="4001" data-pack="Pack of 4" data-price="₹599">Pack of 4</button>
+                    </div>
+                    <div class="variant-pill-wrapper">
+                      <span class="free-shipping-badge">Free Shipping</span>
+                      <button type="button" class="variant-pill" data-variant-id="4002" data-pack="Pack of 6" data-price="₹1,599">Pack of 6</button>
+                    </div>
+                    <div class="variant-pill-wrapper">
+                      <span class="free-shipping-badge">Free Shipping</span>
+                      <button type="button" class="variant-pill" data-variant-id="4004" data-pack="Pack of 24" data-price="₹5,599">Pack of 24</button>
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="variant-error-msg" style="display: none;">⚠️ Please select a variant before buying</div>
+              </div>
+
+              <button type="button" class="btn btn-primary btn-full flavor-buy-btn" data-flavor="mix" {% if mix_product != blank %}data-product-id="{{ mix_product.id }}"{% endif %}>
+                <i class="ph-duotone ph-shopping-bag-open"></i> Buy Now — {% if mix_product != blank %}{{ mix_product.title }}{% else %}Flavour Mix{% endif %}
+              </button>
+            </div>
+          </div>
+
+          <!-- CARD 4: MOBILE-ONLY COMMUNITY POLL CARD -->
+          <div class="flavor-card-item flavor-card-poll" {{ block.shopify_attributes }}>
             <div class="flavor-card-badge">
               <span class="badge-poll"><i class="ph-bold ph-chart-bar"></i> COMMUNITY POLL</span>
             </div>
@@ -112,7 +210,9 @@
                 </div>
               </div>
             </div>
-          {% else %}
+          </div>
+        {% else %}
+          <div class="flavor-card-item flavor-card-{{ flavor_handle }}" {{ block.shopify_attributes }}>
             <div class="flavor-card-badge">
               {% assign f_id_lower = block.settings.flavor_id | downcase %}
               {% if f_id_lower contains 'lime' or f_id_lower contains 'lemon' or f_id_lower contains 'citrus' %}
@@ -183,6 +283,7 @@
                           data-variant-id="{{ variant.id }}"
                           data-pack="{{ variant.title }}"
                           data-price="{{ variant.price | money }}"
+                          data-compare-price="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
                           data-available="{{ variant.available }}">
                           {{ variant.title }}
                         </button>
@@ -199,10 +300,6 @@
                     </div>
                     <div class="variant-pill-wrapper">
                       <span class="free-shipping-badge">Free Shipping</span>
-                      <button type="button" class="variant-pill" data-variant-id="4003" data-pack="Pack of 12" data-price="₹2,999">Pack of 12</button>
-                    </div>
-                    <div class="variant-pill-wrapper">
-                      <span class="free-shipping-badge">Free Shipping</span>
                       <button type="button" class="variant-pill" data-variant-id="4004" data-pack="Pack of 24" data-price="₹5,599">Pack of 24</button>
                     </div>
                   {% endif %}
@@ -214,8 +311,8 @@
                 <i class="ph-duotone ph-shopping-bag-open"></i> Buy Now — {% if card_product != blank %}{{ card_product.title }}{% else %}{{ block.settings.flavor_name }}{% endif %}
               </button>
             </div>
-          {% endif %}
-        </div>
+          </div>
+        {% endif %}
       {% endfor %}
     </div>
   </div>
