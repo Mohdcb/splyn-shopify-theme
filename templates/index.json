@@ -130,8 +130,8 @@
             "description": "Zesty citrus. Cool finish. Built for sun‑soaked workouts and afternoon resets.",
             "tags": "Hydration, Focus, Energy",
             "caffeine": "75mg",
-            "sugar": "0g",
-            "size": "250ml",
+            "sugar": "75mg",
+            "size": "3 Key",
             "cta_text": "Add Lime to Cart",
             "cta_link": "shopify://collections/all"
           }
@@ -147,8 +147,8 @@
             "description": "Wild berries. Velvet finish. Designed for late nights, deep work, and golden hour.",
             "tags": "Hydration, Focus, Energy",
             "caffeine": "75mg",
-            "sugar": "0g",
-            "size": "250ml",
+            "sugar": "75g",
+            "size": "3 Key",
             "cta_text": "Add Raspberry to Cart",
             "cta_link": "shopify://collections/all"
           }
@@ -202,8 +202,8 @@
         "review_1": {
           "type": "review",
           "settings": {
-            "reviewer_name": "Alex Fitness",
-            "reviewer_title": "Pro Athlete • 2.4M followers",
+            "reviewer_name": "Mohammed Shanif",
+            "reviewer_title": "Pro Rider",
             "quote": "Finally a drink that keeps up with my training. Zero crash, all performance.",
             "avatar_gradient": ""
           }
@@ -211,8 +211,8 @@
         "review_2": {
           "type": "review",
           "settings": {
-            "reviewer_name": "Sarah Runs",
-            "reviewer_title": "Marathon Runner • 890K followers",
+            "reviewer_name": "Aban Pappetta",
+            "reviewer_title": "Marathon Runner",
             "quote": "My long runs have never felt this smooth. The hydration is next level.",
             "avatar_gradient": "linear-gradient(135deg, #ff6b9d, #c44569)"
           }
@@ -220,8 +220,8 @@
         "review_3": {
           "type": "review",
           "settings": {
-            "reviewer_name": "Mike Lifts",
-            "reviewer_title": "CrossFit Coach • 1.2M followers",
+            "reviewer_name": "Zieshan",
+            "reviewer_title": "CrossFit Coach",
             "quote": "The clean energy hits different. No jitters, just pure focus for my lifts.",
             "avatar_gradient": "linear-gradient(135deg, #a8edea, #fed6e3)"
           }
@@ -229,8 +229,8 @@
         "review_4": {
           "type": "review",
           "settings": {
-            "reviewer_name": "Jenna Yoga",
-            "reviewer_title": "Yoga Instructor • 567K followers",
+            "reviewer_name": "Mohammed Razy",
+            "reviewer_title": "Yoga Instructor",
             "quote": "I recommend SPLYN to all my students. Clean ingredients, amazing taste.",
             "avatar_gradient": "linear-gradient(135deg, #91B9EA, #EAF2FF)"
           }
@@ -244,8 +244,8 @@
       ],
       "settings": {
         "chip_text": "Real Talk",
-        "heading": "The hype —",
-        "heading_italic": "listen to MVPs",
+        "heading": "The Hype —",
+        "heading_italic": "Listen To Our MVPs",
         "subtext": "Watch creators, athletes, and everyday legends experience SPLYN for the first time."
       }
     },
@@ -296,52 +296,24 @@
         "perk_5"
       ],
       "settings": {
+        "community_image": "shopify://shop_images/hf_20260811_163847_67f70491-f0e0-4a50-8883-8506ac901c34.png",
         "chip_text": "Join the Movement",
         "heading": "Be part of the",
         "heading_italic": "SPLYN family.",
-        "description": "Thousands of athletes, creators, and everyday legends are already in the loop. Get early drops, exclusive recipes, community challenges, and direct access to the SPLYN team — all in one place.",
+        "description": "Thousands of athletes, creators, and everyday legends are already in the loop. Get early drops, community challenges, and direct access to the SPLYN team — all in one place.",
         "cta_text": "Join WhatsApp Community",
         "cta_link": ""
       }
     },
     "story": {
       "type": "story",
-      "blocks": {
-        "stat_1": {
-          "type": "stat",
-          "settings": {
-            "value": "3",
-            "label": "Founders"
-          }
-        },
-        "stat_2": {
-          "type": "stat",
-          "settings": {
-            "value": "75mg",
-            "label": "Caffeine, zero crash"
-          }
-        },
-        "stat_3": {
-          "type": "stat",
-          "settings": {
-            "value": "0g",
-            "label": "Sugar"
-          }
-        }
-      },
-      "block_order": [
-        "stat_1",
-        "stat_2",
-        "stat_3"
-      ],
       "settings": {
         "logo_tagline": "",
-        "blockquote": "\"Three friends training in the same gym. One mission. Clean energy.\"",
+        "blockquote": "Three Friends.<br> One Goal.",
         "eyebrow": "OUR STORY",
-        "heading": "BUILT FOR THE GRIND",
-        "paragraph_1": "Three friends training in the same gym, drinking the same energy drinks — and hating what came with them. Sugar crashes mid-session. Jitters that killed focus instead of sharpening it.",
-        "paragraph_2": "So we built Splyn. Zero sugar. Real electrolytes for what you actually sweat out. 75mg caffeine, balanced with L-Theanine, so you get clean energy — not a spike and a crash.",
-        "paragraph_3": "No shortcuts. No empty calories. Just what your body needs to show up and put in the work."
+        "heading": "It started with the three of us.",
+        "paragraph_1": "Whether we were working out, running, or pushing through a long day, we wanted the energy to keep going. Being the caffeine addicts we were, we consumed a lot of coffee and energy drinks. But we kept running into the same problem: energy drinks gave us energy, but not hydration. Hydration drinks kept us hydrated, but didn’t give us the energy or focus we needed.",
+        "paragraph_2": "We wanted both. So we built Splyn. Energy, Hydration, and Focus in one drink.\n\nZero sugar, real Electrolytes, 75mg caffeine, and L-Theanine. Exactly what we were looking for."
       }
     },
     "sticky-bar": {

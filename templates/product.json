@@ -1,12 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main-product": {
       "type": "main-product",
-      "settings": {
-        "show_reviews": true,
-        "review_text": "4.9 • 127 Reviews",
-        "show_dynamic_checkout": true
-      },
       "blocks": {
         "trust_1": {
           "type": "trust_badge",
@@ -24,20 +28,12 @@
             "subtitle": "100% encrypted checkout"
           }
         },
-        "trust_3": {
-          "type": "trust_badge",
-          "settings": {
-            "icon": "refresh-cw",
-            "title": "Easy Returns",
-            "subtitle": "7-day money-back guarantee"
-          }
-        },
         "acc_1": {
           "type": "accordion",
           "settings": {
             "icon": "list",
             "title": "Ingredients",
-            "content": "<p>Premium caffeine (200mg), L-Theanine, Electrolytes (Sodium, Potassium, Magnesium). Zero sugar. Zero calories. No artificial colors.</p>"
+            "content": "<p>Filtered Carbonated Water, Citric Acid, Potassium Citrate, Sodium Citrate, Magnesium Citrate L-Theanine, Caffeine, Sucralose, Acesulfame Potassium, Nature-Identical Flavouring Substances, Sodium Benzoate INS 5211</p>"
           }
         },
         "acc_2": {
@@ -45,7 +41,7 @@
           "settings": {
             "icon": "droplets",
             "title": "Nutrition Info",
-            "content": "<p>Serving Size: 337ml (11.4 fl oz). Calories: 0. Total Sugar: 0g. Caffeine: 200mg. Sodium: 150mg. Potassium: 100mg.</p>"
+            "content": "<p>250ml serving size. 75mg L-Theanine. 75mg Caffeine. 150mg Potassium. 30mg Magnesium. 50mg Sodium.</p>"
           }
         },
         "acc_3": {
@@ -57,7 +53,18 @@
           }
         }
       },
-      "block_order": ["trust_1", "trust_2", "trust_3", "acc_1", "acc_2", "acc_3"]
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "acc_1",
+        "acc_2",
+        "acc_3"
+      ],
+      "settings": {
+        "show_reviews": true,
+        "review_text": "4.9 • 127 Reviews",
+        "show_dynamic_checkout": true
+      }
     }
   },
   "order": [

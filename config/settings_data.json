@@ -27,17 +27,17 @@
           "newsletter_placeholder": "Enter your email address",
           "newsletter_button_text": "Subscribe",
           "tagline": "Performance hydration built for the way you actually live. Clean energy. Deep hydration. Zero sugar.",
-          "social_instagram": "",
+          "social_instagram": "https://Instagram.com/drinksplyn",
           "social_twitter": "",
           "social_tiktok": "",
-          "social_whatsapp": "",
+          "social_whatsapp": "https://wa.me/919663829900",
           "copyright": "© 2026 SPLYN Beverages Pvt. Ltd. All rights reserved.",
           "legal_menu": "",
-          "privacy_link": "",
-          "terms_link": "",
+          "privacy_link": "shopify://pages/privacy-policy",
+          "terms_link": "shopify://pages/terms-and-conditions",
           "cookie_link": "",
-          "refund_link": "",
-          "disclaimer_link": ""
+          "refund_link": "shopify://pages/refund-policy",
+          "disclaimer_link": "shopify://pages/refund-policy"
         }
       },
       "cart-drawer": {
@@ -51,7 +51,7 @@
     "blocks": {
       "3557650678667880288": {
         "type": "shopify://apps/razorpay-cod-magic-checkout/blocks/magicx-script/c13c688d-5c45-4054-b95f-1edd63faa705",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       }
     }
