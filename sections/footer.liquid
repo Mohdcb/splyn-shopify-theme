@@ -62,11 +62,15 @@
               {% assign h_lower = block.settings.heading | downcase %}
               {% if h_lower contains 'shop' or h_lower contains 'product' %}
                 <ul>
-                  <li><a href="#flavors">Lime Crush</a></li>
-                  <li><a href="#flavors">Raspberry Rush</a></li>
-                  <li><a href="#flavors">Pack of 4</a></li>
-                  <li><a href="#flavors">Pack of 6</a></li>
-                  <li><a href="#flavors">Pack of 24</a></li>
+                  {% if collections.all.products.size > 0 %}
+                    {% for prod in collections.all.products limit: 6 %}
+                      <li><a href="{{ prod.url }}">{{ prod.title }}</a></li>
+                    {% endfor %}
+                  {% else %}
+                    <li><a href="/collections/all">Lemon Lime</a></li>
+                    <li><a href="/collections/all">Raspberry Peach</a></li>
+                    <li><a href="/products/flavour-mix">Flavour Mix</a></li>
+                  {% endif %}
                 </ul>
               {% elsif h_lower contains 'company' or h_lower contains 'about' %}
                 <ul>
@@ -91,11 +95,15 @@
         <div class="foot-col">
           <h4>Shop</h4>
           <ul>
-            <li><a href="#flavors">Lime Crush</a></li>
-            <li><a href="#flavors">Raspberry Rush</a></li>
-            <li><a href="#flavors">Pack of 4</a></li>
-            <li><a href="#flavors">Pack of 6</a></li>
-            <li><a href="#flavors">Pack of 24</a></li>
+            {% if collections.all.products.size > 0 %}
+              {% for prod in collections.all.products limit: 6 %}
+                <li><a href="{{ prod.url }}">{{ prod.title }}</a></li>
+              {% endfor %}
+            {% else %}
+              <li><a href="/collections/all">Lemon Lime</a></li>
+              <li><a href="/collections/all">Raspberry Peach</a></li>
+              <li><a href="/products/flavour-mix">Flavour Mix</a></li>
+            {% endif %}
           </ul>
         </div>
         <div class="foot-col">
